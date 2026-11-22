@@ -1,0 +1,152 @@
+@prefix pdp:   <http://example.org/pdp#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+#################################################################
+#  DATA GRAF SINTETIS: SKENARIO PATUH PENUH (FULL COMPLIANT)
+#  Metode: Equivalence Class Partitioning (ECP), partisi ECP-01 (partisi valid)
+#  ECP-01 mencakup Pengendali PSE_Simulasi_FIN_Compliant beserta sebelas entitas peristiwanya,
+#  dan Prosesor_Simulasi_CLD_Compliant (kunci jawaban: FASE_4_VALIDASI/kunci_jawaban_ecp.csv)
+#  Arketipe: PSE Sektor Finansial & Penyedia Layanan Cloud
+#  Kelas pemicu dan entitas peristiwa ditulis eksplisit (peran lapisan ingesti arsitektur ACC).
+#  Disclaimer: Data artifisial murni untuk tujuan pengujian algoritma
+#################################################################
+
+# Pengendali dengan seluruh pemicu karakteristik; semua kewajiban terpenuhi.
+pdp:PSE_Simulasi_FIN_Compliant
+    a pdp:DataController , pdp:PSE ,
+      pdp:JointController ,                       # Pasal 18 ayat (2): pemrosesan oleh 2 atau lebih Pengendali
+      pdp:ConsentBasedController ,                # Pasal 21 ayat (1); Pasal 24 (interpretasi peneliti)
+      pdp:ChildDataController ,                   # Pasal 25 ayat (2): memproses data pribadi anak
+      pdp:DisabilityDataController ,              # Pasal 26 ayat (3): memproses data penyandang disabilitas
+      pdp:HighRiskProcessingController ,          # Pasal 34 ayat (1): pemrosesan berpotensi risiko tinggi
+      pdp:LargeScaleSpecificDataActor ;           # Pasal 53 ayat (1) huruf c: pemrosesan skala besar atas Data Pribadi spesifik
+    rdfs:label "Arketipe PSE Sektor Finansial (Simulasi Patuh Penuh)"@id ;
+
+    # 1. Keamanan Teknis & Kerahasiaan
+    pdp:hasEncryption true ;                      # deskriptif; tidak diperiksa sejak 2026-10-28
+    pdp:hasAccessControl true ;                   # Pasal 39 ayat (1): Akses kontrol aktif (PATUH)
+    pdp:hasSecurityMeasures true ;                # Pasal 35 huruf a & 38: SOP operasional keamanan aktif (PATUH)
+    pdp:hasConfidentialityMeasures true ;         # Pasal 36: Kerahasiaan terjamin (PATUH)
+    pdp:hasSupervisionMechanism true ;            # Pasal 37: Pengawasan pihak ketiga (PATUH)
+    pdp:hasElectronicSecuritySystem true ;        # Pasal 39 ayat (2): Sistem keamanan elektronik andal (PATUH)
+
+    # 2. Akuntabilitas & Log Audit
+    pdp:hasProcessingAuditLog true ;              # Pasal 31: Audit log aktif (PATUH)
+    pdp:hasDPIA true ;                            # Pasal 34 ayat (1): DPIA telah dilakukan (PATUH)
+
+    # 3. Legalitas & Persetujuan
+    pdp:hasLegalBasis "consent" ;                 # Pasal 20 ayat (1)-(2): Dasar pemrosesan sah terdaftar (PATUH)
+    pdp:hasConsentEvidence true ;                 # Pasal 24: Bukti persetujuan tersimpan (PATUH)
+    pdp:hasProcessingNotice true ;                # Pasal 21 ayat (1): Informasi disampaikan ke subjek (PATUH)
+    pdp:hasParentalConsentForChild true ;         # Pasal 25 ayat (2): Persetujuan orang tua ada (PATUH)
+    pdp:hasSpecialConsentForDisability true ;     # Pasal 26 ayat (3): Persetujuan khusus disabilitas ada (PATUH)
+    pdp:hasDataMinimization true ;                # Pasal 27 & 28: Minimalisasi data terpenuhi (PATUH)
+    pdp:hasDataAccuracyVerification true ;        # Pasal 29 ayat (2): Verifikasi akurasi data aktif (PATUH)
+    pdp:hasJointControllerAgreement true ;        # Pasal 18 ayat (2): Perjanjian tertulis pengendali bersama (PATUH)
+
+    # 4. Retensi (pengakhiran, penghapusan, pemusnahan: lihat entitas peristiwa)
+    pdp:hasRetentionPeriod 365 ;                  # informatif: dasar penetapan Pasal 42 ayat (1) huruf a oleh lapisan ingesti
+
+    # 5. Larangan Pengungkapan/Penggunaan Data Tanpa Hak
+    pdp:hasUnauthorizedProcessing false ;         # Pasal 65 ayat (2)-(3): Tidak ada indikator (PATUH)
+
+    # 6. Pejabat/Petugas Pelindungan Data Pribadi
+    pdp:hasDataProtectionOfficer true .           # Pasal 53 ayat (1): pejabat/petugas PDP ditunjuk (PATUH)
+
+# --- Entitas peristiwa milik PSE_Simulasi_FIN_Compliant (24 jam: di bawah ambang 48 jam dan batas 72 jam) ---
+pdp:Permintaan_Pembaruan_FIN
+    a pdp:DataUpdateRequest ;
+    rdfs:label "Permintaan pembaruan data pada PSE FIN"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_FIN_Compliant ;
+    pdp:dataUpdateResponseHours 24 .              # Pasal 30 ayat (1): 24 jam ≤ 72 jam (PATUH)
+
+pdp:Permintaan_Akses_FIN
+    a pdp:DataAccessRequest ;
+    rdfs:label "Permintaan akses data pada PSE FIN"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_FIN_Compliant ;
+    pdp:dataAccessResponseHours 24 .              # Pasal 32 ayat (2): 24 jam ≤ 72 jam (PATUH)
+
+pdp:Penarikan_Persetujuan_FIN
+    a pdp:ConsentWithdrawalRequest ;
+    rdfs:label "Permintaan penarikan kembali persetujuan pada PSE FIN"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_FIN_Compliant ;
+    pdp:processingCessationHours 24 .             # Pasal 40 ayat (2): 24 jam ≤ 72 jam (PATUH)
+
+pdp:Permintaan_Pembatasan_FIN
+    a pdp:ProcessingRestrictionRequest ;
+    rdfs:label "Permintaan penundaan dan pembatasan pemrosesan pada PSE FIN"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_FIN_Compliant ;
+    pdp:processingRestrictionHours 24 .           # Pasal 41 ayat (1): 24 jam ≤ 72 jam (PATUH)
+
+pdp:Insiden_FIN
+    a pdp:BreachIncident ;
+    rdfs:label "Kegagalan Pelindungan Data Pribadi pada PSE FIN"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_FIN_Compliant ;
+    pdp:breachNotificationHours 24 ;              # Pasal 46 ayat (1): 24 jam ≤ 72 jam (PATUH)
+    pdp:breachNotificationContainsRequiredElements true . # Pasal 46 ayat (2): Elemen pemberitahuan lengkap (PATUH)
+
+pdp:Transfer_FIN
+    a pdp:CrossBorderTransfer ;
+    rdfs:label "Transfer data PSE FIN ke luar wilayah hukum RI"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_FIN_Compliant ;
+    pdp:dataTransferDestination "Singapura" ;     # Negara tujuan (informatif)
+    pdp:transferRecipientEquivalentProtection true . # Pasal 56 ayat (2): pelindungan setara/lebih tinggi (PATUH)
+
+pdp:AksiKorporasi_FIN
+    a pdp:CorporateAction ;
+    rdfs:label "Penggabungan badan hukum PSE FIN (aksi selesai)"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_FIN_Compliant ;
+    pdp:corporateActionType "penggabungan" ;
+    pdp:transferNoticeBeforeAction true ;         # Pasal 48 ayat (1)-(2): pemberitahuan sebelum (PATUH)
+    pdp:transferNoticeAfterAction true .          # Pasal 48 ayat (1)-(2): pemberitahuan sesudah (PATUH)
+
+pdp:Permintaan_Portabilitas_FIN
+    a pdp:DataPortabilityRequest ;
+    rdfs:label "Permintaan Subjek atas Data Pribadi dalam format terstruktur pada PSE FIN"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_FIN_Compliant ;
+    pdp:portableFormatProvided true .             # Pasal 13 ayat (1): data disediakan dalam format terstruktur (PATUH)
+
+pdp:Pengakhiran_FIN
+    a pdp:ProcessingTerminationGround ;
+    rdfs:label "Masa retensi tercapai pada PSE FIN"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_FIN_Compliant ;
+    pdp:triggerGround "a" ;                       # Pasal 42 ayat (1) huruf a: telah mencapai masa retensi (informatif)
+    pdp:processingTerminated true .               # Pasal 42 ayat (1): pemrosesan diakhiri (PATUH)
+
+pdp:Penghapusan_FIN
+    a pdp:DeletionGround ;
+    rdfs:label "Data Pribadi tidak lagi diperlukan pada PSE FIN"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_FIN_Compliant ;
+    pdp:triggerGround "a" ;                       # Pasal 43 ayat (1) huruf a (informatif)
+    pdp:erasureCarriedOut true ;                  # Pasal 43 ayat (1): data dihapus (PATUH)
+    pdp:subjectNotifiedOfErasure true .           # Pasal 45: Subjek diberi tahu (PATUH)
+
+pdp:Pemusnahan_FIN
+    a pdp:DestructionGround ;
+    rdfs:label "Masa retensi arsip habis pada PSE FIN"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_FIN_Compliant ;
+    pdp:triggerGround "a" ;                       # Pasal 44 ayat (1) huruf a (informatif)
+    pdp:erasureCarriedOut true ;                  # Pasal 44 ayat (1): data dimusnahkan (PATUH)
+    pdp:subjectNotifiedOfErasure true .           # Pasal 45: Subjek diberi tahu (PATUH)
+
+#################################################################
+#  Arketipe Prosesor Data Patuh (Cloud Service Provider)
+#################################################################
+
+pdp:Prosesor_Simulasi_CLD_Compliant
+    a pdp:DataProcessor , pdp:PSE ,
+      pdp:PublicServiceProcessingActor ;          # Pasal 53 ayat (1) huruf a: pemrosesan untuk pelayanan publik
+    rdfs:label "Arketipe Prosesor Layanan Cloud (Simulasi Patuh)"@id ;
+    pdp:processesOnlyUnderInstruction true ;      # Pasal 51 ayat (1): Memproses atas perintah Pengendali (PATUH)
+    pdp:hasEncryption true ;                      # deskriptif; tidak diperiksa sejak 2026-10-28
+    pdp:hasAccessControl true ;                   # Pasal 39 ayat (1) jo. Pasal 52 (PATUH)
+    pdp:hasSecurityMeasures true ;                # Pasal 35 huruf a & 38 jo. Pasal 52 (PATUH)
+    pdp:hasConfidentialityMeasures true ;         # Pasal 36 jo. Pasal 52 (PATUH)
+    pdp:hasSupervisionMechanism true ;            # Pasal 37 jo. Pasal 52 (PATUH)
+    pdp:hasElectronicSecuritySystem true ;        # Pasal 39 ayat (2) jo. Pasal 52 (PATUH)
+    pdp:hasProcessingAuditLog true ;              # Pasal 31 jo. Pasal 52 (PATUH)
+    pdp:hasDataAccuracyVerification true ;        # Pasal 29 ayat (2) jo. Pasal 52 (PATUH)
+    pdp:hasUnauthorizedProcessing false ;         # Pasal 65 ayat (2)-(3): Tidak ada indikator (PATUH)
+    pdp:hasDataProtectionOfficer true .           # Pasal 53 ayat (1): pejabat/petugas PDP ditunjuk (PATUH)

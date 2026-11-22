@@ -1,0 +1,7 @@
+﻿Verifikasi resmi_v3 - mulai 2026-10-28T19:50:23
+run_validation.py: kode keluar 0; 5 s; log validation_results\resmi_v3\log_verifikasi\log_run_validation.txt
+uji_pemicu.py: kode keluar 0; 10.2 s; log validation_results\resmi_v3\log_verifikasi\log_uji_pemicu.txt
+uji_mutasi.py: kode keluar 0; 33.7 s; log validation_results\resmi_v3\log_verifikasi\log_uji_mutasi.txt
+hitung_kelas_batasan.py: kode keluar 0; 1.9 s; log validation_results\resmi_v3\log_verifikasi\log_hitung_kelas_batasan.txt
+hitung_tabel_bab4.py --keluaran validation_results/resmi_v3/tabel_bab4: kode keluar 0; 3.8 s; log validation_results\resmi_v3\log_verifikasi\log_hitung_tabel_bab4.txt
+selesai 2026-10-28T19:51:18

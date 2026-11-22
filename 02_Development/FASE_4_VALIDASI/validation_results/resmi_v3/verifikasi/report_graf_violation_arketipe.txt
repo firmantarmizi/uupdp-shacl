@@ -1,0 +1,412 @@
+=== LAPORAN HASIL VALIDASI PYSHACL: Graf Violation Arketipe ===
+File Data: data_pse_violation.ttl (531 triple)
+Conforms (allow_warnings=True): False
+Vonis hukum graf (ada sh:Violation?): MELANGGAR
+Counts: Violation=52, Warning=10, Info=0
+
+--- DETAIL LAPORAN FORMAL SHACL ---
+Validation Report
+Conforms: False
+Results (62):
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("false" = False, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 65 ayat (2) dan (3) UU PDP: terdapat indikator pengungkapan atau penggunaan data pribadi yang bukan miliknya secara melawan hukum.", lang=id) ; sh:name Literal("Indikator Pemrosesan Melawan Hukum") ; sh:path pdp:hasUnauthorizedProcessing ; sh:severity sh:Violation ]
+	Focus Node: pdp:PSE_Simulasi_ILLEGAL_Violation
+	Result Path: pdp:hasUnauthorizedProcessing
+	Message: Pelanggaran Pasal 65 ayat (2) dan (3) UU PDP: terdapat indikator pengungkapan atau penggunaan data pribadi yang bukan miliknya secara melawan hukum.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 13 ayat (1) UU PDP: atas permintaan Subjek Data Pribadi, Pengendali tidak menyediakan data pribadi dalam struktur/format yang lazim digunakan atau dapat dibaca oleh sistem elektronik.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Penyediaan Data dalam Format Terstruktur") ; sh:path pdp:portableFormatProvided ; sh:severity sh:Violation ]
+	Focus Node: pdp:Permintaan_Portabilitas_ECP23
+	Result Path: pdp:portableFormatProvided
+	Message: Pelanggaran Pasal 13 ayat (1) UU PDP: atas permintaan Subjek Data Pribadi, Pengendali tidak menyediakan data pribadi dalam struktur/format yang lazim digunakan atau dapat dibaca oleh sistem elektronik.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 18 ayat (2) UU PDP: pemrosesan oleh dua atau lebih Pengendali tidak disertai perjanjian peran, tujuan bersama, dan narahubung.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Perjanjian Tertulis Antar-Pengendali") ; sh:path pdp:hasJointControllerAgreement ; sh:severity sh:Violation ]
+	Focus Node: pdp:PSE_Simulasi_JNT_Violation
+	Result Path: pdp:hasJointControllerAgreement
+	Message: Pelanggaran Pasal 18 ayat (2) UU PDP: pemrosesan oleh dua atau lebih Pengendali tidak disertai perjanjian peran, tujuan bersama, dan narahubung.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 21 ayat (1) UU PDP: Pengendali tidak menyampaikan informasi legalitas, tujuan, jenis data, retensi, jangka waktu pemrosesan, dan hak Subjek Data Pribadi.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Pemberitahuan Informasi Pemrosesan") ; sh:path pdp:hasProcessingNotice ; sh:severity sh:Violation ]
+	Focus Node: pdp:PSE_Simulasi_CNS_Violation
+	Result Path: pdp:hasProcessingNotice
+	Message: Pelanggaran Pasal 21 ayat (1) UU PDP: Pengendali tidak menyampaikan informasi legalitas, tujuan, jenis data, retensi, jangka waktu pemrosesan, dan hak Subjek Data Pribadi.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 24 jo. Pasal 22 ayat (1) UU PDP: Pengendali tidak dapat menunjukkan bukti persetujuan tertulis atau terekam yang telah diberikan oleh Subjek Data Pribadi.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Bukti Persetujuan Sah") ; sh:path pdp:hasConsentEvidence ; sh:severity sh:Violation ]
+	Focus Node: pdp:PSE_Simulasi_CNS_Violation
+	Result Path: pdp:hasConsentEvidence
+	Message: Pelanggaran Pasal 24 jo. Pasal 22 ayat (1) UU PDP: Pengendali tidak dapat menunjukkan bukti persetujuan tertulis atau terekam yang telah diberikan oleh Subjek Data Pribadi.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 25 ayat (2) UU PDP: pemrosesan data pribadi anak tidak mendapat persetujuan orang tua dan/atau wali anak.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Persetujuan Orang Tua/Wali") ; sh:path pdp:hasParentalConsentForChild ; sh:severity sh:Violation ]
+	Focus Node: pdp:PSE_Simulasi_ANK_Violation
+	Result Path: pdp:hasParentalConsentForChild
+	Message: Pelanggaran Pasal 25 ayat (2) UU PDP: pemrosesan data pribadi anak tidak mendapat persetujuan orang tua dan/atau wali anak.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 26 ayat (3) UU PDP: pemrosesan data pribadi penyandang disabilitas tidak mendapat persetujuan penyandang disabilitas dan/atau walinya.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Persetujuan Khusus Disabilitas") ; sh:path pdp:hasSpecialConsentForDisability ; sh:severity sh:Violation ]
+	Focus Node: pdp:PSE_Simulasi_DIS_Violation
+	Result Path: pdp:hasSpecialConsentForDisability
+	Message: Pelanggaran Pasal 26 ayat (3) UU PDP: pemrosesan data pribadi penyandang disabilitas tidak mendapat persetujuan penyandang disabilitas dan/atau walinya.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 27 dan Pasal 28 UU PDP: pemrosesan tidak terbatas dan spesifik atau tidak sesuai dengan tujuan pemrosesan.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Prinsip Pembatasan & Spesifikasi Tujuan") ; sh:path pdp:hasDataMinimization ; sh:severity sh:Violation ]
+	Focus Node: pdp:PSE_Simulasi_SIK_Violation
+	Result Path: pdp:hasDataMinimization
+	Message: Pelanggaran Pasal 27 dan Pasal 28 UU PDP: pemrosesan tidak terbatas dan spesifik atau tidak sesuai dengan tujuan pemrosesan.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 34 ayat (1) UU PDP: Pengendali dengan pemrosesan berpotensi risiko tinggi belum melakukan penilaian dampak Pelindungan Data Pribadi.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Pelaksanaan DPIA") ; sh:path pdp:hasDPIA ; sh:severity sh:Violation ]
+	Focus Node: pdp:PSE_Simulasi_HLT_Violation
+	Result Path: pdp:hasDPIA
+	Message: Pelanggaran Pasal 34 ayat (1) UU PDP: Pengendali dengan pemrosesan berpotensi risiko tinggi belum melakukan penilaian dampak Pelindungan Data Pribadi.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 42 ayat (1) UU PDP: kondisi pengakhiran pemrosesan terpenuhi, tetapi Pengendali tidak mengakhiri pemrosesan Data Pribadi.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Pengakhiran Pemrosesan") ; sh:path pdp:processingTerminated ; sh:severity sh:Violation ]
+	Focus Node: pdp:Pengakhiran_ECP16
+	Result Path: pdp:processingTerminated
+	Message: Pelanggaran Pasal 42 ayat (1) UU PDP: kondisi pengakhiran pemrosesan terpenuhi, tetapi Pengendali tidak mengakhiri pemrosesan Data Pribadi.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 43 ayat (1) UU PDP: kondisi penghapusan terpenuhi, tetapi Pengendali tidak menghapus Data Pribadi.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Pelaksanaan Penghapusan Data") ; sh:path pdp:erasureCarriedOut ; sh:severity sh:Violation ]
+	Focus Node: pdp:Penghapusan_ECP24
+	Result Path: pdp:erasureCarriedOut
+	Message: Pelanggaran Pasal 43 ayat (1) UU PDP: kondisi penghapusan terpenuhi, tetapi Pengendali tidak menghapus Data Pribadi.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 44 ayat (1) UU PDP: kondisi pemusnahan terpenuhi, tetapi Pengendali tidak memusnahkan Data Pribadi.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Pelaksanaan Pemusnahan Data") ; sh:path pdp:erasureCarriedOut ; sh:severity sh:Violation ]
+	Focus Node: pdp:Pemusnahan_ECP25
+	Result Path: pdp:erasureCarriedOut
+	Message: Pelanggaran Pasal 44 ayat (1) UU PDP: kondisi pemusnahan terpenuhi, tetapi Pengendali tidak memusnahkan Data Pribadi.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 46 ayat (2) UU PDP: pemberitahuan kegagalan tidak memuat data pribadi yang terungkap, kapan dan bagaimana terungkap, serta upaya penanganan dan pemulihan.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Kelengkapan Elemen Konten Notifikasi") ; sh:path pdp:breachNotificationContainsRequiredElements ; sh:severity sh:Violation ]
+	Focus Node: pdp:Insiden_ECP17
+	Result Path: pdp:breachNotificationContainsRequiredElements
+	Message: Pelanggaran Pasal 46 ayat (2) UU PDP: pemberitahuan kegagalan tidak memuat data pribadi yang terungkap, kapan dan bagaimana terungkap, serta upaya penanganan dan pemulihan.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 48 ayat (1) dan (2) UU PDP: pemberitahuan pengalihan Data Pribadi kepada Subjek Data Pribadi tidak disampaikan sebelum penggabungan, pemisahan, pengambilalihan, peleburan, atau pembubaran badan hukum.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Pemberitahuan Pengalihan Sebelum Aksi Korporasi") ; sh:path pdp:transferNoticeBeforeAction ; sh:severity sh:Violation ]
+	Focus Node: pdp:AksiKorporasi_ECP21
+	Result Path: pdp:transferNoticeBeforeAction
+	Message: Pelanggaran Pasal 48 ayat (1) dan (2) UU PDP: pemberitahuan pengalihan Data Pribadi kepada Subjek Data Pribadi tidak disampaikan sebelum penggabungan, pemisahan, pengambilalihan, peleburan, atau pembubaran badan hukum.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 48 ayat (1) dan (2) UU PDP: pemberitahuan pengalihan Data Pribadi kepada Subjek Data Pribadi tidak disampaikan sesudah penggabungan, pemisahan, pengambilalihan, peleburan, atau pembubaran badan hukum.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Pemberitahuan Pengalihan Sesudah Aksi Korporasi") ; sh:path pdp:transferNoticeAfterAction ; sh:severity sh:Violation ]
+	Focus Node: pdp:AksiKorporasi_ECP21
+	Result Path: pdp:transferNoticeAfterAction
+	Message: Pelanggaran Pasal 48 ayat (1) dan (2) UU PDP: pemberitahuan pengalihan Data Pribadi kepada Subjek Data Pribadi tidak disampaikan sesudah penggabungan, pemisahan, pengambilalihan, peleburan, atau pembubaran badan hukum.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 51 ayat (1) UU PDP: Prosesor tidak melakukan pemrosesan berdasarkan perintah Pengendali Data Pribadi.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Pemrosesan Hanya Sesuai Instruksi") ; sh:path pdp:processesOnlyUnderInstruction ; sh:severity sh:Violation ]
+	Focus Node: pdp:Prosesor_Simulasi_CLD_Violation
+	Result Path: pdp:processesOnlyUnderInstruction
+	Message: Pelanggaran Pasal 51 ayat (1) UU PDP: Prosesor tidak melakukan pemrosesan berdasarkan perintah Pengendali Data Pribadi.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 53 ayat (1) UU PDP: Pengendali atau Prosesor yang memenuhi huruf a, b, atau c tidak menunjuk pejabat atau petugas yang melaksanakan fungsi Pelindungan Data Pribadi.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Penunjukan Pejabat/Petugas PDP") ; sh:path pdp:hasDataProtectionOfficer ; sh:severity sh:Violation ]
+	Focus Node: pdp:PSE_Simulasi_DPO_Violation
+	Result Path: pdp:hasDataProtectionOfficer
+	Message: Pelanggaran Pasal 53 ayat (1) UU PDP: Pengendali atau Prosesor yang memenuhi huruf a, b, atau c tidak menunjuk pejabat atau petugas yang melaksanakan fungsi Pelindungan Data Pribadi.
+Constraint Violation in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:boolean ; sh:hasValue Literal("true" = True, datatype=xsd:boolean) ; sh:message Literal("Pelanggaran Pasal 53 ayat (1) UU PDP: Pengendali atau Prosesor yang memenuhi huruf a, b, atau c tidak menunjuk pejabat atau petugas yang melaksanakan fungsi Pelindungan Data Pribadi.", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Penunjukan Pejabat/Petugas PDP") ; sh:path pdp:hasDataProtectionOfficer ; sh:severity sh:Violation ]
+	Focus Node: pdp:Prosesor_Simulasi_DPO_Violation
+	Result Path: pdp:hasDataProtectionOfficer
+	Message: Pelanggaran Pasal 53 ayat (1) UU PDP: Pengendali atau Prosesor yang memenuhi huruf a, b, atau c tidak menunjuk pejabat atau petugas yang melaksanakan fungsi Pelindungan Data Pribadi.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:string ; sh:in ( Literal("consent") Literal("contract") Literal("legal_obligation") Literal("vital_interest") Literal("public_interest") Literal("legitimate_interest") ) ; sh:message Literal("Pelanggaran Pasal 20 ayat (1) dan (2) UU PDP: pemrosesan data pribadi tidak memiliki dasar pemrosesan atau dasarnya tidak termasuk enam dasar pada ayat (2).", lang=id) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("Dasar Pemrosesan yang Sah") ; sh:path pdp:hasLegalBasis ; sh:severity sh:Violation ]
+	Focus Node: pdp:PSE_Simulasi_LGL_Violation
+	Value Node: Literal("unauthorized_commercial")
+	Result Path: pdp:hasLegalBasis
+	Message: Pelanggaran Pasal 20 ayat (1) dan (2) UU PDP: pemrosesan data pribadi tidak memiliki dasar pemrosesan atau dasarnya tidak termasuk enam dasar pada ayat (2).
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:AccessControl_Applied
+	Focus Node: pdp:PSE_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasAccessControl
+	Message: Pelanggaran Pasal 39 ayat (1) UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak menerapkan pengendalian hak akses untuk mencegah akses tidak sah.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:AccessControl_Applied
+	Focus Node: pdp:Prosesor_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasAccessControl
+	Message: Pelanggaran Pasal 39 ayat (1) UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak menerapkan pengendalian hak akses untuk mencegah akses tidak sah.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ConfidentialityMeasures_Applied
+	Focus Node: pdp:PSE_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasConfidentialityMeasures
+	Message: Pelanggaran Pasal 36 UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak menjaga kerahasiaan data pribadi dalam pemrosesan.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ConfidentialityMeasures_Applied
+	Focus Node: pdp:Prosesor_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasConfidentialityMeasures
+	Message: Pelanggaran Pasal 36 UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak menjaga kerahasiaan data pribadi dalam pemrosesan.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:DataAccuracyVerification_Applied
+	Focus Node: pdp:PSE_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasDataAccuracyVerification
+	Message: Pelanggaran Pasal 29 ayat (2) UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak melakukan verifikasi atas akurasi, kelengkapan, dan konsistensi data pribadi.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:DataAccuracyVerification_Applied
+	Focus Node: pdp:Prosesor_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasDataAccuracyVerification
+	Message: Pelanggaran Pasal 29 ayat (2) UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak melakukan verifikasi atas akurasi, kelengkapan, dan konsistensi data pribadi.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ElectronicSecuritySystem_Applied
+	Focus Node: pdp:PSE_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasElectronicSecuritySystem
+	Message: Pelanggaran Pasal 39 ayat (1) dan (2) UU PDP (bagi Prosesor jo. Pasal 52): sistem elektronik Pengendali atau Prosesor tercatat tidak memiliki sistem keamanan untuk mencegah akses tidak sah.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ElectronicSecuritySystem_Applied
+	Focus Node: pdp:Prosesor_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasElectronicSecuritySystem
+	Message: Pelanggaran Pasal 39 ayat (1) dan (2) UU PDP (bagi Prosesor jo. Pasal 52): sistem elektronik Pengendali atau Prosesor tercatat tidak memiliki sistem keamanan untuk mencegah akses tidak sah.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ProcessingAuditLog_Applied
+	Focus Node: pdp:PSE_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasProcessingAuditLog
+	Message: Pelanggaran Pasal 31 UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak merekam seluruh kegiatan pemrosesan data pribadi.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ProcessingAuditLog_Applied
+	Focus Node: pdp:Prosesor_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasProcessingAuditLog
+	Message: Pelanggaran Pasal 31 UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak merekam seluruh kegiatan pemrosesan data pribadi.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:SecurityMeasures_Applied
+	Focus Node: pdp:PSE_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasSecurityMeasures
+	Message: Pelanggaran Pasal 35 huruf a dan Pasal 38 UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat belum menerapkan langkah teknis operasional keamanan untuk melindungi data pribadi dari pemrosesan yang tidak sah.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:SecurityMeasures_Applied
+	Focus Node: pdp:Prosesor_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasSecurityMeasures
+	Message: Pelanggaran Pasal 35 huruf a dan Pasal 38 UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat belum menerapkan langkah teknis operasional keamanan untuk melindungi data pribadi dari pemrosesan yang tidak sah.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:SupervisionMechanism_Applied
+	Focus Node: pdp:PSE_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasSupervisionMechanism
+	Message: Pelanggaran Pasal 37 UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak memiliki mekanisme pengawasan terhadap pihak yang terlibat dalam pemrosesan data.
+Constraint Violation in InConstraintComponent (http://www.w3.org/ns/shacl#InConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:SupervisionMechanism_Applied
+	Focus Node: pdp:Prosesor_Simulasi_SEC_Violation
+	Value Node: Literal("false" = False, datatype=xsd:boolean)
+	Result Path: pdp:hasSupervisionMechanism
+	Message: Pelanggaran Pasal 37 UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak memiliki mekanisme pengawasan terhadap pihak yang terlibat dalam pemrosesan data.
+Constraint Violation in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:BreachNotificationHours_WithinLimit
+	Focus Node: pdp:Insiden_ECP07_Lewat
+	Value Node: Literal("144", datatype=xsd:integer)
+	Result Path: pdp:breachNotificationHours
+	Message: Pelanggaran Pasal 46 ayat (1) UU PDP: pemberitahuan tertulis kegagalan Pelindungan Data Pribadi melebihi batas 3 x 24 jam (72 jam), atau tidak dicatat sebagai bilangan bulat jam.
+Constraint Violation in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:DataAccessHours_WithinLimit
+	Focus Node: pdp:Akses_ECP04_Lewat
+	Value Node: Literal("120", datatype=xsd:integer)
+	Result Path: pdp:dataAccessResponseHours
+	Message: Pelanggaran Pasal 32 ayat (2) UU PDP: waktu pemberian akses data pribadi melebihi batas 3 x 24 jam (72 jam) sejak permintaan akses diterima, atau tidak dicatat sebagai bilangan bulat jam.
+Constraint Violation in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:DataUpdateHours_WithinLimit
+	Focus Node: pdp:Pembaruan_ECP03_Lewat
+	Value Node: Literal("96", datatype=xsd:integer)
+	Result Path: pdp:dataUpdateResponseHours
+	Message: Pelanggaran Pasal 30 ayat (1) UU PDP: waktu pembaruan/perbaikan data pribadi melebihi batas 3 x 24 jam (72 jam) sejak permintaan diterima, atau tidak dicatat sebagai bilangan bulat jam.
+Constraint Violation in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ProcessingCessationHours_WithinLimit
+	Focus Node: pdp:Penarikan_ECP05_Lewat
+	Value Node: Literal("96", datatype=xsd:integer)
+	Result Path: pdp:processingCessationHours
+	Message: Pelanggaran Pasal 40 ayat (2) UU PDP: penghentian pemrosesan setelah penarikan kembali persetujuan melebihi batas 3 x 24 jam (72 jam), atau tidak dicatat sebagai bilangan bulat jam.
+Constraint Violation in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ProcessingRestrictionHours_WithinLimit
+	Focus Node: pdp:Pembatasan_ECP06_Lewat
+	Value Node: Literal("100", datatype=xsd:integer)
+	Result Path: pdp:processingRestrictionHours
+	Message: Pelanggaran Pasal 41 ayat (1) UU PDP: penundaan dan pembatasan pemrosesan melebihi batas 3 x 24 jam (72 jam) sejak permintaan diterima, atau tidak dicatat sebagai bilangan bulat jam.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:AccessControl_Recorded
+	Focus Node: pdp:PSE_Simulasi_SEC_Kosong
+	Result Path: pdp:hasAccessControl
+	Message: Pelanggaran Pasal 39 ayat (1) UU PDP (bagi Prosesor jo. Pasal 52): catatan pengendalian hak akses Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:BreachNotificationHours_Recorded
+	Focus Node: pdp:Insiden_ECP07_Kosong
+	Result Path: pdp:breachNotificationHours
+	Message: Pelanggaran Pasal 46 ayat (1) UU PDP: waktu pemberitahuan tertulis kegagalan Pelindungan Data Pribadi tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ConfidentialityMeasures_Recorded
+	Focus Node: pdp:PSE_Simulasi_SEC_Kosong
+	Result Path: pdp:hasConfidentialityMeasures
+	Message: Pelanggaran Pasal 36 UU PDP (bagi Prosesor jo. Pasal 52): catatan langkah menjaga kerahasiaan data pribadi pada Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:DataAccessHours_Recorded
+	Focus Node: pdp:Akses_ECP04_Kosong
+	Result Path: pdp:dataAccessResponseHours
+	Message: Pelanggaran Pasal 32 ayat (2) UU PDP: waktu pemberian akses data pribadi tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:DataAccuracyVerification_Recorded
+	Focus Node: pdp:PSE_Simulasi_SEC_Kosong
+	Result Path: pdp:hasDataAccuracyVerification
+	Message: Pelanggaran Pasal 29 ayat (2) UU PDP (bagi Prosesor jo. Pasal 52): catatan verifikasi akurasi, kelengkapan, dan konsistensi data pribadi pada Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:DataUpdateHours_Recorded
+	Focus Node: pdp:Pembaruan_ECP03_Kosong
+	Result Path: pdp:dataUpdateResponseHours
+	Message: Pelanggaran Pasal 30 ayat (1) UU PDP: waktu pembaruan/perbaikan data pribadi tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ElectronicSecuritySystem_Recorded
+	Focus Node: pdp:PSE_Simulasi_SEC_Kosong
+	Result Path: pdp:hasElectronicSecuritySystem
+	Message: Pelanggaran Pasal 39 ayat (1) dan (2) UU PDP (bagi Prosesor jo. Pasal 52): catatan sistem keamanan elektronik Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ProcessingAuditLog_Recorded
+	Focus Node: pdp:PSE_Simulasi_SEC_Kosong
+	Result Path: pdp:hasProcessingAuditLog
+	Message: Pelanggaran Pasal 31 UU PDP (bagi Prosesor jo. Pasal 52): catatan perekaman kegiatan pemrosesan Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ProcessingCessationHours_Recorded
+	Focus Node: pdp:Penarikan_ECP05_Kosong
+	Result Path: pdp:processingCessationHours
+	Message: Pelanggaran Pasal 40 ayat (2) UU PDP: waktu penghentian pemrosesan setelah penarikan kembali persetujuan tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ProcessingRestrictionHours_Recorded
+	Focus Node: pdp:Pembatasan_ECP06_Kosong
+	Result Path: pdp:processingRestrictionHours
+	Message: Pelanggaran Pasal 41 ayat (1) UU PDP: waktu penundaan dan pembatasan pemrosesan tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:SecurityMeasures_Recorded
+	Focus Node: pdp:PSE_Simulasi_SEC_Kosong
+	Result Path: pdp:hasSecurityMeasures
+	Message: Pelanggaran Pasal 35 huruf a dan Pasal 38 UU PDP (bagi Prosesor jo. Pasal 52): catatan langkah teknis operasional keamanan Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:SupervisionMechanism_Recorded
+	Focus Node: pdp:PSE_Simulasi_SEC_Kosong
+	Result Path: pdp:hasSupervisionMechanism
+	Message: Pelanggaran Pasal 37 UU PDP (bagi Prosesor jo. Pasal 52): catatan mekanisme pengawasan terhadap pihak yang terlibat dalam pemrosesan pada Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa.
+Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:DeletionNoticeShape
+	Focus Node: pdp:Penghapusan_ECP26
+	Value Node: pdp:Penghapusan_ECP26
+	Message: Pelanggaran Pasal 45 UU PDP: Data Pribadi telah dihapus dan/atau dimusnahkan, tetapi Pengendali tidak memberitahukannya kepada Subjek Data Pribadi.
+Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:InternationalTransferShape
+	Focus Node: pdp:Transfer_ECP18
+	Value Node: pdp:Transfer_ECP18
+	Message: Pelanggaran Pasal 56 ayat (2) sampai (4) UU PDP: transfer ke luar wilayah hukum RI tidak memenuhi tingkat pelindungan setara atau lebih tinggi, pelindungan yang memadai dan mengikat, maupun persetujuan Subjek Data Pribadi.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:BreachNotificationHours_EarlyWarning
+	Focus Node: pdp:Insiden_ECM
+	Value Node: Literal("58", datatype=xsd:integer)
+	Result Path: pdp:breachNotificationHours
+	Message: Peringatan dini Pasal 46 ayat (1) UU PDP: pemberitahuan kegagalan Pelindungan Data Pribadi melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:BreachNotificationHours_EarlyWarning
+	Focus Node: pdp:Insiden_ECP07_Lewat
+	Value Node: Literal("144", datatype=xsd:integer)
+	Result Path: pdp:breachNotificationHours
+	Message: Peringatan dini Pasal 46 ayat (1) UU PDP: pemberitahuan kegagalan Pelindungan Data Pribadi melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:DataAccessHours_EarlyWarning
+	Focus Node: pdp:Akses_ECP04_Lewat
+	Value Node: Literal("120", datatype=xsd:integer)
+	Result Path: pdp:dataAccessResponseHours
+	Message: Peringatan dini Pasal 32 ayat (2) UU PDP: waktu pemberian akses data melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:DataAccessHours_EarlyWarning
+	Focus Node: pdp:Permintaan_Akses_ECM
+	Value Node: Literal("52", datatype=xsd:integer)
+	Result Path: pdp:dataAccessResponseHours
+	Message: Peringatan dini Pasal 32 ayat (2) UU PDP: waktu pemberian akses data melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:DataUpdateHours_EarlyWarning
+	Focus Node: pdp:Pembaruan_ECP03_Lewat
+	Value Node: Literal("96", datatype=xsd:integer)
+	Result Path: pdp:dataUpdateResponseHours
+	Message: Peringatan dini Pasal 30 ayat (1) UU PDP: waktu pembaruan/perbaikan data melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:DataUpdateHours_EarlyWarning
+	Focus Node: pdp:Permintaan_Pembaruan_ECM
+	Value Node: Literal("55", datatype=xsd:integer)
+	Result Path: pdp:dataUpdateResponseHours
+	Message: Peringatan dini Pasal 30 ayat (1) UU PDP: waktu pembaruan/perbaikan data melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:ProcessingCessationHours_EarlyWarning
+	Focus Node: pdp:Penarikan_ECP05_Lewat
+	Value Node: Literal("96", datatype=xsd:integer)
+	Result Path: pdp:processingCessationHours
+	Message: Peringatan dini Pasal 40 ayat (2) UU PDP: penghentian pemrosesan melebihi 48 jam sejak permintaan penarikan persetujuan diterima.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:ProcessingCessationHours_EarlyWarning
+	Focus Node: pdp:Penarikan_Persetujuan_ECM
+	Value Node: Literal("50", datatype=xsd:integer)
+	Result Path: pdp:processingCessationHours
+	Message: Peringatan dini Pasal 40 ayat (2) UU PDP: penghentian pemrosesan melebihi 48 jam sejak permintaan penarikan persetujuan diterima.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:ProcessingRestrictionHours_EarlyWarning
+	Focus Node: pdp:Pembatasan_ECP06_Lewat
+	Value Node: Literal("100", datatype=xsd:integer)
+	Result Path: pdp:processingRestrictionHours
+	Message: Peringatan dini Pasal 41 ayat (1) UU PDP: penundaan dan pembatasan pemrosesan melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:ProcessingRestrictionHours_EarlyWarning
+	Focus Node: pdp:Permintaan_Pembatasan_ECM
+	Value Node: Literal("53", datatype=xsd:integer)
+	Result Path: pdp:processingRestrictionHours
+	Message: Peringatan dini Pasal 41 ayat (1) UU PDP: penundaan dan pembatasan pemrosesan melebihi 48 jam dan mendekati batas 72 jam.

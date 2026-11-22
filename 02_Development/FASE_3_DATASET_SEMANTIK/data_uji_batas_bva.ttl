@@ -1,0 +1,167 @@
+#################################################################
+#  DATA GRAF UJI BATAS (BOUNDARY VALUE ANALYSIS)
+#  Dibuat oleh buat_data_bva.py; jangan disunting manual.
+#  5 kewajiban bertenggat x 5 nilai (48, 49, 72, 73 jam, kosong) = 25 entitas peristiwa,
+#  ditautkan ke BVA_Pengendali (salinan PSE_Simulasi_FIN_Compliant, patuh penuh).
+#  Graf ini terpisah dari partisi ECP dan tidak dihitung sebagai partisi.
+#  Disclaimer: data artifisial murni untuk pengujian.
+#################################################################
+
+@prefix pdp: <http://example.org/pdp#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+pdp:BVA_Ps30_048 a pdp:DataUpdateRequest ;
+    rdfs:label "Uji batas Pasal 30 ayat (1): 48 jam"@id ;
+    pdp:dataUpdateResponseHours 48 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps30_049 a pdp:DataUpdateRequest ;
+    rdfs:label "Uji batas Pasal 30 ayat (1): 49 jam"@id ;
+    pdp:dataUpdateResponseHours 49 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps30_072 a pdp:DataUpdateRequest ;
+    rdfs:label "Uji batas Pasal 30 ayat (1): 72 jam"@id ;
+    pdp:dataUpdateResponseHours 72 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps30_073 a pdp:DataUpdateRequest ;
+    rdfs:label "Uji batas Pasal 30 ayat (1): 73 jam"@id ;
+    pdp:dataUpdateResponseHours 73 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps30_kosong a pdp:DataUpdateRequest ;
+    rdfs:label "Uji batas Pasal 30 ayat (1): tidak diisi"@id ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps32_048 a pdp:DataAccessRequest ;
+    rdfs:label "Uji batas Pasal 32 ayat (2): 48 jam"@id ;
+    pdp:dataAccessResponseHours 48 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps32_049 a pdp:DataAccessRequest ;
+    rdfs:label "Uji batas Pasal 32 ayat (2): 49 jam"@id ;
+    pdp:dataAccessResponseHours 49 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps32_072 a pdp:DataAccessRequest ;
+    rdfs:label "Uji batas Pasal 32 ayat (2): 72 jam"@id ;
+    pdp:dataAccessResponseHours 72 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps32_073 a pdp:DataAccessRequest ;
+    rdfs:label "Uji batas Pasal 32 ayat (2): 73 jam"@id ;
+    pdp:dataAccessResponseHours 73 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps32_kosong a pdp:DataAccessRequest ;
+    rdfs:label "Uji batas Pasal 32 ayat (2): tidak diisi"@id ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps40_048 a pdp:ConsentWithdrawalRequest ;
+    rdfs:label "Uji batas Pasal 40 ayat (2): 48 jam"@id ;
+    pdp:processingCessationHours 48 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps40_049 a pdp:ConsentWithdrawalRequest ;
+    rdfs:label "Uji batas Pasal 40 ayat (2): 49 jam"@id ;
+    pdp:processingCessationHours 49 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps40_072 a pdp:ConsentWithdrawalRequest ;
+    rdfs:label "Uji batas Pasal 40 ayat (2): 72 jam"@id ;
+    pdp:processingCessationHours 72 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps40_073 a pdp:ConsentWithdrawalRequest ;
+    rdfs:label "Uji batas Pasal 40 ayat (2): 73 jam"@id ;
+    pdp:processingCessationHours 73 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps40_kosong a pdp:ConsentWithdrawalRequest ;
+    rdfs:label "Uji batas Pasal 40 ayat (2): tidak diisi"@id ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps41_048 a pdp:ProcessingRestrictionRequest ;
+    rdfs:label "Uji batas Pasal 41 ayat (1): 48 jam"@id ;
+    pdp:processingRestrictionHours 48 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps41_049 a pdp:ProcessingRestrictionRequest ;
+    rdfs:label "Uji batas Pasal 41 ayat (1): 49 jam"@id ;
+    pdp:processingRestrictionHours 49 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps41_072 a pdp:ProcessingRestrictionRequest ;
+    rdfs:label "Uji batas Pasal 41 ayat (1): 72 jam"@id ;
+    pdp:processingRestrictionHours 72 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps41_073 a pdp:ProcessingRestrictionRequest ;
+    rdfs:label "Uji batas Pasal 41 ayat (1): 73 jam"@id ;
+    pdp:processingRestrictionHours 73 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps41_kosong a pdp:ProcessingRestrictionRequest ;
+    rdfs:label "Uji batas Pasal 41 ayat (1): tidak diisi"@id ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps46_048 a pdp:BreachIncident ;
+    rdfs:label "Uji batas Pasal 46 ayat (1): 48 jam"@id ;
+    pdp:breachNotificationContainsRequiredElements true ;
+    pdp:breachNotificationHours 48 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps46_049 a pdp:BreachIncident ;
+    rdfs:label "Uji batas Pasal 46 ayat (1): 49 jam"@id ;
+    pdp:breachNotificationContainsRequiredElements true ;
+    pdp:breachNotificationHours 49 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps46_072 a pdp:BreachIncident ;
+    rdfs:label "Uji batas Pasal 46 ayat (1): 72 jam"@id ;
+    pdp:breachNotificationContainsRequiredElements true ;
+    pdp:breachNotificationHours 72 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps46_073 a pdp:BreachIncident ;
+    rdfs:label "Uji batas Pasal 46 ayat (1): 73 jam"@id ;
+    pdp:breachNotificationContainsRequiredElements true ;
+    pdp:breachNotificationHours 73 ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Ps46_kosong a pdp:BreachIncident ;
+    rdfs:label "Uji batas Pasal 46 ayat (1): tidak diisi"@id ;
+    pdp:breachNotificationContainsRequiredElements true ;
+    pdp:responsibleController pdp:BVA_Pengendali .
+
+pdp:BVA_Pengendali a pdp:ChildDataController,
+        pdp:ConsentBasedController,
+        pdp:DataController,
+        pdp:DisabilityDataController,
+        pdp:HighRiskProcessingController,
+        pdp:JointController,
+        pdp:LargeScaleSpecificDataActor,
+        pdp:PSE ;
+    rdfs:label "Pengendali uji batas (salinan PSE FIN, patuh penuh)"@id ;
+    pdp:hasAccessControl true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasConsentEvidence true ;
+    pdp:hasDPIA true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataProtectionOfficer true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasEncryption true ;
+    pdp:hasJointControllerAgreement true ;
+    pdp:hasLegalBasis "consent" ;
+    pdp:hasParentalConsentForChild true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasProcessingNotice true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasSpecialConsentForDisability true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasUnauthorizedProcessing false .
+

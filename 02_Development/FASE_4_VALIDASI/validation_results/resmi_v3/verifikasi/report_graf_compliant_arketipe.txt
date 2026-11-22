@@ -1,0 +1,9 @@
+=== LAPORAN HASIL VALIDASI PYSHACL: Graf Compliant Arketipe ===
+File Data: data_pse_compliant.ttl (96 triple)
+Conforms (allow_warnings=True): True
+Vonis hukum graf (ada sh:Violation?): PATUH
+Counts: Violation=0, Warning=0, Info=0
+
+--- DETAIL LAPORAN FORMAL SHACL ---
+Validation Report
+Conforms: True

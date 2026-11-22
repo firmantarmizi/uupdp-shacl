@@ -1,0 +1,289 @@
+﻿==============================================================================
+ STATISTIK ARTEFAK (dihitung dari berkas)
+==============================================================================
+NodeShape: 30 | property shape: 47 {'Violation': 42, 'Warning': 5, 'Info': 0} | constraint tingkat node: 2 {'Violation': 2, 'Warning': 0, 'Info': 0}
+  ontology_pdp.ttl              347 triple
+  shapes_pdp.ttl                489 triple
+  data_pse_compliant.ttl         96 triple
+  data_pse_violation.ttl        531 triple
+  data_uji_batas_bva.ttl        128 triple
+
+==============================================================================
+ PEMERIKSAAN INTEGRITAS DATA UJI (bukan vonis hukum)
+==============================================================================
+data_pse_compliant.ttl + data_pse_violation.ttl: OK
+data_uji_batas_bva.ttl: OK
+
+==============================================================================
+ PEMERIKSAAN PARTISI ECP TERHADAP KELAS BATASAN
+==============================================================================
+N_constraint = 24 (multiset: 25); partisi pada kunci = 26
+OK
+
+==============================================================================
+ Validasi pySHACL: Graf Compliant Arketipe (data_pse_compliant.ttl, 96 triple)
+==============================================================================
+Conforms (allow_warnings=True) : True
+Vonis hukum graf (ada sh:Violation?) : PATUH
+Ringkasan severity : 0 Violation | 0 Warning | 0 Info
+Tiga besaran (Violation / Warning):
+  hasil validasi (sh:ValidationResult)    : 0 / 0
+  pasangan (focus node, unit) terpicu     : 0 / 0
+  focus node terpicu                      : 0 / 0
+Laporan tersimpan di : D:\Magister PJJ Informatika Amikom\Tesis\Transformasi UU No. 27 Tahun 2022 Menjadi Dataset Semantik untuk Validasi Kepatuhan Data Pribadi menggunakan SHACL\02_Development\FASE_4_VALIDASI\validation_results\report_graf_compliant_arketipe.txt
+
+==============================================================================
+ Validasi pySHACL: Graf Violation Arketipe (data_pse_violation.ttl, 531 triple)
+==============================================================================
+Conforms (allow_warnings=True) : False
+Vonis hukum graf (ada sh:Violation?) : MELANGGAR
+Ringkasan severity : 52 Violation | 10 Warning | 0 Info
+Tiga besaran (Violation / Warning):
+  hasil validasi (sh:ValidationResult)    : 52 / 10
+  pasangan (focus node, unit) terpicu     : 52 / 10
+  focus node terpicu                      : 32 / 10
+Laporan tersimpan di : D:\Magister PJJ Informatika Amikom\Tesis\Transformasi UU No. 27 Tahun 2022 Menjadi Dataset Semantik untuk Validasi Kepatuhan Data Pribadi menggunakan SHACL\02_Development\FASE_4_VALIDASI\validation_results\report_graf_violation_arketipe.txt
+
+==============================================================================
+ EVALUASI PER ENTITAS (FOCUS NODE) ΓÇö PARTISI ECP
+==============================================================================
+ecp              Entitas                             V  W  I  Harapan   Prediksi  Hasil Shape sesuai kunci
+ECP-01           PSE_Simulasi_FIN_Compliant          0  0  0  Compliant Compliant TN    ya
+ECP-01           Permintaan_Pembaruan_FIN            0  0  0  Compliant Compliant TN    ya
+ECP-01           Permintaan_Akses_FIN                0  0  0  Compliant Compliant TN    ya
+ECP-01           Penarikan_Persetujuan_FIN           0  0  0  Compliant Compliant TN    ya
+ECP-01           Permintaan_Pembatasan_FIN           0  0  0  Compliant Compliant TN    ya
+ECP-01           Insiden_FIN                         0  0  0  Compliant Compliant TN    ya
+ECP-01           Transfer_FIN                        0  0  0  Compliant Compliant TN    ya
+ECP-01           Prosesor_Simulasi_CLD_Compliant     0  0  0  Compliant Compliant TN    ya
+ECP-01           AksiKorporasi_FIN                   0  0  0  Compliant Compliant TN    ya
+ECP-01           Permintaan_Portabilitas_FIN         0  0  0  Compliant Compliant TN    ya
+ECP-01           Pengakhiran_FIN                     0  0  0  Compliant Compliant TN    ya
+ECP-01           Penghapusan_FIN                     0  0  0  Compliant Compliant TN    ya
+ECP-01           Pemusnahan_FIN                      0  0  0  Compliant Compliant TN    ya
+ECP-02           PSE_Simulasi_ECM_Warning            0  0  0  Compliant Compliant TN    ya
+ECP-02           Permintaan_Pembaruan_ECM            0  1  0  Compliant Compliant TN    ya
+ECP-02           Permintaan_Akses_ECM                0  1  0  Compliant Compliant TN    ya
+ECP-02           Penarikan_Persetujuan_ECM           0  1  0  Compliant Compliant TN    ya
+ECP-02           Permintaan_Pembatasan_ECM           0  1  0  Compliant Compliant TN    ya
+ECP-02           Insiden_ECM                         0  1  0  Compliant Compliant TN    ya
+ECP-03           Pengendali_ECP03                    0  0  0  Compliant Compliant TN    ya
+ECP-03           Pembaruan_ECP03_Lewat               1  1  0  Violation Violation TP    ya
+ECP-03           Pembaruan_ECP03_Kosong              1  0  0  Violation Violation TP    ya
+ECP-04           Pengendali_ECP04                    0  0  0  Compliant Compliant TN    ya
+ECP-04           Akses_ECP04_Lewat                   1  1  0  Violation Violation TP    ya
+ECP-04           Akses_ECP04_Kosong                  1  0  0  Violation Violation TP    ya
+ECP-05           Pengendali_ECP05                    0  0  0  Compliant Compliant TN    ya
+ECP-05           Penarikan_ECP05_Lewat               1  1  0  Violation Violation TP    ya
+ECP-05           Penarikan_ECP05_Kosong              1  0  0  Violation Violation TP    ya
+ECP-06           Pengendali_ECP06                    0  0  0  Compliant Compliant TN    ya
+ECP-06           Pembatasan_ECP06_Lewat              1  1  0  Violation Violation TP    ya
+ECP-06           Pembatasan_ECP06_Kosong             1  0  0  Violation Violation TP    ya
+ECP-07           Pengendali_ECP07                    0  0  0  Compliant Compliant TN    ya
+ECP-07           Insiden_ECP07_Lewat                 1  1  0  Violation Violation TP    ya
+ECP-07           Insiden_ECP07_Kosong                1  0  0  Violation Violation TP    ya
+ECP-08           PSE_Simulasi_SEC_Violation          7  0  0  Violation Violation TP    ya
+ECP-08           Prosesor_Simulasi_SEC_Violation     7  0  0  Violation Violation TP    ya
+ECP-08           PSE_Simulasi_SEC_Kosong             7  0  0  Violation Violation TP    ya
+ECP-09           PSE_Simulasi_HLT_Violation          1  0  0  Violation Violation TP    ya
+ECP-10           PSE_Simulasi_LGL_Violation          1  0  0  Violation Violation TP    ya
+ECP-11           PSE_Simulasi_CNS_Violation          2  0  0  Violation Violation TP    ya
+ECP-12           PSE_Simulasi_ANK_Violation          1  0  0  Violation Violation TP    ya
+ECP-13           PSE_Simulasi_DIS_Violation          1  0  0  Violation Violation TP    ya
+ECP-14           PSE_Simulasi_SIK_Violation          1  0  0  Violation Violation TP    ya
+ECP-15           PSE_Simulasi_JNT_Violation          1  0  0  Violation Violation TP    ya
+ECP-16           Pengendali_ECP16                    0  0  0  Compliant Compliant TN    ya
+ECP-16           Pengakhiran_ECP16                   1  0  0  Violation Violation TP    ya
+ECP-17           Pengendali_ECP17                    0  0  0  Compliant Compliant TN    ya
+ECP-17           Insiden_ECP17                       1  0  0  Violation Violation TP    ya
+ECP-18           Pengendali_ECP18                    0  0  0  Compliant Compliant TN    ya
+ECP-18           Transfer_ECP18                      1  0  0  Violation Violation TP    ya
+ECP-19           Prosesor_Simulasi_CLD_Violation     1  0  0  Violation Violation TP    ya
+ECP-20           PSE_Simulasi_ILLEGAL_Violation      1  0  0  Violation Violation TP    ya
+ECP-21           Pengendali_ECP21                    0  0  0  Compliant Compliant TN    ya
+ECP-21           AksiKorporasi_ECP21                 2  0  0  Violation Violation TP    ya
+ECP-22           PSE_Simulasi_DPO_Violation          1  0  0  Violation Violation TP    ya
+ECP-22           Prosesor_Simulasi_DPO_Violation     1  0  0  Violation Violation TP    ya
+ECP-23           Pengendali_ECP23                    0  0  0  Compliant Compliant TN    ya
+ECP-23           Permintaan_Portabilitas_ECP23       1  0  0  Violation Violation TP    ya
+ECP-24           Pengendali_ECP24                    0  0  0  Compliant Compliant TN    ya
+ECP-24           Penghapusan_ECP24                   1  0  0  Violation Violation TP    ya
+ECP-25           Pengendali_ECP25                    0  0  0  Compliant Compliant TN    ya
+ECP-25           Pemusnahan_ECP25                    1  0  0  Violation Violation TP    ya
+ECP-26           Pengendali_ECP26                    0  0  0  Compliant Compliant TN    ya
+ECP-26           Penghapusan_ECP26                   1  0  0  Violation Violation TP    ya
+
+==============================================================================
+ CONFUSION MATRIX TINGKAT ENTITAS (metrik utama)
+==============================================================================
+N = 64 entitas | TP = 32 | TN = 32 | FP = 0 | FN = 0
+Akurasi 100.00% | Presisi 100.00% | Recall 100.00% | F1 100.00%
+
+==============================================================================
+ VONIS PER PELAKU (Pengendali/Prosesor/PSE beserta peristiwanya) ΓÇö tabel pendukung, bukan metrik
+==============================================================================
+ECP     Pelaku                             Peristiwa   V   W  Harapan   Agregat   Sesuai
+ECP-01  PSE_Simulasi_FIN_Compliant                11   0   0  Compliant Compliant ya
+ECP-01  Prosesor_Simulasi_CLD_Compliant            0   0   0  Compliant Compliant ya
+ECP-02  PSE_Simulasi_ECM_Warning                   5   0   5  Compliant Compliant ya
+ECP-03  Pengendali_ECP03                           2   2   1  Violation Violation ya
+ECP-04  Pengendali_ECP04                           2   2   1  Violation Violation ya
+ECP-05  Pengendali_ECP05                           2   2   1  Violation Violation ya
+ECP-06  Pengendali_ECP06                           2   2   1  Violation Violation ya
+ECP-07  Pengendali_ECP07                           2   2   1  Violation Violation ya
+ECP-08  PSE_Simulasi_SEC_Kosong                    0   7   0  Violation Violation ya
+ECP-08  PSE_Simulasi_SEC_Violation                 0   7   0  Violation Violation ya
+ECP-08  Prosesor_Simulasi_SEC_Violation            0   7   0  Violation Violation ya
+ECP-09  PSE_Simulasi_HLT_Violation                 0   1   0  Violation Violation ya
+ECP-10  PSE_Simulasi_LGL_Violation                 0   1   0  Violation Violation ya
+ECP-11  PSE_Simulasi_CNS_Violation                 0   2   0  Violation Violation ya
+ECP-12  PSE_Simulasi_ANK_Violation                 0   1   0  Violation Violation ya
+ECP-13  PSE_Simulasi_DIS_Violation                 0   1   0  Violation Violation ya
+ECP-14  PSE_Simulasi_SIK_Violation                 0   1   0  Violation Violation ya
+ECP-15  PSE_Simulasi_JNT_Violation                 0   1   0  Violation Violation ya
+ECP-16  Pengendali_ECP16                           1   1   0  Violation Violation ya
+ECP-17  Pengendali_ECP17                           1   1   0  Violation Violation ya
+ECP-18  Pengendali_ECP18                           1   1   0  Violation Violation ya
+ECP-19  Prosesor_Simulasi_CLD_Violation            0   1   0  Violation Violation ya
+ECP-20  PSE_Simulasi_ILLEGAL_Violation             0   1   0  Violation Violation ya
+ECP-21  Pengendali_ECP21                           1   2   0  Violation Violation ya
+ECP-22  PSE_Simulasi_DPO_Violation                 0   1   0  Violation Violation ya
+ECP-22  Prosesor_Simulasi_DPO_Violation            0   1   0  Violation Violation ya
+ECP-23  Pengendali_ECP23                           1   1   0  Violation Violation ya
+ECP-24  Pengendali_ECP24                           1   1   0  Violation Violation ya
+ECP-25  Pengendali_ECP25                           1   1   0  Violation Violation ya
+ECP-26  Pengendali_ECP26                           1   1   0  Violation Violation ya
+
+==============================================================================
+ BUKTI CAKUPAN TINGKAT SHAPE (bukan metrik akurasi utama)
+==============================================================================
+Property shape                                                              Sev        Target Harap Aktual  Sesuai
+AccessControl_Applied                                                       Violation      29     2      2  ya
+AccessControl_Recorded                                                      Violation      29     1      1  ya
+BreachNotificationContentShape:breachNotificationContainsRequiredElements   Violation       5     1      1  ya
+BreachNotificationHours_Recorded                                            Violation       5     1      1  ya
+BreachNotificationHours_WithinLimit                                         Violation       5     1      1  ya
+ChildConsentShape:hasParentalConsentForChild                                Violation       2     1      1  ya
+ConfidentialityMeasures_Applied                                             Violation      29     2      2  ya
+ConfidentialityMeasures_Recorded                                            Violation      29     1      1  ya
+ConsentEvidenceShape:hasConsentEvidence                                     Violation       5     1      1  ya
+CorporateActionNoticeShape:transferNoticeAfterAction                        Violation       2     1      1  ya
+CorporateActionNoticeShape:transferNoticeBeforeAction                       Violation       2     1      1  ya
+DPIAShape:hasDPIA                                                           Violation       4     1      1  ya
+DataAccessHours_Recorded                                                    Violation       4     1      1  ya
+DataAccessHours_WithinLimit                                                 Violation       4     1      1  ya
+DataAccuracyVerification_Applied                                            Violation      29     2      2  ya
+DataAccuracyVerification_Recorded                                           Violation      29     1      1  ya
+DataDeletionShape:erasureCarriedOut                                         Violation       3     1      1  ya
+DataDestructionShape:erasureCarriedOut                                      Violation       2     1      1  ya
+DataMinimizationShape:hasDataMinimization                                   Violation      25     1      1  ya
+DataPortabilityShape:portableFormatProvided                                 Violation       2     1      1  ya
+DataProtectionOfficerShape:hasDataProtectionOfficer                         Violation       4     2      2  ya
+DataUpdateHours_Recorded                                                    Violation       4     1      1  ya
+DataUpdateHours_WithinLimit                                                 Violation       4     1      1  ya
+DeletionNoticeShape                                                         Violation       5     1      1  ya
+DisabilityConsentShape:hasSpecialConsentForDisability                       Violation       2     1      1  ya
+ElectronicSecuritySystem_Applied                                            Violation      29     2      2  ya
+ElectronicSecuritySystem_Recorded                                           Violation      29     1      1  ya
+InternationalTransferShape                                                  Violation       2     1      1  ya
+JointControllerShape:hasJointControllerAgreement                            Violation       2     1      1  ya
+LegalBasisShape:hasLegalBasis                                               Violation      25     1      1  ya
+ProcessingAuditLog_Applied                                                  Violation      29     2      2  ya
+ProcessingAuditLog_Recorded                                                 Violation      29     1      1  ya
+ProcessingCessationHours_Recorded                                           Violation       4     1      1  ya
+ProcessingCessationHours_WithinLimit                                        Violation       4     1      1  ya
+ProcessingNoticeShape:hasProcessingNotice                                   Violation       5     1      1  ya
+ProcessingRestrictionHours_Recorded                                         Violation       4     1      1  ya
+ProcessingRestrictionHours_WithinLimit                                      Violation       4     1      1  ya
+ProcessingTerminationShape:processingTerminated                             Violation       2     1      1  ya
+ProcessorInstructionShape:processesOnlyUnderInstruction                     Violation       4     1      1  ya
+SecurityMeasures_Applied                                                    Violation      29     2      2  ya
+SecurityMeasures_Recorded                                                   Violation      29     1      1  ya
+SupervisionMechanism_Applied                                                Violation      29     2      2  ya
+SupervisionMechanism_Recorded                                               Violation      29     1      1  ya
+UnauthorizedProcessingShape:hasUnauthorizedProcessing                       Violation      30     1      1  ya
+BreachNotificationHours_EarlyWarning                                        Warning         5     2      2  ya
+DataAccessHours_EarlyWarning                                                Warning         4     2      2  ya
+DataUpdateHours_EarlyWarning                                                Warning         4     2      2  ya
+ProcessingCessationHours_EarlyWarning                                       Warning         4     2      2  ya
+ProcessingRestrictionHours_EarlyWarning                                     Warning         4     2      2  ya
+Property shape yang tidak terpicu oleh entitas ECP mana pun (0): -
+
+==============================================================================
+ CAKUPAN PER KELAS BATASAN
+==============================================================================
+Kelas  ECP      Unit  Terpicu  NodeShape
+K01    ECP-03      3        3  DataUpdateShape
+K02    ECP-04      3        3  DataAccessShape
+K03    ECP-05      3        3  ProcessingCessationShape
+K04    ECP-06      3        3  ProcessingRestrictionShape
+K05    ECP-07      3        3  BreachNotificationShape
+K06    ECP-08     14       14  SecurityMeasuresShape, ConfidentialityShape, SupervisionShape, ElectronicSecuritySystemShape, AuditLogShape, DataAccuracyShape
+K07    ECP-09      1        1  DPIAShape
+K08    ECP-10      1        1  LegalBasisShape
+K09    ECP-11      2        2  ConsentEvidenceShape, ProcessingNoticeShape
+K10    ECP-12      1        1  ChildConsentShape
+K11    ECP-13      1        1  DisabilityConsentShape
+K12    ECP-14      1        1  DataMinimizationShape
+K13    ECP-15      1        1  JointControllerShape
+K14    ECP-16      1        1  ProcessingTerminationShape
+K15    ECP-17      1        1  BreachNotificationContentShape
+K16    ECP-18      1        1  InternationalTransferShape
+K17    ECP-19      1        1  ProcessorInstructionShape
+K18    ECP-20      1        1  UnauthorizedProcessingShape
+K19    ECP-21      2        2  CorporateActionNoticeShape
+K20    ECP-22      1        1  DataProtectionOfficerShape
+K21    ECP-23      1        1  DataPortabilityShape
+K22    ECP-24      1        1  DataDeletionShape
+K23    ECP-25      1        1  DataDestructionShape
+K24    ECP-26      1        1  DeletionNoticeShape
+
+==============================================================================
+ Validasi pySHACL: Graf Uji Batas BVA (data_uji_batas_bva.ttl, 128 triple)
+==============================================================================
+Conforms (allow_warnings=True) : False
+Vonis hukum graf (ada sh:Violation?) : MELANGGAR
+Ringkasan severity : 10 Violation | 15 Warning | 0 Info
+Tiga besaran (Violation / Warning):
+  hasil validasi (sh:ValidationResult)    : 10 / 15
+  pasangan (focus node, unit) terpicu     : 10 / 15
+  focus node terpicu                      : 10 / 15
+Laporan tersimpan di : D:\Magister PJJ Informatika Amikom\Tesis\Transformasi UU No. 27 Tahun 2022 Menjadi Dataset Semantik untuk Validasi Kepatuhan Data Pribadi menggunakan SHACL\02_Development\FASE_4_VALIDASI\validation_results\report_graf_uji_batas_bva.txt
+
+==============================================================================
+ UJI BATAS (BOUNDARY VALUE ANALYSIS) ΓÇö terpisah dari ECP
+==============================================================================
+kasus            Entitas                             V  W  I  Harapan   Prediksi  Hasil Shape sesuai kunci
+BVA-Pengendali   BVA_Pengendali                      0  0  0  Compliant Compliant TN    ya
+BVA-Ps30-048     BVA_Ps30_048                        0  0  0  Compliant Compliant TN    ya
+BVA-Ps30-049     BVA_Ps30_049                        0  1  0  Compliant Compliant TN    ya
+BVA-Ps30-072     BVA_Ps30_072                        0  1  0  Compliant Compliant TN    ya
+BVA-Ps30-073     BVA_Ps30_073                        1  1  0  Violation Violation TP    ya
+BVA-Ps30-kosong  BVA_Ps30_kosong                     1  0  0  Violation Violation TP    ya
+BVA-Ps32-048     BVA_Ps32_048                        0  0  0  Compliant Compliant TN    ya
+BVA-Ps32-049     BVA_Ps32_049                        0  1  0  Compliant Compliant TN    ya
+BVA-Ps32-072     BVA_Ps32_072                        0  1  0  Compliant Compliant TN    ya
+BVA-Ps32-073     BVA_Ps32_073                        1  1  0  Violation Violation TP    ya
+BVA-Ps32-kosong  BVA_Ps32_kosong                     1  0  0  Violation Violation TP    ya
+BVA-Ps40-048     BVA_Ps40_048                        0  0  0  Compliant Compliant TN    ya
+BVA-Ps40-049     BVA_Ps40_049                        0  1  0  Compliant Compliant TN    ya
+BVA-Ps40-072     BVA_Ps40_072                        0  1  0  Compliant Compliant TN    ya
+BVA-Ps40-073     BVA_Ps40_073                        1  1  0  Violation Violation TP    ya
+BVA-Ps40-kosong  BVA_Ps40_kosong                     1  0  0  Violation Violation TP    ya
+BVA-Ps41-048     BVA_Ps41_048                        0  0  0  Compliant Compliant TN    ya
+BVA-Ps41-049     BVA_Ps41_049                        0  1  0  Compliant Compliant TN    ya
+BVA-Ps41-072     BVA_Ps41_072                        0  1  0  Compliant Compliant TN    ya
+BVA-Ps41-073     BVA_Ps41_073                        1  1  0  Violation Violation TP    ya
+BVA-Ps41-kosong  BVA_Ps41_kosong                     1  0  0  Violation Violation TP    ya
+BVA-Ps46-048     BVA_Ps46_048                        0  0  0  Compliant Compliant TN    ya
+BVA-Ps46-049     BVA_Ps46_049                        0  1  0  Compliant Compliant TN    ya
+BVA-Ps46-072     BVA_Ps46_072                        0  1  0  Compliant Compliant TN    ya
+BVA-Ps46-073     BVA_Ps46_073                        1  1  0  Violation Violation TP    ya
+BVA-Ps46-kosong  BVA_Ps46_kosong                     1  0  0  Violation Violation TP    ya
+Kasus sesuai kunci (vonis dan shape): 26/26
+
+CSV tersimpan di D:\Magister PJJ Informatika Amikom\Tesis\Transformasi UU No. 27 Tahun 2022 Menjadi Dataset Semantik untuk Validasi Kepatuhan Data Pribadi menggunakan SHACL\02_Development\FASE_4_VALIDASI\validation_results
+
+==============================================================================
+SEMUA HASIL SESUAI KUNCI JAWABAN
+==============================================================================

@@ -1,0 +1,53 @@
+﻿Definisi: NodeShape dengan himpunan sh:targetClass sama dan himpunan tanda tangan property shape sama.
+K01  target=DataUpdateRequest                             NodeShape=DataUpdateShape
+      unit V=2 W=1  komponen=datatype, maxInclusive, minCount
+K02  target=DataAccessRequest                             NodeShape=DataAccessShape
+      unit V=2 W=1  komponen=datatype, maxInclusive, minCount
+K03  target=ConsentWithdrawalRequest                      NodeShape=ProcessingCessationShape
+      unit V=2 W=1  komponen=datatype, maxInclusive, minCount
+K04  target=ProcessingRestrictionRequest                  NodeShape=ProcessingRestrictionShape
+      unit V=2 W=1  komponen=datatype, maxInclusive, minCount
+K05  target=BreachIncident                                NodeShape=BreachNotificationShape
+      unit V=2 W=1  komponen=datatype, maxInclusive, minCount
+K06  target=DataController/DataProcessor                  NodeShape=SecurityMeasuresShape, ConfidentialityShape, SupervisionShape, ElectronicSecuritySystemShape, AuditLogShape, DataAccuracyShape
+      unit V=14 W=0  komponen=datatype, in, minCount
+K07  target=HighRiskProcessingController                  NodeShape=DPIAShape
+      unit V=1 W=0  komponen=datatype, hasValue, minCount
+K08  target=DataController                                NodeShape=LegalBasisShape
+      unit V=1 W=0  komponen=datatype, in, minCount
+K09  target=ConsentBasedController                        NodeShape=ConsentEvidenceShape, ProcessingNoticeShape
+      unit V=2 W=0  komponen=datatype, hasValue, minCount
+K10  target=ChildDataController                           NodeShape=ChildConsentShape
+      unit V=1 W=0  komponen=datatype, hasValue, minCount
+K11  target=DisabilityDataController                      NodeShape=DisabilityConsentShape
+      unit V=1 W=0  komponen=datatype, hasValue, minCount
+K12  target=DataController                                NodeShape=DataMinimizationShape
+      unit V=1 W=0  komponen=datatype, hasValue, minCount
+K13  target=JointController                               NodeShape=JointControllerShape
+      unit V=1 W=0  komponen=datatype, hasValue, minCount
+K14  target=ProcessingTerminationGround                   NodeShape=ProcessingTerminationShape
+      unit V=1 W=0  komponen=datatype, hasValue, minCount
+K15  target=BreachIncident                                NodeShape=BreachNotificationContentShape
+      unit V=1 W=0  komponen=datatype, hasValue, minCount
+K16  target=CrossBorderTransfer                           NodeShape=InternationalTransferShape
+      unit V=1 W=0  komponen=or
+K17  target=DataProcessor                                 NodeShape=ProcessorInstructionShape
+      unit V=1 W=0  komponen=datatype, hasValue, minCount
+K18  target=PSE                                           NodeShape=UnauthorizedProcessingShape
+      unit V=1 W=0  komponen=datatype, hasValue
+K19  target=CorporateAction                               NodeShape=CorporateActionNoticeShape
+      unit V=2 W=0  komponen=datatype, hasValue, minCount
+K20  target=DPORequiredActor                              NodeShape=DataProtectionOfficerShape
+      unit V=1 W=0  komponen=datatype, hasValue, minCount
+K21  target=DataPortabilityRequest                        NodeShape=DataPortabilityShape
+      unit V=1 W=0  komponen=datatype, hasValue, minCount
+K22  target=DeletionGround                                NodeShape=DataDeletionShape
+      unit V=1 W=0  komponen=datatype, hasValue, minCount
+K23  target=DestructionGround                             NodeShape=DataDestructionShape
+      unit V=1 W=0  komponen=datatype, hasValue, minCount
+K24  target=ErasureGround                                 NodeShape=DeletionNoticeShape
+      unit V=1 W=0  komponen=or
+
+N_constraint = 24 (bila pola dibaca sebagai multiset: 25)
+N_partisi = N_valid + N_constraint = 2 + 24 = 26
+CSV tersimpan di D:\Magister PJJ Informatika Amikom\Tesis\Transformasi UU No. 27 Tahun 2022 Menjadi Dataset Semantik untuk Validasi Kepatuhan Data Pribadi menggunakan SHACL\02_Development\FASE_4_VALIDASI\validation_results\kelas_batasan.csv

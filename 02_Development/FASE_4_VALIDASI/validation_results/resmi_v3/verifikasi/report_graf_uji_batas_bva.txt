@@ -1,0 +1,180 @@
+=== LAPORAN HASIL VALIDASI PYSHACL: Graf Uji Batas BVA ===
+File Data: data_uji_batas_bva.ttl (128 triple)
+Conforms (allow_warnings=True): False
+Vonis hukum graf (ada sh:Violation?): MELANGGAR
+Counts: Violation=10, Warning=15, Info=0
+
+--- DETAIL LAPORAN FORMAL SHACL ---
+Validation Report
+Conforms: False
+Results (25):
+Constraint Violation in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:BreachNotificationHours_WithinLimit
+	Focus Node: pdp:BVA_Ps46_073
+	Value Node: Literal("73", datatype=xsd:integer)
+	Result Path: pdp:breachNotificationHours
+	Message: Pelanggaran Pasal 46 ayat (1) UU PDP: pemberitahuan tertulis kegagalan Pelindungan Data Pribadi melebihi batas 3 x 24 jam (72 jam), atau tidak dicatat sebagai bilangan bulat jam.
+Constraint Violation in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:DataAccessHours_WithinLimit
+	Focus Node: pdp:BVA_Ps32_073
+	Value Node: Literal("73", datatype=xsd:integer)
+	Result Path: pdp:dataAccessResponseHours
+	Message: Pelanggaran Pasal 32 ayat (2) UU PDP: waktu pemberian akses data pribadi melebihi batas 3 x 24 jam (72 jam) sejak permintaan akses diterima, atau tidak dicatat sebagai bilangan bulat jam.
+Constraint Violation in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:DataUpdateHours_WithinLimit
+	Focus Node: pdp:BVA_Ps30_073
+	Value Node: Literal("73", datatype=xsd:integer)
+	Result Path: pdp:dataUpdateResponseHours
+	Message: Pelanggaran Pasal 30 ayat (1) UU PDP: waktu pembaruan/perbaikan data pribadi melebihi batas 3 x 24 jam (72 jam) sejak permintaan diterima, atau tidak dicatat sebagai bilangan bulat jam.
+Constraint Violation in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ProcessingCessationHours_WithinLimit
+	Focus Node: pdp:BVA_Ps40_073
+	Value Node: Literal("73", datatype=xsd:integer)
+	Result Path: pdp:processingCessationHours
+	Message: Pelanggaran Pasal 40 ayat (2) UU PDP: penghentian pemrosesan setelah penarikan kembali persetujuan melebihi batas 3 x 24 jam (72 jam), atau tidak dicatat sebagai bilangan bulat jam.
+Constraint Violation in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ProcessingRestrictionHours_WithinLimit
+	Focus Node: pdp:BVA_Ps41_073
+	Value Node: Literal("73", datatype=xsd:integer)
+	Result Path: pdp:processingRestrictionHours
+	Message: Pelanggaran Pasal 41 ayat (1) UU PDP: penundaan dan pembatasan pemrosesan melebihi batas 3 x 24 jam (72 jam) sejak permintaan diterima, atau tidak dicatat sebagai bilangan bulat jam.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:BreachNotificationHours_Recorded
+	Focus Node: pdp:BVA_Ps46_kosong
+	Result Path: pdp:breachNotificationHours
+	Message: Pelanggaran Pasal 46 ayat (1) UU PDP: waktu pemberitahuan tertulis kegagalan Pelindungan Data Pribadi tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:DataAccessHours_Recorded
+	Focus Node: pdp:BVA_Ps32_kosong
+	Result Path: pdp:dataAccessResponseHours
+	Message: Pelanggaran Pasal 32 ayat (2) UU PDP: waktu pemberian akses data pribadi tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:DataUpdateHours_Recorded
+	Focus Node: pdp:BVA_Ps30_kosong
+	Result Path: pdp:dataUpdateResponseHours
+	Message: Pelanggaran Pasal 30 ayat (1) UU PDP: waktu pembaruan/perbaikan data pribadi tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ProcessingCessationHours_Recorded
+	Focus Node: pdp:BVA_Ps40_kosong
+	Result Path: pdp:processingCessationHours
+	Message: Pelanggaran Pasal 40 ayat (2) UU PDP: waktu penghentian pemrosesan setelah penarikan kembali persetujuan tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: pdps:ProcessingRestrictionHours_Recorded
+	Focus Node: pdp:BVA_Ps41_kosong
+	Result Path: pdp:processingRestrictionHours
+	Message: Pelanggaran Pasal 41 ayat (1) UU PDP: waktu penundaan dan pembatasan pemrosesan tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:BreachNotificationHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps46_049
+	Value Node: Literal("49", datatype=xsd:integer)
+	Result Path: pdp:breachNotificationHours
+	Message: Peringatan dini Pasal 46 ayat (1) UU PDP: pemberitahuan kegagalan Pelindungan Data Pribadi melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:BreachNotificationHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps46_072
+	Value Node: Literal("72", datatype=xsd:integer)
+	Result Path: pdp:breachNotificationHours
+	Message: Peringatan dini Pasal 46 ayat (1) UU PDP: pemberitahuan kegagalan Pelindungan Data Pribadi melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:BreachNotificationHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps46_073
+	Value Node: Literal("73", datatype=xsd:integer)
+	Result Path: pdp:breachNotificationHours
+	Message: Peringatan dini Pasal 46 ayat (1) UU PDP: pemberitahuan kegagalan Pelindungan Data Pribadi melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:DataAccessHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps32_049
+	Value Node: Literal("49", datatype=xsd:integer)
+	Result Path: pdp:dataAccessResponseHours
+	Message: Peringatan dini Pasal 32 ayat (2) UU PDP: waktu pemberian akses data melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:DataAccessHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps32_072
+	Value Node: Literal("72", datatype=xsd:integer)
+	Result Path: pdp:dataAccessResponseHours
+	Message: Peringatan dini Pasal 32 ayat (2) UU PDP: waktu pemberian akses data melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:DataAccessHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps32_073
+	Value Node: Literal("73", datatype=xsd:integer)
+	Result Path: pdp:dataAccessResponseHours
+	Message: Peringatan dini Pasal 32 ayat (2) UU PDP: waktu pemberian akses data melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:DataUpdateHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps30_049
+	Value Node: Literal("49", datatype=xsd:integer)
+	Result Path: pdp:dataUpdateResponseHours
+	Message: Peringatan dini Pasal 30 ayat (1) UU PDP: waktu pembaruan/perbaikan data melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:DataUpdateHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps30_072
+	Value Node: Literal("72", datatype=xsd:integer)
+	Result Path: pdp:dataUpdateResponseHours
+	Message: Peringatan dini Pasal 30 ayat (1) UU PDP: waktu pembaruan/perbaikan data melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:DataUpdateHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps30_073
+	Value Node: Literal("73", datatype=xsd:integer)
+	Result Path: pdp:dataUpdateResponseHours
+	Message: Peringatan dini Pasal 30 ayat (1) UU PDP: waktu pembaruan/perbaikan data melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:ProcessingCessationHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps40_049
+	Value Node: Literal("49", datatype=xsd:integer)
+	Result Path: pdp:processingCessationHours
+	Message: Peringatan dini Pasal 40 ayat (2) UU PDP: penghentian pemrosesan melebihi 48 jam sejak permintaan penarikan persetujuan diterima.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:ProcessingCessationHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps40_072
+	Value Node: Literal("72", datatype=xsd:integer)
+	Result Path: pdp:processingCessationHours
+	Message: Peringatan dini Pasal 40 ayat (2) UU PDP: penghentian pemrosesan melebihi 48 jam sejak permintaan penarikan persetujuan diterima.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:ProcessingCessationHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps40_073
+	Value Node: Literal("73", datatype=xsd:integer)
+	Result Path: pdp:processingCessationHours
+	Message: Peringatan dini Pasal 40 ayat (2) UU PDP: penghentian pemrosesan melebihi 48 jam sejak permintaan penarikan persetujuan diterima.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:ProcessingRestrictionHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps41_049
+	Value Node: Literal("49", datatype=xsd:integer)
+	Result Path: pdp:processingRestrictionHours
+	Message: Peringatan dini Pasal 41 ayat (1) UU PDP: penundaan dan pembatasan pemrosesan melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:ProcessingRestrictionHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps41_072
+	Value Node: Literal("72", datatype=xsd:integer)
+	Result Path: pdp:processingRestrictionHours
+	Message: Peringatan dini Pasal 41 ayat (1) UU PDP: penundaan dan pembatasan pemrosesan melebihi 48 jam dan mendekati batas 72 jam.
+Validation Result in MaxInclusiveConstraintComponent (http://www.w3.org/ns/shacl#MaxInclusiveConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: pdps:ProcessingRestrictionHours_EarlyWarning
+	Focus Node: pdp:BVA_Ps41_073
+	Value Node: Literal("73", datatype=xsd:integer)
+	Result Path: pdp:processingRestrictionHours
+	Message: Peringatan dini Pasal 41 ayat (1) UU PDP: penundaan dan pembatasan pemrosesan melebihi 48 jam dan mendekati batas 72 jam.

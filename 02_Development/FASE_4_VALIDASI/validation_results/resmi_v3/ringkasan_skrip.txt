@@ -1,0 +1,17 @@
+﻿[2026-10-28T20:27:57] Mulai skrip. Mode: RESMI. Keluaran: D:\Magister PJJ Informatika Amikom\Tesis\Transformasi UU No. 27 Tahun 2022 Menjadi Dataset Semantik untuk Validasi Kepatuhan Data Pribadi menggunakan SHACL\02_Development\FASE_4_VALIDASI\validation_results\resmi_v3
+[2026-10-28T20:27:57] Hash artefak cocok: 17 berkas.
+[2026-10-28T20:27:58] Uptime: 4.8 menit (boot 2026-10-28T20:23:07).
+[2026-10-28T20:27:58] Menunggu 610 detik agar uptime >= 15 menit.
+[2026-10-28T20:39:22] Beban CPU rerata 60 detik: 69.2 %
+[2026-10-28T20:40:35] Beban CPU rerata 60 detik: 49.7 % (menunggu < 15 %)
+[2026-10-28T20:41:49] Beban CPU rerata 60 detik: 18.2 % (menunggu < 15 %)
+[2026-10-28T20:43:02] Beban CPU rerata 60 detik: 43.9 % (menunggu < 15 %)
+[2026-10-28T20:44:15] Beban CPU rerata 60 detik: 10.2 % (menunggu < 15 %)
+[2026-10-28T20:44:18] Sleep dicegah selama skrip berjalan. Skema daya asli: 381b4222-f694-41f0-9685-ff5bb260df2e
+[2026-10-28T20:44:19] Skema daya High performance aktif.
+[2026-10-28T20:44:24] run_validation.py: kode keluar 0 (log D:\Magister PJJ Informatika Amikom\Tesis\Transformasi UU No. 27 Tahun 2022 Menjadi Dataset Semantik untuk Validasi Kepatuhan Data Pribadi menggunakan SHACL\02_Development\FASE_4_VALIDASI\validation_results\resmi_v3\log_verifikasi_pra_ukur.txt)
+[2026-10-28T20:44:24] Mulai ukur_performa.py (faktor 1 10 50 100 250).
+[2026-10-28T21:22:27] ukur_performa.py: kode keluar 0 (log D:\Magister PJJ Informatika Amikom\Tesis\Transformasi UU No. 27 Tahun 2022 Menjadi Dataset Semantik untuk Validasi Kepatuhan Data Pribadi menggunakan SHACL\02_Development\FASE_4_VALIDASI\validation_results\resmi_v3\log_ukur_performa.txt)
+[2026-10-28T21:22:28] Skema daya dikembalikan ke 381b4222-f694-41f0-9685-ff5bb260df2e: OK
+[2026-10-28T21:22:28] Pencegahan sleep dilepas.
+[2026-10-28T21:22:31] Ringkasan: uptime awal 4.8 menit; beban CPU sebelum ukur 10.2 %; skema dipakai: Power Scheme GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c  (High performance); kode ukur: 0

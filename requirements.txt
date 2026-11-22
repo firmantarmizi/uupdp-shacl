@@ -1,0 +1,21 @@
+# Python 3.13.0. Exact versions of the environment that produced validation_results/resmi_v3/.
+contourpy==1.4.0
+cycler==0.12.1
+et_xmlfile==2.0.0
+fonttools==4.66.1
+html5rdf==1.2.1
+kiwisolver==1.5.1
+matplotlib==3.10.0
+numpy==2.5.4
+openpyxl==3.1.5
+owlrl==7.6.2
+packaging==26.3
+pillow==12.3.0
+prettytable==3.18.0
+pyparsing==3.3.3
+pyshacl==0.40.1
+python-dateutil==2.9.0.post0
+rdflib==7.6.0
+six==1.17.0
+typing_extensions==4.16.0
+wcwidth==0.9.2

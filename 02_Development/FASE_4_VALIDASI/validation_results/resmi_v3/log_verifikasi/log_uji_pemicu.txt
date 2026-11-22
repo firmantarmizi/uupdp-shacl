@@ -1,0 +1,27 @@
+﻿Uji pemicu (sesudah Bagian B); shapes: shapes_pdp.ttl
+K00  Pengendali tanpa pemicu                                            shape V= 0 (hasil  0) W= 0  sesuai
+K01  Pemrosesan oleh 2 atau lebih Pengendali                            shape V= 1 (hasil  2) W= 0  sesuai
+K02  Dasar pemrosesan persetujuan                                       shape V= 2 (hasil  4) W= 0  sesuai
+K03  Pemrosesan data pribadi anak                                       shape V= 1 (hasil  2) W= 0  sesuai
+K04  Pemrosesan data pribadi penyandang disabilitas                     shape V= 1 (hasil  2) W= 0  sesuai
+K05  Pemrosesan berpotensi risiko tinggi                                shape V= 1 (hasil  2) W= 0  sesuai
+K06  Permintaan pembaruan/perbaikan diterima                            shape V= 1 (hasil  1) W= 0  sesuai
+K07  Permintaan akses diterima                                          shape V= 1 (hasil  1) W= 0  sesuai
+K08  Permintaan penarikan kembali persetujuan diterima                  shape V= 1 (hasil  1) W= 0  sesuai
+K09  Permintaan penundaan dan pembatasan diterima                       shape V= 1 (hasil  1) W= 0  sesuai
+K10  Terjadi kegagalan Pelindungan Data Pribadi                         shape V= 2 (hasil  3) W= 0  sesuai
+K11  Transfer ke luar wilayah hukum RI                                  shape V= 1 (hasil  1) W= 0  sesuai
+K12  Pengendali menunjuk Prosesor (Prosesor tanpa properti kewajiban)   shape V= 8 (hasil  9) W= 0  sesuai
+K13  Aksi korporasi badan hukum Pengendali (selesai)                    shape V= 2 (hasil  4) W= 0  sesuai
+K14  Pemrosesan untuk kepentingan pelayanan publik (huruf a saja)       shape V= 1 (hasil  2) W= 0  sesuai
+K15  Pemantauan teratur dan sistematis skala besar (huruf b saja)       shape V= 1 (hasil  2) W= 0  sesuai
+K16  Pemrosesan skala besar Data Pribadi spesifik (huruf c saja)        shape V= 1 (hasil  2) W= 0  sesuai
+K17  Prosesor patuh dengan pemrosesan pelayanan publik (huruf a)        shape V= 1 (hasil  2) W= 0  sesuai
+K18  Permintaan Subjek atas data dalam format terstruktur               shape V= 1 (hasil  2) W= 0  sesuai
+K19  Kondisi pengakhiran pemrosesan terpenuhi                           shape V= 1 (hasil  2) W= 0  sesuai
+K20  Kondisi penghapusan terpenuhi (belum dihapus, tanpa pemberitahuan) shape V= 1 (hasil  2) W= 0  sesuai
+K21  Kondisi pemusnahan terpenuhi (belum dimusnahkan, tanpa pemberitahuan) shape V= 1 (hasil  2) W= 0  sesuai
+K22  Penghapusan dilakukan tanpa pemberitahuan kepada Subjek            shape V= 1 (hasil  1) W= 0  sesuai
+
+Kasus sesuai harapan rancangan bersyarat: 23/23
+Tersimpan di D:\Magister PJJ Informatika Amikom\Tesis\Transformasi UU No. 27 Tahun 2022 Menjadi Dataset Semantik untuk Validasi Kepatuhan Data Pribadi menggunakan SHACL\02_Development\FASE_4_VALIDASI\validation_results\uji_pemicu.csv

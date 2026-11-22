@@ -1,0 +1,29 @@
+﻿Baseline (tanpa mutasi): tanpa temuan
+MD-01 data  FIN_Compliant: hasSecurityMeasures true -> false (Ps. 35 huruf a, 38)    harap FP    aktual FP    TERDETEKSI
+MD-02 data  Insiden_FIN: breachNotificationHours dihapus (data kosong)               harap FP    aktual FP    TERDETEKSI
+MD-03 data  Insiden_ECM: breachNotificationHours 58 -> 73                            harap FP    aktual FP    TERDETEKSI
+MD-04 data  CLD_Compliant: processesOnlyUnderInstruction true -> false               harap FP    aktual FP    TERDETEKSI
+MD-05 data  Insiden_ECP07_Lewat: breachNotificationHours 144 -> 24                   harap FN    aktual FN    TERDETEKSI
+MD-06 data  ILLEGAL_Violation: hasUnauthorizedProcessing true -> false               harap FN    aktual FN    TERDETEKSI
+MD-07 data  CNS_Violation: hasConsentEvidence false -> true (vonis tetap Violation)  harap SHAPE aktual SHAPE TERDETEKSI
+MD-08 data  ANK_Violation: kelas pemicu ChildDataController dihapus                  harap FN    aktual FN    TERDETEKSI
+MD-09 data  Transfer_ECP18: entitas peristiwa transfer dihapus                       harap FN    aktual FN    TERDETEKSI
+MD-10 data  CLD_Compliant: hasAccessControl true -> false (Ps. 39 ayat (1) jo. 52)   harap FP    aktual FP    TERDETEKSI
+MD-11 data  CLD_Violation: processesOnlyUnderInstruction false -> true               harap FN    aktual FN    TERDETEKSI
+MD-12 data  AksiKorporasi_FIN: transferNoticeAfterAction true -> false               harap FP    aktual FP    TERDETEKSI
+MD-13 data  DPO_Violation: pemicu LargeScaleMonitoringActor (huruf b) dihapus        harap FN    aktual FN    TERDETEKSI
+MD-14 data  Penghapusan_FIN: erasureCarriedOut true -> false                         harap FP    aktual FP    TERDETEKSI
+MD-15 data  Pengakhiran_ECP16: processingTerminated false -> true                    harap FN    aktual FN    TERDETEKSI
+MD-16 data  FIN_Compliant: hasSecurityMeasures dihapus (catatan tidak tersedia)      harap FP    aktual FP    TERDETEKSI
+MS-01 shape BreachNotificationHours_WithinLimit: maxInclusive 72 -> 200              harap FN    aktual FN    TERDETEKSI
+MS-02 shape DPIAShape: severity Violation -> Warning                                 harap FN    aktual FN    TERDETEKSI
+MS-03 shape UnauthorizedProcessingShape: property shape dihapus                      harap FN    aktual FN    TERDETEKSI
+MS-04 shape DataUpdateHours_EarlyWarning: maxInclusive 48 -> 60                      harap SHAPE aktual SHAPE TERDETEKSI
+MS-05 shape SecurityMeasuresShape: target pdp:DataProcessor dihapus                  harap SHAPE aktual SHAPE TERDETEKSI
+MS-06 shape DataProtectionOfficerShape: target dipersempit ke huruf a saja           harap FN    aktual FN    TERDETEKSI
+MS-07 shape DeletionNoticeShape: cabang sh:not dihapus (pemberitahuan selalu wajib)  harap SHAPE aktual SHAPE TERDETEKSI  lain: {'Pemusnahan_ECP25': 'SHAPE'}
+MK-01 kunci Kunci ECP-09 HLT: vonis Violation -> Compliant                           harap FP    aktual FP    TERDETEKSI
+MK-02 kunci Kunci ECP-01 FIN: vonis Compliant -> Violation                           harap FN    aktual FN    TERDETEKSI
+
+Skor mutasi: 25/25 mutan terdeteksi
+Tersimpan di D:\Magister PJJ Informatika Amikom\Tesis\Transformasi UU No. 27 Tahun 2022 Menjadi Dataset Semantik untuk Validasi Kepatuhan Data Pribadi menggunakan SHACL\02_Development\FASE_4_VALIDASI\validation_results\uji_mutasi.csv

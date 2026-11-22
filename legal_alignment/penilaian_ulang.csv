@@ -1,0 +1,3 @@
+id,pasal,aturan_yang_dinilai,skor_penilai1,skor_penilai2,jenis_ketidaksesuaian_penilai1,jenis_ketidaksesuaian_penilai2
+FO-16R,Pasal 35,shapes_pdp.ttl v2.4 (pasca-deliberasi): SecurityMeasuresShape,0,0,ada isi pasal yang terlewat; perlu pertimbangan manusia,ada isi pasal yang terlewat
+FO-30R,Pasal 52,shapes_pdp.ttl v2.4 (pasca-deliberasi): grup Pasal 52 untuk Prosesor,0,0,ada isi pasal yang terlewat,ada isi pasal yang terlewat

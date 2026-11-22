@@ -1,0 +1,5 @@
+# PENGUKURAN RESMI resmi_v3 - Bab 4
+graf,triple,runs,median_s,sd_s,mean_s,min_s,max_s,cv_persen,n_pencilan,pencilan_s,parse_median_s,mem_puncak_median_mb,mem_runs,cpu_mhz_efektif_median
+compliant,96,10,0.1962,0.3545,0.3586,0.1439,1.0945,98.85,2,0.9528;1.0945,0.0085,0.85,3,2878
+violation,531,10,0.3655,0.0383,0.3772,0.3556,0.4847,10.16,1,0.4847,0.0268,2.13,3,2976
+uji_batas_bva,128,10,0.179,0.0048,0.1797,0.1738,0.1891,2.68,1,0.1891,0.0067,1.08,3,2928

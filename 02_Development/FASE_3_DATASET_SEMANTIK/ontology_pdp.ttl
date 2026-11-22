@@ -1,0 +1,536 @@
+@prefix pdp:   <http://example.org/pdp#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+
+<http://example.org/pdp#>
+    a owl:Ontology ;
+    rdfs:label "Ontologi Pelindungan Data Pribadi (UU No. 27 Tahun 2022)"@id ;
+    rdfs:comment "Kosakata ontologi untuk audit kepatuhan teknis UU PDP Indonesia menggunakan Closed-World Assumption."@id ;
+    owl:versionInfo "1.4" .
+
+# Pemodelan kondisi berlaku (kewajiban bersyarat):
+#  - Pemicu peristiwa (permintaan, insiden, transfer, aksi korporasi, kondisi pengakhiran/penghapusan/
+#    pemusnahan) adalah entitas tersendiri yang ditautkan ke Pengendali
+#    melalui pdp:responsibleController; properti kewajiban bertenggat melekat pada peristiwa.
+#  - Pemicu karakteristik pemrosesan adalah subkelas pdp:DataController yang WAJIB ditulis eksplisit di data
+#    (rdf:type). Tidak ada rdfs:domain/rdfs:range yang menunjuk kelas pemicu karakteristik, karena inferensi
+#    RDFS akan mengetik entitas sebagai kelas pemicu hanya karena memakai suatu properti.
+#  - Dalam arsitektur ACC, kelas pemicu dan entitas peristiwa ditetapkan oleh lapisan ingesti.
+
+#################################################################
+#    Kelas-Kelas Ontologi (Classes)
+#################################################################
+
+pdp:PSE
+    a rdfs:Class ;
+    rdfs:label "Penyelenggara Sistem Elektronik"@id , "Electronic System Operator"@en ;
+    rdfs:comment "Setiap orang, penyelenggara negara, badan usaha, dan masyarakat yang menyediakan, mengelola, dan/atau mengoperasikan sistem elektronik."@id .
+
+pdp:DataController
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:PSE ;
+    rdfs:label "Pengendali Data Pribadi"@id , "Data Controller"@en ;
+    rdfs:comment "Setiap orang, badan publik, dan organisasi internasional yang bertindak sendiri-sendiri atau bersama-sama dalam menentukan tujuan dan melakukan kendali pemrosesan Data Pribadi."@id .
+
+pdp:DataProcessor
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:PSE ;
+    rdfs:label "Prosesor Data Pribadi"@id , "Data Processor"@en ;
+    rdfs:comment "Setiap orang, badan publik, dan organisasi internasional yang bertindak sendiri-sendiri atau bersama-sama dalam melakukan pemrosesan Data Pribadi atas nama Pengendali Data Pribadi."@id .
+
+pdp:DataSubject
+    a rdfs:Class ;
+    rdfs:label "Subjek Data Pribadi"@id , "Data Subject"@en ;
+    rdfs:comment "Orang perseorangan yang pada dirinya melekat Data Pribadi."@id .
+
+pdp:PersonalData
+    a rdfs:Class ;
+    rdfs:label "Data Pribadi"@id , "Personal Data"@en ;
+    rdfs:comment "Data tentang orang perseorangan yang teridentifikasi atau dapat diidentifikasi secara tersendiri atau dikombinasi dengan informasi lainnya baik secara langsung maupun tidak langsung melalui sistem elektronik atau nonelektronik."@id .
+
+pdp:SpecificPersonalData
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:PersonalData ;
+    rdfs:label "Data Pribadi Spesifik"@id , "Specific Personal Data"@en ;
+    rdfs:comment "Pasal 4 ayat (2) UU PDP: \"Data Pribadi yang bersifat spesifik ... meliputi: a. data dan informasi kesehatan; b. data biometrik; c. data genetika; d. catatan kejahatan; e. data anak; f. data keuangan pribadi; dan/atau g. data lainnya sesuai dengan ketentuan peraturan perundang-undangan.\" Pemrosesannya berpotensi risiko tinggi (Pasal 34 ayat (2) huruf b)."@id .
+
+pdp:GeneralPersonalData
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:PersonalData ;
+    rdfs:label "Data Pribadi Umum"@id , "General Personal Data"@en ;
+    rdfs:comment "Data pribadi bersifat umum seperti nama lengkap, jenis kelamin, kewarganegaraan, agama, status perkawinan."@id .
+
+pdp:ProcessingActivity
+    a rdfs:Class ;
+    rdfs:label "Aktivitas Pemrosesan Data"@id , "Processing Activity"@en ;
+    rdfs:comment "Kegiatan pemerolehan, pengumpulan, pengolahan, penganalisisan, penyimpanan, perbaikan, pembaruan, penampilan, pengumuman, transfer, penyebarluasan, penghapusan, atau pemusnahan data pribadi."@id .
+
+pdp:BreachIncident
+    a rdfs:Class ;
+    rdfs:label "Insiden Kegagalan Pelindungan Data Pribadi"@id , "Data Breach Incident"@en ;
+    rdfs:comment "Kejadian kegagalan dalam melindungi data pribadi yang meliputi kerahasiaan, integritas, dan ketersediaan data pribadi. Pemicu Pasal 46 ayat (1) UU PDP: \"Dalam hal terjadi kegagalan Pelindungan Data Pribadi ...\""@id .
+
+pdp:DataRequest
+    a rdfs:Class ;
+    rdfs:label "Permintaan Subjek Data"@id , "Data Subject Request"@en ;
+    rdfs:comment "Permohonan pelaksanaan hak Subjek Data Pribadi yang diterima Pengendali (Pasal 14 UU PDP: \"diajukan melalui permohonan tercatat yang disampaikan secara elektronik atau nonelektronik\"). Menjadi pemicu kewajiban bertenggat yang dihitung \"sejak Pengendali Data Pribadi menerima permintaan\"."@id .
+
+#################################################################
+#    Kelas Pemicu Peristiwa (Event Triggers)
+#################################################################
+
+pdp:DataUpdateRequest
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:DataRequest ;
+    rdfs:label "Permintaan pembaruan dan/atau perbaikan Data Pribadi"@id , "Data Update Request"@en ;
+    rdfs:comment "Pemicu Pasal 30 ayat (1) UU PDP: \"... paling lambat 3 x 24 (tiga kali dua puluh empat) jam terhitung sejak Pengendali Data Pribadi menerima permintaan pembaruan dan/atau perbaikan Data Pribadi.\""@id .
+
+pdp:DataAccessRequest
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:DataRequest ;
+    rdfs:label "Permintaan akses Data Pribadi"@id , "Data Access Request"@en ;
+    rdfs:comment "Pemicu Pasal 32 ayat (2) UU PDP: \"... paling lambat 3 x 24 (tiga kali dua puluh empat) jam terhitung sejak Pengendali Data Pribadi menerima permintaan akses.\""@id .
+
+pdp:ConsentWithdrawalRequest
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:DataRequest ;
+    rdfs:label "Permintaan penarikan kembali persetujuan"@id , "Consent Withdrawal Request"@en ;
+    rdfs:comment "Pemicu Pasal 40 ayat (2) UU PDP: \"... paling lambat 3 x 24 (tiga kali dua puluh empat) jam terhitung sejak Pengendali Data Pribadi menerima permintaan penarikan kembali persetujuan pemrosesan Data Pribadi.\""@id .
+
+pdp:ProcessingRestrictionRequest
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:DataRequest ;
+    rdfs:label "Permintaan penundaan dan pembatasan pemrosesan"@id , "Processing Restriction Request"@en ;
+    rdfs:comment "Pemicu Pasal 41 ayat (1) UU PDP: \"... paling lambat 3 x 24 (tiga kali dua puluh empat) jam terhitung sejak Pengendali Data Pribadi menerima permintaan penundaan dan pembatasan pemrosesan Data Pribadi.\" Pengecualian ayat (2) huruf a-c tidak dimodelkan."@id .
+
+pdp:CrossBorderTransfer
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:ProcessingActivity ;
+    rdfs:label "Transfer Data Pribadi ke luar wilayah hukum Negara Republik Indonesia"@id , "Cross-Border Transfer"@en ;
+    rdfs:comment "Pemicu Pasal 56 ayat (2) UU PDP: \"Dalam melakukan transfer Data Pribadi sebagaimana dimaksud pada ayat (1) ...\", yaitu transfer kepada Pengendali dan/atau Prosesor di luar wilayah hukum Negara Republik Indonesia."@id .
+
+pdp:CorporateAction
+    a rdfs:Class ;
+    rdfs:label "Aksi korporasi badan hukum Pengendali (penggabungan, pemisahan, pengambilalihan, peleburan, atau pembubaran)"@id , "Corporate Action"@en ;
+    rdfs:comment "Pemicu Pasal 48 ayat (1) UU PDP: \"Pengendali Data Pribadi berbentuk badan hukum yang melakukan penggabungan, pemisahan, pengambilalihan, peleburan, atau pembubaran badan hukum wajib menyampaikan pemberitahuan pengalihan Data Pribadi kepada Subjek Data Pribadi.\" Entitas kelas ini ditetapkan lapisan ingesti hanya untuk aksi yang SUDAH SELESAI oleh Pengendali berbentuk badan hukum, sehingga pemberitahuan sebelum dan sesudah (ayat (2)) dapat diperiksa; aksi yang sedang berjalan tidak dimodelkan (keterbatasan)."@id .
+
+pdp:DataPortabilityRequest
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:DataRequest ;
+    rdfs:label "Permintaan Subjek untuk mendapatkan dan/atau menggunakan Data Pribadi dalam format terstruktur"@id , "Data Portability Request"@en ;
+    rdfs:comment "Pemicu Pasal 13 ayat (1) UU PDP: \"Subjek Data Pribadi berhak mendapatkan dan/atau menggunakan Data Pribadi tentang dirinya dari Pengendali Data Pribadi dalam bentuk yang sesuai dengan struktur dan/atau format yang lazim digunakan atau dapat dibaca oleh sistem elektronik.\" Interpretasi peneliti (untuk dinilai validator): teks tidak menyebut \"permintaan\"; kewajiban korelatif Pengendali dibaca timbul ketika Subjek menjalankan haknya, sejajar dengan hak lain yang dimodelkan lewat permintaan."@id .
+
+pdp:ProcessingTerminationGround
+    a rdfs:Class ;
+    rdfs:label "Terpenuhinya kondisi pengakhiran pemrosesan Data Pribadi"@id , "Processing Termination Ground"@en ;
+    rdfs:comment "Pemicu Pasal 42 ayat (1) UU PDP: \"Pengendali Data Pribadi wajib mengakhiri pemrosesan Data Pribadi dalam hal: a. telah mencapai masa retensi; b. tujuan pemrosesan Data Pribadi telah tercapai; atau c. terdapat permintaan dari Subjek Data Pribadi.\" Huruf yang terpenuhi dicatat informatif pada pdp:triggerGround."@id .
+
+pdp:ErasureGround
+    a rdfs:Class ;
+    rdfs:label "Terpenuhinya kondisi penghapusan atau pemusnahan Data Pribadi"@id , "Erasure Ground"@en ;
+    rdfs:comment "Superkelas kondisi Pasal 43 ayat (1) dan Pasal 44 ayat (1) UU PDP. Menjadi target kewajiban pemberitahuan Pasal 45: \"Pengendali Data Pribadi wajib memberitahukan penghapusan dan/atau pemusnahan Data Pribadi kepada Subjek Data Pribadi.\""@id .
+
+pdp:DeletionGround
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:ErasureGround ;
+    rdfs:label "Terpenuhinya kondisi penghapusan Data Pribadi"@id , "Deletion Ground"@en ;
+    rdfs:comment "Pemicu Pasal 43 ayat (1) UU PDP: \"Pengendali Data Pribadi wajib menghapus Data Pribadi dalam hal: a. Data Pribadi tidak lagi diperlukan untuk pencapaian tujuan pemrosesan Data Pribadi; b. Subjek Data Pribadi telah melakukan penarikan kembali persetujuan pemrosesan Data Pribadi; c. terdapat permintaan dari Subjek Data Pribadi; atau d. Data Pribadi diperoleh dan/atau diproses dengan cara melawan hukum.\""@id .
+
+pdp:DestructionGround
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:ErasureGround ;
+    rdfs:label "Terpenuhinya kondisi pemusnahan Data Pribadi"@id , "Destruction Ground"@en ;
+    rdfs:comment "Pemicu Pasal 44 ayat (1) UU PDP: \"Pengendali Data Pribadi wajib memusnahkan Data Pribadi dalam hal: a. telah habis masa retensinya dan berketerangan dimusnahkan berdasarkan jadwal retensi arsip; b. terdapat permintaan dari Subjek Data Pribadi; c. tidak berkaitan dengan penyelesaian proses hukum suatu perkara; dan/atau d. Data Pribadi diperoleh dan/atau diproses dengan cara melawan hukum.\""@id .
+
+#################################################################
+#    Kelas Pemicu Karakteristik Pemrosesan (subkelas Pengendali; ditulis eksplisit)
+#################################################################
+
+pdp:JointController
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:DataController ;
+    rdfs:label "Pengendali dalam pemrosesan oleh 2 (dua) atau lebih Pengendali"@id , "Joint Controller"@en ;
+    rdfs:comment "Pemicu Pasal 18 ayat (2) UU PDP: \"Dalam hal Pemrosesan Data Pribadi dilakukan oleh 2 (dua) atau lebih Pengendali Data Pribadi ...\""@id .
+
+pdp:ConsentBasedController
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:DataController ;
+    rdfs:label "Pengendali dengan dasar pemrosesan persetujuan"@id , "Consent-Based Controller"@en ;
+    rdfs:comment "Pemicu Pasal 21 ayat (1) UU PDP: \"Dalam hal pemrosesan Data Pribadi berdasarkan persetujuan sebagaimana dimaksud dalam Pasal 20 ayat (2) huruf a ...\". Juga pemicu Pasal 24 berdasarkan interpretasi sistematis peneliti (lihat R2C_TRANSLATION_SPEC.md). Pengendali kelas ini harus memiliki pdp:hasLegalBasis \"consent\"."@id .
+
+pdp:ChildDataController
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:DataController ;
+    rdfs:label "Pengendali yang memproses Data Pribadi anak"@id , "Child Data Controller"@en ;
+    rdfs:comment "Pemicu Pasal 25 ayat (2) UU PDP: \"Pemrosesan Data Pribadi anak sebagaimana dimaksud pada ayat (1) wajib mendapat persetujuan dari orang tua anak dan/atau wali anak ...\""@id .
+
+pdp:DisabilityDataController
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:DataController ;
+    rdfs:label "Pengendali yang memproses Data Pribadi penyandang disabilitas"@id , "Disability Data Controller"@en ;
+    rdfs:comment "Pemicu Pasal 26 ayat (3) UU PDP: \"Pemrosesan Data Pribadi penyandang disabilitas ... wajib mendapat persetujuan dari penyandang disabilitas dan/atau wali penyandang disabilitas ...\""@id .
+
+pdp:HighRiskProcessingController
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:DataController ;
+    rdfs:label "Pengendali dengan pemrosesan berpotensi risiko tinggi"@id , "High-Risk Processing Controller"@en ;
+    rdfs:comment "Pemicu Pasal 34 ayat (1) UU PDP: \"... dalam hal pemrosesan Data Pribadi memiliki potensi risiko tinggi terhadap Subjek Data Pribadi.\" Kriteria risiko tinggi pada ayat (2) huruf a-g tidak diturunkan otomatis; kelas ditulis eksplisit oleh lapisan ingesti. Untuk huruf b (\"pemrosesan atas Data Pribadi yang bersifat spesifik\"), konsistensi diperiksa oleh aturan integritas (f1) (pdp:processesPersonalData ke pdp:SpecificPersonalData) dan (f2) (pdp:ChildDataController, karena data anak adalah Data Pribadi spesifik menurut Pasal 4 ayat (2) huruf e)."@id .
+
+#################################################################
+#    Kelas Pemicu Penunjukan Pejabat/Petugas PDP (Pasal 53 ayat (1); Pengendali dan Prosesor)
+#################################################################
+# Huruf a, b, c bersifat alternatif. Amar butir 2 Putusan MK Nomor 151/PUU-XXII/2024: kata "dan" dalam Pasal 53
+# ayat (1) huruf b "bertentangan dengan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 dan tidak mempunyai
+# kekuatan hukum mengikat secara bersyarat sepanjang tidak dimaknai "dan/atau"" (diputus 16 Juli 2025, diucapkan
+# 30 Juli 2025; referensi/putusan_mkri_12970_1753859809.pdf, hlm. 159 PDF). Disjungsi dimodelkan lewat rdfs:subClassOf:
+# entitas bertipe salah satu subkelas diinferensikan bertipe pdp:DPORequiredActor (target shape).
+
+pdp:DPORequiredActor
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:PSE ;
+    rdfs:label "Pengendali atau Prosesor yang wajib menunjuk pejabat atau petugas Pelindungan Data Pribadi"@id , "DPO-Required Actor"@en ;
+    rdfs:comment "Pemicu Pasal 53 ayat (1) UU PDP: \"Pengendali Data Pribadi dan Prosesor Data Pribadi wajib menunjuk pejabat atau petugas yang melaksanakan fungsi Pelindungan Data Pribadi dalam hal: ...\". Tidak ditulis langsung di data; diturunkan dari salah satu subkelas huruf a, b, atau c. Entitas harus juga bertipe pdp:DataController atau pdp:DataProcessor (aturan integritas (g))."@id .
+
+pdp:PublicServiceProcessingActor
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:DPORequiredActor ;
+    rdfs:label "Pemrosesan untuk kepentingan pelayanan publik"@id , "Public Service Processing Actor"@en ;
+    rdfs:comment "Pemicu Pasal 53 ayat (1) huruf a UU PDP: \"pemrosesan Data Pribadi untuk kepentingan pelayanan publik\"."@id .
+
+pdp:LargeScaleMonitoringActor
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:DPORequiredActor ;
+    rdfs:label "Kegiatan inti dengan pemantauan teratur dan sistematis skala besar"@id , "Large-Scale Monitoring Actor"@en ;
+    rdfs:comment "Pemicu Pasal 53 ayat (1) huruf b UU PDP: \"kegiatan inti Pengendali Data Pribadi memiliki sifat, ruang lingkup, dan/atau tujuan yang memerlukan pemantauan secara teratur dan sistematis atas Data Pribadi dengan skala besar\". Pengendali kelas ini juga wajib bertipe pdp:HighRiskProcessingController (Pasal 34 ayat (2) huruf c dan d; aturan integritas (f3))."@id .
+
+pdp:LargeScaleSpecificDataActor
+    a rdfs:Class ;
+    rdfs:subClassOf pdp:DPORequiredActor ;
+    rdfs:label "Kegiatan inti berupa pemrosesan skala besar atas Data Pribadi spesifik atau terkait tindak pidana"@id , "Large-Scale Specific Data Actor"@en ;
+    rdfs:comment "Pemicu Pasal 53 ayat (1) huruf c UU PDP: \"kegiatan inti Pengendali Data Pribadi terdiri dari pemrosesan Data Pribadi dalam skala besar untuk Data Pribadi yang bersifat spesifik dan/atau Data Pribadi yang berkaitan dengan tindak pidana\". Pengendali kelas ini juga wajib bertipe pdp:HighRiskProcessingController (Pasal 34 ayat (2) huruf b dan c; aturan integritas (f3))."@id .
+
+#################################################################
+#    Properti Tautan Peristiwa
+#################################################################
+
+pdp:responsibleController
+    a rdf:Property ;
+    rdfs:range pdp:DataController ;
+    rdfs:label "Pengendali yang bertanggung jawab"@id ;
+    rdfs:comment "Menautkan entitas peristiwa (permintaan, insiden kegagalan Pelindungan Data Pribadi, transfer) ke Pengendali yang wajib menindaklanjutinya. Tanpa rdfs:domain agar tidak menurunkan tipe peristiwa."@id .
+
+#################################################################
+#    Properti Jenis Data Pribadi yang Diproses
+#################################################################
+
+pdp:processesPersonalData
+    a rdf:Property ;
+    rdfs:range pdp:PersonalData ;
+    rdfs:label "Memproses Data Pribadi"@id ;
+    rdfs:comment "Menautkan Pengendali ke jenis Data Pribadi yang diprosesnya. Tanpa rdfs:domain agar tidak menurunkan tipe pelaku. Bila entitas data bertipe pdp:SpecificPersonalData, Pengendali wajib bertipe pdp:HighRiskProcessingController (Pasal 34 ayat (2) huruf b: \"pemrosesan atas Data Pribadi yang bersifat spesifik\"); diperiksa oleh aturan integritas (f1) lapisan ingesti, bukan oleh shape."@id .
+
+pdp:personalDataCategory
+    a rdf:Property ;
+    rdfs:domain pdp:PersonalData ;
+    rdfs:range xsd:string ;
+    rdfs:label "Kategori Data Pribadi"@id ;
+    rdfs:comment "Kategori Data Pribadi menurut Pasal 4 ayat (2) atau (3) UU PDP, mis. \"data dan informasi kesehatan\" atau \"data anak\". Bersifat informatif; tidak diperiksa oleh shape."@id .
+
+#################################################################
+#    Properti Waktu Respons (Time-Bound Response Properties)
+#################################################################
+
+pdp:dataUpdateResponseHours
+    a rdf:Property ;
+    rdfs:domain pdp:DataUpdateRequest ;
+    rdfs:range xsd:integer ;
+    rdfs:label "Waktu respons pembaruan data (jam)"@id ;
+    rdfs:comment "Waktu penyelesaian pembaruan/perbaikan data sejak permintaan diterima (Pasal 30 ayat (1) UU PDP, maks 72 jam). Melekat pada entitas permintaan."@id .
+
+pdp:dataAccessResponseHours
+    a rdf:Property ;
+    rdfs:domain pdp:DataAccessRequest ;
+    rdfs:range xsd:integer ;
+    rdfs:label "Waktu respons pemberian akses data (jam)"@id ;
+    rdfs:comment "Waktu pemberian akses data kepada subjek sejak permintaan akses diterima (Pasal 32 ayat (2) UU PDP, maks 72 jam). Melekat pada entitas permintaan."@id .
+
+pdp:processingCessationHours
+    a rdf:Property ;
+    rdfs:domain pdp:ConsentWithdrawalRequest ;
+    rdfs:range xsd:integer ;
+    rdfs:label "Waktu penghentian pemrosesan (jam)"@id ;
+    rdfs:comment "Waktu penghentian pemrosesan sejak permintaan penarikan kembali persetujuan diterima (Pasal 40 ayat (2) UU PDP, maks 72 jam). Melekat pada entitas permintaan."@id .
+
+pdp:processingRestrictionHours
+    a rdf:Property ;
+    rdfs:domain pdp:ProcessingRestrictionRequest ;
+    rdfs:range xsd:integer ;
+    rdfs:label "Waktu penundaan dan pembatasan pemrosesan (jam)"@id ;
+    rdfs:comment "Waktu pelaksanaan penundaan dan pembatasan pemrosesan sejak permintaan diterima (Pasal 41 ayat (1) UU PDP, maks 72 jam). Melekat pada entitas permintaan."@id .
+
+pdp:breachNotificationHours
+    a rdf:Property ;
+    rdfs:domain pdp:BreachIncident ;
+    rdfs:range xsd:integer ;
+    rdfs:label "Waktu penyampaian notifikasi insiden (jam)"@id ;
+    rdfs:comment "Waktu pemberitahuan tertulis kegagalan Pelindungan Data Pribadi kepada Subjek Data Pribadi dan lembaga (Pasal 46 ayat (1) UU PDP, maks 72 jam). Melekat pada entitas insiden."@id .
+
+#################################################################
+#    Properti Keamanan Teknis (Technical Security Properties)
+#################################################################
+
+pdp:hasEncryption
+    a rdf:Property ;
+    rdfs:domain pdp:PSE ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Menerapkan enkripsi data"@id ;
+    rdfs:comment "Data deskriptif tentang penerapan enkripsi. Tidak diperiksa oleh shapes sejak 2026-10-28 (konsensus validator FO-16/FO-30): teks Pasal 35 UU PDP tidak menyebut enkripsi, sehingga enkripsi bukan syarat wajib."@id .
+
+pdp:hasAccessControl
+    a rdf:Property ;
+    rdfs:domain pdp:PSE ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Menerapkan pengendalian akses"@id ;
+    rdfs:comment "Kewajiban mencegah akses tidak sah melalui pengendalian hak akses (Pasal 39 ayat (1) UU PDP). Berlaku bagi Pengendali dan, melalui Pasal 52, bagi Prosesor Data Pribadi."@id .
+
+pdp:hasSecurityMeasures
+    a rdf:Property ;
+    rdfs:domain pdp:PSE ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Memiliki langkah teknis keamanan operasional"@id ;
+    rdfs:comment "Kewajiban menerapkan langkah teknis operasional keamanan dan melindungi data dari pemrosesan yang tidak sah (Pasal 35 huruf a dan Pasal 38 UU PDP). Pasal 35 huruf b (penentuan tingkat keamanan) tidak dikodekan karena memerlukan penilaian manusia. Berlaku bagi Pengendali dan, melalui Pasal 52, bagi Prosesor Data Pribadi."@id .
+
+pdp:hasElectronicSecuritySystem
+    a rdf:Property ;
+    rdfs:domain pdp:PSE ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Memiliki sistem keamanan elektronik"@id ;
+    rdfs:comment "Kewajiban mencegah akses tidak sah melalui sistem keamanan elektronik andal (Pasal 39 ayat (2) UU PDP). Berlaku bagi Pengendali dan, melalui Pasal 52, bagi Prosesor Data Pribadi."@id .
+
+pdp:hasConfidentialityMeasures
+    a rdf:Property ;
+    rdfs:domain pdp:PSE ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Menjaga kerahasiaan data pribadi"@id ;
+    rdfs:comment "Kewajiban menjaga kerahasiaan data yang diproses (Pasal 36 UU PDP). Berlaku bagi Pengendali dan, melalui Pasal 52, bagi Prosesor Data Pribadi."@id .
+
+#################################################################
+#    Properti Tata Kelola & Akuntabilitas (Governance & Logs)
+#################################################################
+
+pdp:hasProcessingAuditLog
+    a rdf:Property ;
+    rdfs:domain pdp:PSE ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Merekam log audit pemrosesan"@id ;
+    rdfs:comment "Kewajiban merekam seluruh kegiatan pemrosesan data pribadi (Pasal 31 UU PDP). Berlaku bagi Pengendali dan, melalui Pasal 52, bagi Prosesor Data Pribadi."@id .
+
+pdp:hasDPIA
+    a rdf:Property ;
+    rdfs:domain pdp:DataController ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Melakukan penilaian dampak perlindungan data (DPIA)"@id ;
+    rdfs:comment "Kewajiban melakukan DPIA untuk pemrosesan berisiko tinggi (Pasal 34 ayat (1) UU PDP)."@id .
+
+pdp:hasSupervisionMechanism
+    a rdf:Property ;
+    rdfs:domain pdp:PSE ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Mengawasi pihak yang terlibat pemrosesan"@id ;
+    rdfs:comment "Kewajiban mengawasi seluruh pihak yang terlibat dalam pemrosesan data (Pasal 37 UU PDP). Berlaku bagi Pengendali dan, melalui Pasal 52, bagi Prosesor Data Pribadi."@id .
+
+#################################################################
+#    Properti Legalitas & Persetujuan (Legal Basis & Consent)
+#################################################################
+
+pdp:hasLegalBasis
+    a rdf:Property ;
+    rdfs:domain pdp:DataController ;
+    rdfs:range xsd:string ;
+    rdfs:label "Dasar pemrosesan data pribadi"@id ;
+    rdfs:comment "Kewajiban memiliki dasar hukum pemrosesan (consent, contract, legal_obligation, vital_interest, public_interest, legitimate_interest) (Pasal 20 ayat (1) dan (2) UU PDP)."@id .
+
+pdp:hasConsentEvidence
+    a rdf:Property ;
+    rdfs:domain pdp:DataController ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Memiliki bukti persetujuan eksplisit"@id ;
+    rdfs:comment "Kewajiban menunjukkan bukti persetujuan yang sah dari subjek data (Pasal 24 UU PDP)."@id .
+
+pdp:hasProcessingNotice
+    a rdf:Property ;
+    rdfs:domain pdp:DataController ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Menyampaikan informasi pemrosesan"@id ;
+    rdfs:comment "Kewajiban menyampaikan informasi legalitas, tujuan, jenis dan relevansi data, retensi, rincian informasi yang dikumpulkan, jangka waktu pemrosesan, dan hak subjek, dalam hal pemrosesan berdasarkan persetujuan (Pasal 21 ayat (1) UU PDP)."@id .
+
+pdp:hasParentalConsentForChild
+    a rdf:Property ;
+    rdfs:domain pdp:DataController ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Persetujuan orang tua untuk data anak"@id ;
+    rdfs:comment "Kewajiban memperoleh persetujuan orang tua/wali untuk pemrosesan data anak (Pasal 25 ayat (2) UU PDP)."@id .
+
+pdp:hasSpecialConsentForDisability
+    a rdf:Property ;
+    rdfs:domain pdp:DataController ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Persetujuan khusus penyandang disabilitas"@id ;
+    rdfs:comment "Kewajiban memperoleh persetujuan khusus atau wali bagi penyandang disabilitas (Pasal 26 ayat (3) UU PDP)."@id .
+
+pdp:hasDataMinimization
+    a rdf:Property ;
+    rdfs:domain pdp:DataController ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Prinsip pembatasan dan spesifikasi tujuan"@id ;
+    rdfs:comment "Pemrosesan dilakukan secara terbatas dan spesifik sesuai tujuan yang sah (Pasal 27 dan Pasal 28 UU PDP)."@id .
+
+pdp:hasDataAccuracyVerification
+    a rdf:Property ;
+    rdfs:domain pdp:PSE ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Verifikasi akurasi dan kelengkapan data"@id ;
+    rdfs:comment "Kewajiban memastikan akurasi, kelengkapan, dan konsistensi data melalui upaya verifikasi (Pasal 29 ayat (2) UU PDP). Berlaku bagi Pengendali dan, melalui Pasal 52, bagi Prosesor Data Pribadi."@id .
+
+pdp:hasJointControllerAgreement
+    a rdf:Property ;
+    rdfs:domain pdp:DataController ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Perjanjian tertulis antar-Pengendali"@id ;
+    rdfs:comment "Kewajiban memiliki perjanjian tertulis jika pemrosesan dilakukan oleh lebih dari satu Pengendali (Pasal 18 ayat (2) UU PDP)."@id .
+
+pdp:portableFormatProvided
+    a rdf:Property ;
+    rdfs:domain pdp:DataPortabilityRequest ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Data Pribadi disediakan dalam format terstruktur"@id ;
+    rdfs:comment "Pengendali menyediakan Data Pribadi kepada Subjek dalam bentuk yang sesuai dengan struktur dan/atau format yang lazim digunakan atau dapat dibaca oleh sistem elektronik (Pasal 13 ayat (1) UU PDP). Melekat pada entitas permintaan."@id .
+
+#################################################################
+#    Properti Retensi, Pengakhiran, Penghapusan & Notifikasi Insiden
+#################################################################
+
+pdp:hasRetentionPeriod
+    a rdf:Property ;
+    rdfs:domain pdp:DataController ;
+    rdfs:range xsd:integer ;
+    rdfs:label "Masa retensi data (hari)"@id ;
+    rdfs:comment "Informatif; tidak diperiksa oleh shape. Dipakai lapisan ingesti untuk menetapkan terpenuhinya Pasal 42 ayat (1) huruf a (\"telah mencapai masa retensi\") sebagai entitas pdp:ProcessingTerminationGround."@id .
+
+pdp:triggerGround
+    a rdf:Property ;
+    rdfs:range xsd:string ;
+    rdfs:label "Huruf kondisi pemicu yang terpenuhi"@id ;
+    rdfs:comment "Informatif; tidak diperiksa oleh shape. Mencatat huruf kondisi pada Pasal 42 ayat (1), Pasal 43 ayat (1), atau Pasal 44 ayat (1) yang terpenuhi. Tanpa rdfs:domain agar tidak menurunkan tipe entitas."@id .
+
+pdp:processingTerminated
+    a rdf:Property ;
+    rdfs:domain pdp:ProcessingTerminationGround ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Pemrosesan telah diakhiri"@id ;
+    rdfs:comment "Pengendali mengakhiri pemrosesan Data Pribadi setelah kondisi Pasal 42 ayat (1) terpenuhi. Melekat pada entitas kondisi pengakhiran."@id .
+
+pdp:erasureCarriedOut
+    a rdf:Property ;
+    rdfs:domain pdp:ErasureGround ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Penghapusan atau pemusnahan telah dilakukan"@id ;
+    rdfs:comment "Pada pdp:DeletionGround: Data Pribadi telah dihapus (Pasal 43 ayat (1)). Pada pdp:DestructionGround: Data Pribadi telah dimusnahkan (Pasal 44 ayat (1))."@id .
+
+pdp:subjectNotifiedOfErasure
+    a rdf:Property ;
+    rdfs:domain pdp:ErasureGround ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Subjek diberi tahu atas penghapusan atau pemusnahan"@id ;
+    rdfs:comment "Pasal 45 UU PDP. Wajib bernilai true bila pdp:erasureCarriedOut bernilai true; diperiksa sebagai implikasi oleh DeletionNoticeShape."@id .
+
+pdp:breachNotificationContainsRequiredElements
+    a rdf:Property ;
+    rdfs:domain pdp:BreachIncident ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Kelengkapan elemen isi notifikasi insiden"@id ;
+    rdfs:comment "Kewajiban memuat data terungkap, kapan dan bagaimana terungkap, serta upaya penanganan dan pemulihan (Pasal 46 ayat (2) UU PDP). Melekat pada entitas insiden."@id .
+
+#################################################################
+#    Properti Transfer ke Luar Wilayah Hukum RI & Prosesor Data
+#################################################################
+
+pdp:dataTransferDestination
+    a rdf:Property ;
+    rdfs:domain pdp:CrossBorderTransfer ;
+    rdfs:range xsd:string ;
+    rdfs:label "Negara tujuan transfer data"@id ;
+    rdfs:comment "Negara tempat kedudukan penerima transfer Data Pribadi (Pasal 56 ayat (1) dan (2) UU PDP). Bersifat informatif; tidak diperiksa oleh shape."@id .
+
+pdp:transferRecipientEquivalentProtection
+    a rdf:Property ;
+    rdfs:domain pdp:CrossBorderTransfer ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Negara penerima memiliki tingkat pelindungan setara atau lebih tinggi"@id ;
+    rdfs:comment "Syarat jenjang pertama Pasal 56 ayat (2) UU PDP: \"... memiliki tingkat Pelindungan Data Pribadi yang setara atau lebih tinggi dari yang diatur dalam Undang-Undang ini.\""@id .
+
+pdp:transferHasAdequateBindingProtection
+    a rdf:Property ;
+    rdfs:domain pdp:CrossBorderTransfer ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Terdapat pelindungan yang memadai dan bersifat mengikat"@id ;
+    rdfs:comment "Syarat jenjang kedua Pasal 56 ayat (3) UU PDP: \"Dalam hal ketentuan sebagaimana dimaksud pada ayat (2) tidak terpenuhi, Pengendali Data Pribadi wajib memastikan terdapat Pelindungan Data Pribadi yang memadai dan bersifat mengikat.\""@id .
+
+pdp:transferHasSubjectConsent
+    a rdf:Property ;
+    rdfs:domain pdp:CrossBorderTransfer ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Terdapat persetujuan Subjek Data Pribadi atas transfer"@id ;
+    rdfs:comment "Syarat jenjang ketiga Pasal 56 ayat (4) UU PDP: \"Dalam hal ketentuan sebagaimana dimaksud pada ayat (2) dan ayat (3) tidak terpenuhi, Pengendali Data Pribadi wajib mendapatkan persetujuan Subjek Data Pribadi.\""@id .
+
+pdp:processesOnlyUnderInstruction
+    a rdf:Property ;
+    rdfs:domain pdp:DataProcessor ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Pemrosesan atas instruksi Pengendali"@id ;
+    rdfs:comment "Kewajiban Prosesor melakukan pemrosesan berdasarkan perintah Pengendali (Pasal 51 ayat (1) UU PDP). Kondisi \"dalam hal Pengendali Data Pribadi menunjuk Prosesor\" dipenuhi oleh keberadaan entitas pdp:DataProcessor, yang menurut definisi Pasal 1 memproses atas nama Pengendali."@id .
+
+#################################################################
+#    Properti Aksi Korporasi (Pasal 48) dan Pejabat/Petugas PDP (Pasal 53)
+#################################################################
+
+pdp:corporateActionType
+    a rdf:Property ;
+    rdfs:domain pdp:CorporateAction ;
+    rdfs:range xsd:string ;
+    rdfs:label "Jenis aksi korporasi"@id ;
+    rdfs:comment "Penggabungan, pemisahan, pengambilalihan, peleburan, atau pembubaran badan hukum (Pasal 48 ayat (1) UU PDP). Bersifat informatif; tidak diperiksa oleh shape."@id .
+
+pdp:transferNoticeBeforeAction
+    a rdf:Property ;
+    rdfs:domain pdp:CorporateAction ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Pemberitahuan pengalihan Data Pribadi sebelum aksi korporasi"@id ;
+    rdfs:comment "Pasal 48 ayat (1) dan (2) UU PDP: pemberitahuan pengalihan Data Pribadi kepada Subjek Data Pribadi \"dilakukan sebelum dan sesudah\" aksi korporasi. Properti ini untuk pemberitahuan sebelum."@id .
+
+pdp:transferNoticeAfterAction
+    a rdf:Property ;
+    rdfs:domain pdp:CorporateAction ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Pemberitahuan pengalihan Data Pribadi sesudah aksi korporasi"@id ;
+    rdfs:comment "Pasal 48 ayat (1) dan (2) UU PDP: pemberitahuan pengalihan Data Pribadi kepada Subjek Data Pribadi \"dilakukan sebelum dan sesudah\" aksi korporasi. Properti ini untuk pemberitahuan sesudah."@id .
+
+pdp:hasDataProtectionOfficer
+    a rdf:Property ;
+    rdfs:domain pdp:PSE ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Telah menunjuk pejabat atau petugas Pelindungan Data Pribadi"@id ;
+    rdfs:comment "Kewajiban Pasal 53 ayat (1) UU PDP bagi Pengendali dan Prosesor yang memenuhi huruf a, b, atau c. Domain pdp:PSE, bukan kelas pemicu, agar inferensi RDFS tidak menetapkan pemicu (aturan integritas (d))."@id .
+
+#################################################################
+#    Properti Larangan (Prohibitions)
+#################################################################
+
+pdp:hasUnauthorizedProcessing
+    a rdf:Property ;
+    rdfs:domain pdp:PSE ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Pemrosesan tidak sah atau melawan hukum"@id ;
+    rdfs:comment "Indikator pengungkapan atau penggunaan data pribadi yang bukan miliknya secara melawan hukum (Pasal 65 ayat (2) dan (3) UU PDP)."@id .

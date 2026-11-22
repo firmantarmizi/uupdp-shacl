@@ -1,0 +1,77 @@
+article,chapter,chapter_title_official_id,S,A,K,T,D,total,operability_class
+1,I,Ketentuan Umum,0,0,0,0,0,0,Non-Operable
+2,I,Ketentuan Umum,0,0,0,0,0,0,Non-Operable
+3,II,Asas,0,0,0,0,0,0,Non-Operable
+4,III,Jenis Data Pribadi,1,0,1,0,1,3,Partial
+5,IV,Hak Subjek Data Pribadi,1,0,0,0,0,1,Non-Operable
+6,IV,Hak Subjek Data Pribadi,1,1,1,0,0,3,Partial
+7,IV,Hak Subjek Data Pribadi,1,1,1,0,0,3,Partial
+8,IV,Hak Subjek Data Pribadi,1,1,1,0,0,3,Partial
+9,IV,Hak Subjek Data Pribadi,1,1,1,0,0,3,Partial
+10,IV,Hak Subjek Data Pribadi,1,1,1,0,0,3,Partial
+11,IV,Hak Subjek Data Pribadi,1,1,1,0,0,3,Partial
+12,IV,Hak Subjek Data Pribadi,0,0,0,0,0,0,Non-Operable
+13,IV,Hak Subjek Data Pribadi,1,1,1,0,1,4,Fully Operable
+14,IV,Hak Subjek Data Pribadi,1,0,1,0,0,2,Non-Operable
+15,IV,Hak Subjek Data Pribadi,0,0,1,0,0,1,Non-Operable
+16,V,Pemrosesan Data Pribadi,1,0,0,0,0,1,Non-Operable
+17,V,Pemrosesan Data Pribadi,1,1,1,0,0,3,Partial
+18,V,Pemrosesan Data Pribadi,1,1,1,0,1,4,Fully Operable
+19,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,0,0,0,0,0,0,Non-Operable
+20,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+21,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+22,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+23,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,0,1,0,0,2,Non-Operable
+24,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+25,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+26,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+27,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+28,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+29,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+30,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,1,1,5,Fully Operable
+31,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+32,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,1,1,5,Fully Operable
+33,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,0,3,Partial
+34,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+35,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+36,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+37,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+38,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+39,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+40,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,1,1,5,Fully Operable
+41,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,1,1,5,Fully Operable
+42,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+43,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+44,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+45,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+46,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,1,1,5,Fully Operable
+47,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,0,0,0,2,Non-Operable
+48,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+49,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,0,0,0,2,Non-Operable
+50,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,0,0,1,0,0,1,Non-Operable
+51,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+52,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+53,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,1,1,0,1,4,Fully Operable
+54,VI,Kewajiban Pengendali dan Prosesor Data Pribadi,1,0,0,0,0,1,Non-Operable
+55,VII,Transfer Data Pribadi,1,1,1,0,0,3,Partial
+56,VII,Transfer Data Pribadi,1,1,1,0,1,4,Fully Operable
+57,VIII,Sanksi Administratif,0,0,0,0,0,0,Non-Operable
+58,IX,Kelembagaan,0,0,0,0,0,0,Non-Operable
+59,IX,Kelembagaan,0,0,0,0,0,0,Non-Operable
+60,IX,Kelembagaan,0,0,0,0,0,0,Non-Operable
+61,IX,Kelembagaan,0,0,0,0,0,0,Non-Operable
+62,X,Kerja Sama Internasional,0,0,0,0,0,0,Non-Operable
+63,XI,Partisipasi Masyarakat,0,0,0,0,0,0,Non-Operable
+64,XII,Penyelesaian Sengketa dan Hukum Acara,0,0,0,0,0,0,Non-Operable
+65,XIII,Larangan dalam Penggunaan Data Pribadi,1,1,1,0,1,4,Fully Operable
+66,XIII,Larangan dalam Penggunaan Data Pribadi,1,1,1,0,0,3,Partial
+67,XIV,Ketentuan Pidana,0,0,0,0,0,0,Non-Operable
+68,XIV,Ketentuan Pidana,0,0,0,0,0,0,Non-Operable
+69,XIV,Ketentuan Pidana,0,0,0,0,0,0,Non-Operable
+70,XIV,Ketentuan Pidana,0,0,0,0,0,0,Non-Operable
+71,XIV,Ketentuan Pidana,0,0,0,0,0,0,Non-Operable
+72,XIV,Ketentuan Pidana,0,0,0,0,0,0,Non-Operable
+73,XIV,Ketentuan Pidana,0,0,0,0,0,0,Non-Operable
+74,XV,Ketentuan Peralihan,0,0,0,0,0,0,Non-Operable
+75,XV,Ketentuan Peralihan,0,0,0,0,0,0,Non-Operable
+76,XVI,Ketentuan Penutup,0,0,0,0,0,0,Non-Operable

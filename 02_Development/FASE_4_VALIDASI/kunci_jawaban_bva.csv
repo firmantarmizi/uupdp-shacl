@@ -1,0 +1,27 @@
+kasus,entitas,berkas,pasal,properti,nilai,vonis_harapan,shape_violation_harapan,shape_warning_harapan
+BVA-Pengendali,BVA_Pengendali,data_uji_batas_bva.ttl,-,-,-,Compliant,,
+BVA-Ps30-048,BVA_Ps30_048,data_uji_batas_bva.ttl,Pasal 30 ayat (1),dataUpdateResponseHours,48,Compliant,,
+BVA-Ps30-049,BVA_Ps30_049,data_uji_batas_bva.ttl,Pasal 30 ayat (1),dataUpdateResponseHours,49,Compliant,,DataUpdateHours_EarlyWarning
+BVA-Ps30-072,BVA_Ps30_072,data_uji_batas_bva.ttl,Pasal 30 ayat (1),dataUpdateResponseHours,72,Compliant,,DataUpdateHours_EarlyWarning
+BVA-Ps30-073,BVA_Ps30_073,data_uji_batas_bva.ttl,Pasal 30 ayat (1),dataUpdateResponseHours,73,Violation,DataUpdateHours_WithinLimit,DataUpdateHours_EarlyWarning
+BVA-Ps30-kosong,BVA_Ps30_kosong,data_uji_batas_bva.ttl,Pasal 30 ayat (1),dataUpdateResponseHours,kosong,Violation,DataUpdateHours_Recorded,
+BVA-Ps32-048,BVA_Ps32_048,data_uji_batas_bva.ttl,Pasal 32 ayat (2),dataAccessResponseHours,48,Compliant,,
+BVA-Ps32-049,BVA_Ps32_049,data_uji_batas_bva.ttl,Pasal 32 ayat (2),dataAccessResponseHours,49,Compliant,,DataAccessHours_EarlyWarning
+BVA-Ps32-072,BVA_Ps32_072,data_uji_batas_bva.ttl,Pasal 32 ayat (2),dataAccessResponseHours,72,Compliant,,DataAccessHours_EarlyWarning
+BVA-Ps32-073,BVA_Ps32_073,data_uji_batas_bva.ttl,Pasal 32 ayat (2),dataAccessResponseHours,73,Violation,DataAccessHours_WithinLimit,DataAccessHours_EarlyWarning
+BVA-Ps32-kosong,BVA_Ps32_kosong,data_uji_batas_bva.ttl,Pasal 32 ayat (2),dataAccessResponseHours,kosong,Violation,DataAccessHours_Recorded,
+BVA-Ps40-048,BVA_Ps40_048,data_uji_batas_bva.ttl,Pasal 40 ayat (2),processingCessationHours,48,Compliant,,
+BVA-Ps40-049,BVA_Ps40_049,data_uji_batas_bva.ttl,Pasal 40 ayat (2),processingCessationHours,49,Compliant,,ProcessingCessationHours_EarlyWarning
+BVA-Ps40-072,BVA_Ps40_072,data_uji_batas_bva.ttl,Pasal 40 ayat (2),processingCessationHours,72,Compliant,,ProcessingCessationHours_EarlyWarning
+BVA-Ps40-073,BVA_Ps40_073,data_uji_batas_bva.ttl,Pasal 40 ayat (2),processingCessationHours,73,Violation,ProcessingCessationHours_WithinLimit,ProcessingCessationHours_EarlyWarning
+BVA-Ps40-kosong,BVA_Ps40_kosong,data_uji_batas_bva.ttl,Pasal 40 ayat (2),processingCessationHours,kosong,Violation,ProcessingCessationHours_Recorded,
+BVA-Ps41-048,BVA_Ps41_048,data_uji_batas_bva.ttl,Pasal 41 ayat (1),processingRestrictionHours,48,Compliant,,
+BVA-Ps41-049,BVA_Ps41_049,data_uji_batas_bva.ttl,Pasal 41 ayat (1),processingRestrictionHours,49,Compliant,,ProcessingRestrictionHours_EarlyWarning
+BVA-Ps41-072,BVA_Ps41_072,data_uji_batas_bva.ttl,Pasal 41 ayat (1),processingRestrictionHours,72,Compliant,,ProcessingRestrictionHours_EarlyWarning
+BVA-Ps41-073,BVA_Ps41_073,data_uji_batas_bva.ttl,Pasal 41 ayat (1),processingRestrictionHours,73,Violation,ProcessingRestrictionHours_WithinLimit,ProcessingRestrictionHours_EarlyWarning
+BVA-Ps41-kosong,BVA_Ps41_kosong,data_uji_batas_bva.ttl,Pasal 41 ayat (1),processingRestrictionHours,kosong,Violation,ProcessingRestrictionHours_Recorded,
+BVA-Ps46-048,BVA_Ps46_048,data_uji_batas_bva.ttl,Pasal 46 ayat (1),breachNotificationHours,48,Compliant,,
+BVA-Ps46-049,BVA_Ps46_049,data_uji_batas_bva.ttl,Pasal 46 ayat (1),breachNotificationHours,49,Compliant,,BreachNotificationHours_EarlyWarning
+BVA-Ps46-072,BVA_Ps46_072,data_uji_batas_bva.ttl,Pasal 46 ayat (1),breachNotificationHours,72,Compliant,,BreachNotificationHours_EarlyWarning
+BVA-Ps46-073,BVA_Ps46_073,data_uji_batas_bva.ttl,Pasal 46 ayat (1),breachNotificationHours,73,Violation,BreachNotificationHours_WithinLimit,BreachNotificationHours_EarlyWarning
+BVA-Ps46-kosong,BVA_Ps46_kosong,data_uji_batas_bva.ttl,Pasal 46 ayat (1),breachNotificationHours,kosong,Violation,BreachNotificationHours_Recorded,

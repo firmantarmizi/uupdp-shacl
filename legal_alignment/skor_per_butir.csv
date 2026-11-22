@@ -1,0 +1,45 @@
+id,kelompok,pasal,skor_penilai1,skor_penilai2,sepakat,jenis_ketidaksesuaian_penilai1,jenis_ketidaksesuaian_penilai2,skor_akhir_deliberasi
+FO-01,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 13 ayat (1),1,1,True,,,1
+FO-02,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 18 ayat (2),1,1,True,,,1
+FO-03,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 20 ayat (1)–(2),1,1,True,,,1
+FO-04,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 21 ayat (1),1,1,True,,,1
+FO-05,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 22 ayat (1),1,1,True,,,1
+FO-06,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 24,1,1,True,,,1
+FO-07,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 25 ayat (2),1,1,True,,,1
+FO-08,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 26 ayat (3),1,1,True,,,1
+FO-09,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 27,1,1,True,,,1
+FO-10,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 28,1,1,True,,,1
+FO-11,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 29 ayat (1)–(2),1,1,True,,,1
+FO-12,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 30 ayat (1),1,1,True,,,1
+FO-13,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 31,1,1,True,,,1
+FO-14,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 32 ayat (2),1,1,True,,,1
+FO-15,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 34 ayat (1),1,1,True,,,1
+FO-16,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 35 huruf a–b,0,1,False,akibatnya salah (pelanggaran/peringatan); lainnya,,0
+FO-17,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 36,1,1,True,,,1
+FO-18,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 37,1,1,True,,,1
+FO-19,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 38,1,1,True,,,1
+FO-20,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 39 ayat (1)–(2),1,1,True,,,1
+FO-21,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 40 ayat (2),1,1,True,,,1
+FO-22,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 41 ayat (1),1,1,True,,,1
+FO-23,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 42 ayat (1),1,1,True,,,1
+FO-24,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 43 ayat (1),1,1,True,,,1
+FO-25,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 44 ayat (1),1,1,True,,,1
+FO-26,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 45,1,1,True,,,1
+FO-27,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 46 ayat (1)–(2),1,1,True,,,1
+FO-28,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 48 ayat (1)–(2),1,1,True,,,1
+FO-29,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 51 ayat (1),1,1,True,,,1
+FO-30,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 52,0,1,False,akibatnya salah (pelanggaran/peringatan); lainnya,,0
+FO-31,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 53 ayat (1),1,1,True,,,1
+FO-32,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 56 ayat (2)–(4),1,1,True,,,1
+FO-33,A. Ketentuan yang sudah dibuatkan aturan pemeriksaan,Pasal 65 ayat (2)–(3),1,1,True,,,1
+KT-01,B. Ketentuan pembanding (tanpa aturan pemeriksaan),Pasal 4,0,1,False,perlu pertimbangan manusia; lainnya,,0
+KT-02,B. Ketentuan pembanding (tanpa aturan pemeriksaan),Pasal 6,0,0,True,perlu pertimbangan manusia; lainnya,perlu pertimbangan manusia,0
+KT-03,B. Ketentuan pembanding (tanpa aturan pemeriksaan),Pasal 7,0,1,False,perlu pertimbangan manusia; lainnya,,0
+KT-04,B. Ketentuan pembanding (tanpa aturan pemeriksaan),Pasal 8,0,0,True,perlu pertimbangan manusia; lainnya,perlu pertimbangan manusia,0
+KT-05,B. Ketentuan pembanding (tanpa aturan pemeriksaan),Pasal 9,0,0,True,lainnya,perlu pertimbangan manusia,0
+KT-06,B. Ketentuan pembanding (tanpa aturan pemeriksaan),Pasal 10,0,0,True,perlu pertimbangan manusia; lainnya,perlu pertimbangan manusia,0
+KT-07,B. Ketentuan pembanding (tanpa aturan pemeriksaan),Pasal 11,0,0,True,perlu pertimbangan manusia; lainnya,perlu pertimbangan manusia,0
+KT-08,B. Ketentuan pembanding (tanpa aturan pemeriksaan),Pasal 17,0,1,False,perlu pertimbangan manusia,,0
+KT-09,B. Ketentuan pembanding (tanpa aturan pemeriksaan),Pasal 33,0,0,True,perlu pertimbangan manusia,perlu pertimbangan manusia,0
+KT-10,B. Ketentuan pembanding (tanpa aturan pemeriksaan),Pasal 55,0,0,True,perlu pertimbangan manusia,perlu pertimbangan manusia,0
+KT-11,B. Ketentuan pembanding (tanpa aturan pemeriksaan),Pasal 66,0,0,True,perlu pertimbangan manusia,perlu pertimbangan manusia,0

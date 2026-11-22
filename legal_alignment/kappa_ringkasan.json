@@ -1,0 +1,41 @@
+{
+  "gabungan": {
+    "N": 44,
+    "a": 31,
+    "b": 0,
+    "c": 5,
+    "d": 8,
+    "p_o": 0.8863636363636364,
+    "p_e": 0.6301652892561983,
+    "kappa": 0.6927374301675978,
+    "kappa_memenuhi_ambang": false,
+    "p_pos": 0.9253731343283582,
+    "p_neg": 0.7619047619047619,
+    "AC1": 0.8215010141987829,
+    "p_e_AC1": 0.3633780991735536,
+    "PABAK": 0.7727272727272727,
+    "PI": 0.5227272727272727,
+    "BI": -0.11363636363636363
+  },
+  "per_kelompok": {
+    "A. Ketentuan yang sudah dibuatkan aturan pemeriksaan": {
+      "N": 33,
+      "setuju": 31,
+      "tidak_setuju": 2,
+      "a": 31,
+      "b": 0,
+      "c": 2,
+      "d": 0
+    },
+    "B. Ketentuan pembanding (tanpa aturan pemeriksaan)": {
+      "N": 11,
+      "setuju": 8,
+      "tidak_setuju": 3,
+      "a": 0,
+      "b": 0,
+      "c": 3,
+      "d": 8
+    }
+  },
+  "ambang_kappa": 0.7
+}

@@ -1,0 +1,687 @@
+@prefix pdp:   <http://example.org/pdp#> .
+@prefix pdps:  <http://example.org/pdp/shapes#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+
+# Atribusi pasal/ayat mengikuti teks resmi UU No. 27 Tahun 2022 (lihat PERBAIKAN/KOREKSI_PASAL.md).
+#
+# KONDISI BERLAKU (kewajiban bersyarat): kondisi = kelas target (sh:targetClass).
+# Shape hanya menyasar entitas yang memenuhi kondisi; entitas tanpa kondisi bukan focus node.
+#  - Pemicu peristiwa : pdp:DataUpdateRequest, pdp:DataAccessRequest, pdp:ConsentWithdrawalRequest,
+#                       pdp:ProcessingRestrictionRequest, pdp:BreachIncident, pdp:CrossBorderTransfer.
+#  - Pemicu karakteristik (subkelas pdp:DataController, ditulis eksplisit di data):
+#                       pdp:JointController, pdp:ConsentBasedController, pdp:ChildDataController,
+#                       pdp:DisabilityDataController, pdp:HighRiskProcessingController.
+#  - Pemicu peristiwa aksi korporasi (Pasal 48): pdp:CorporateAction.
+#  - Pemicu peristiwa Pasal 13, 42, 43, 44, 45: pdp:DataPortabilityRequest, pdp:ProcessingTerminationGround,
+#                       pdp:DeletionGround dan pdp:DestructionGround (keduanya subkelas pdp:ErasureGround).
+#  - Pemicu Pasal 53 ayat (1) (Pengendali dan Prosesor): subkelas pdp:DPORequiredActor huruf a/b/c.
+# Kelas pemicu dan entitas peristiwa ditetapkan oleh lapisan ingesti arsitektur ACC, bukan oleh shapes ini.
+#
+# PASAL 52: kewajiban Pasal 29, 31, 35, 36, 37, 38, dan 39 berlaku juga bagi Prosesor, sehingga shape
+# terkait menargetkan pdp:DataController dan pdp:DataProcessor.
+
+<http://example.org/pdp/shapes#>
+    a owl:Ontology ;
+    rdfs:label "SHACL Shapes Validasi Kepatuhan UU No. 27 Tahun 2022 (UU PDP)"@id ;
+    rdfs:comment "Batasan formal (shapes graph) untuk automated compliance checking dengan dua tingkat severity: Violation (Obligation/Prohibition) dan Warning (peringatan dini bila lebih dari 48 jam; bila lebih dari 72 jam, pelanggaran dan peringatan dini tercatat bersamaan). Kewajiban bersyarat hanya menargetkan entitas pemicu."@id ;
+    owl:versionInfo "2.4" .
+
+#################################################################
+#  GRUP 1: KEWAJIBAN BERTENGGAT DAN PERINGATAN DINI
+#################################################################
+#
+# POLA TENGGAT 3 x 24 JAM (dipakai ulang untuk Pasal 30, 32, 40, 41, 46)
+# Setiap kewajiban bertenggat terdiri atas satu NodeShape dan tiga property shape bernama:
+#   <X>_Recorded     : sh:minCount 1                              -> Violation, pesan "tidak tercatat"
+#   <X>_WithinLimit  : sh:datatype xsd:integer + sh:maxInclusive 72 -> Violation, pesan "melebihi 72 jam"
+#   <X>_EarlyWarning : sh:datatype xsd:integer + sh:maxInclusive 48 -> Warning,   pesan "melebihi 48 jam"
+# Pemecahan diperlukan karena sh:message berlaku untuk seluruh property shape, sehingga
+# data kosong dan data yang melebihi batas harus dilaporkan oleh shape yang berbeda.
+# NodeShape menargetkan entitas peristiwa pemicu (permintaan atau insiden), karena tenggat dihitung
+# "terhitung sejak Pengendali Data Pribadi menerima permintaan" atau, untuk Pasal 46 ayat (1), sejak kegagalan
+# tercatat (interpretasi peneliti; pasal dan Penjelasannya tidak menyebut titik awal; rumusan sama dengan kartu FO-27).
+
+# --- Pasal 30 ayat (1): Pembaruan Data (pemicu: permintaan pembaruan/perbaikan) ---
+pdps:DataUpdateShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DataUpdateRequest ;
+    rdfs:label "Shape Pembaruan Data (Pasal 30 ayat (1))"@id ;
+    sh:property pdps:DataUpdateHours_Recorded , pdps:DataUpdateHours_WithinLimit , pdps:DataUpdateHours_EarlyWarning .
+
+pdps:DataUpdateHours_Recorded
+    sh:path pdp:dataUpdateResponseHours ;
+    sh:name "Pencatatan Waktu Pembaruan Data" ;
+    sh:minCount 1 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 30 ayat (1) UU PDP: waktu pembaruan/perbaikan data pribadi tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa."@id .
+
+pdps:DataUpdateHours_WithinLimit
+    sh:path pdp:dataUpdateResponseHours ;
+    sh:name "Batas Waktu Pembaruan Data" ;
+    sh:datatype xsd:integer ;
+    sh:maxInclusive 72 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 30 ayat (1) UU PDP: waktu pembaruan/perbaikan data pribadi melebihi batas 3 x 24 jam (72 jam) sejak permintaan diterima, atau tidak dicatat sebagai bilangan bulat jam."@id .
+
+pdps:DataUpdateHours_EarlyWarning
+    sh:path pdp:dataUpdateResponseHours ;
+    sh:name "Peringatan Ambang Waktu Pembaruan Data" ;
+    sh:datatype xsd:integer ;
+    sh:maxInclusive 48 ;
+    sh:severity sh:Warning ;
+    sh:message "Peringatan dini Pasal 30 ayat (1) UU PDP: waktu pembaruan/perbaikan data melebihi 48 jam dan mendekati batas 72 jam."@id .
+
+# --- Pasal 32 ayat (2): Akses Data (pemicu: permintaan akses) ---
+pdps:DataAccessShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DataAccessRequest ;
+    rdfs:label "Shape Akses Data (Pasal 32 ayat (2))"@id ;
+    sh:property pdps:DataAccessHours_Recorded , pdps:DataAccessHours_WithinLimit , pdps:DataAccessHours_EarlyWarning .
+
+pdps:DataAccessHours_Recorded
+    sh:path pdp:dataAccessResponseHours ;
+    sh:name "Pencatatan Waktu Pemberian Akses Data" ;
+    sh:minCount 1 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 32 ayat (2) UU PDP: waktu pemberian akses data pribadi tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa."@id .
+
+pdps:DataAccessHours_WithinLimit
+    sh:path pdp:dataAccessResponseHours ;
+    sh:name "Batas Waktu Pemberian Akses Data" ;
+    sh:datatype xsd:integer ;
+    sh:maxInclusive 72 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 32 ayat (2) UU PDP: waktu pemberian akses data pribadi melebihi batas 3 x 24 jam (72 jam) sejak permintaan akses diterima, atau tidak dicatat sebagai bilangan bulat jam."@id .
+
+pdps:DataAccessHours_EarlyWarning
+    sh:path pdp:dataAccessResponseHours ;
+    sh:name "Peringatan Ambang Waktu Akses Data" ;
+    sh:datatype xsd:integer ;
+    sh:maxInclusive 48 ;
+    sh:severity sh:Warning ;
+    sh:message "Peringatan dini Pasal 32 ayat (2) UU PDP: waktu pemberian akses data melebihi 48 jam dan mendekati batas 72 jam."@id .
+
+# --- Pasal 40 ayat (2): Penghentian Pemrosesan (pemicu: permintaan penarikan kembali persetujuan) ---
+pdps:ProcessingCessationShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:ConsentWithdrawalRequest ;
+    rdfs:label "Shape Penghentian Pemrosesan (Pasal 40 ayat (2))"@id ;
+    sh:property pdps:ProcessingCessationHours_Recorded , pdps:ProcessingCessationHours_WithinLimit , pdps:ProcessingCessationHours_EarlyWarning .
+
+pdps:ProcessingCessationHours_Recorded
+    sh:path pdp:processingCessationHours ;
+    sh:name "Pencatatan Waktu Penghentian Pemrosesan" ;
+    sh:minCount 1 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 40 ayat (2) UU PDP: waktu penghentian pemrosesan setelah penarikan kembali persetujuan tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa."@id .
+
+pdps:ProcessingCessationHours_WithinLimit
+    sh:path pdp:processingCessationHours ;
+    sh:name "Batas Waktu Penghentian Pemrosesan" ;
+    sh:datatype xsd:integer ;
+    sh:maxInclusive 72 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 40 ayat (2) UU PDP: penghentian pemrosesan setelah penarikan kembali persetujuan melebihi batas 3 x 24 jam (72 jam), atau tidak dicatat sebagai bilangan bulat jam."@id .
+
+pdps:ProcessingCessationHours_EarlyWarning
+    sh:path pdp:processingCessationHours ;
+    sh:name "Peringatan Ambang Waktu Penghentian" ;
+    sh:datatype xsd:integer ;
+    sh:maxInclusive 48 ;
+    sh:severity sh:Warning ;
+    sh:message "Peringatan dini Pasal 40 ayat (2) UU PDP: penghentian pemrosesan melebihi 48 jam sejak permintaan penarikan persetujuan diterima."@id .
+
+# --- Pasal 41 ayat (1): Penundaan dan Pembatasan Pemrosesan (pemicu: permintaan penundaan dan pembatasan) ---
+# Pengecualian ayat (2) huruf a-c dan kewajiban pemberitahuan ayat (3) tidak dimodelkan.
+pdps:ProcessingRestrictionShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:ProcessingRestrictionRequest ;
+    rdfs:label "Shape Penundaan dan Pembatasan Pemrosesan (Pasal 41 ayat (1))"@id ;
+    sh:property pdps:ProcessingRestrictionHours_Recorded , pdps:ProcessingRestrictionHours_WithinLimit , pdps:ProcessingRestrictionHours_EarlyWarning .
+
+pdps:ProcessingRestrictionHours_Recorded
+    sh:path pdp:processingRestrictionHours ;
+    sh:name "Pencatatan Waktu Penundaan dan Pembatasan Pemrosesan" ;
+    sh:minCount 1 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 41 ayat (1) UU PDP: waktu penundaan dan pembatasan pemrosesan tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa."@id .
+
+pdps:ProcessingRestrictionHours_WithinLimit
+    sh:path pdp:processingRestrictionHours ;
+    sh:name "Batas Waktu Penundaan dan Pembatasan Pemrosesan" ;
+    sh:datatype xsd:integer ;
+    sh:maxInclusive 72 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 41 ayat (1) UU PDP: penundaan dan pembatasan pemrosesan melebihi batas 3 x 24 jam (72 jam) sejak permintaan diterima, atau tidak dicatat sebagai bilangan bulat jam."@id .
+
+pdps:ProcessingRestrictionHours_EarlyWarning
+    sh:path pdp:processingRestrictionHours ;
+    sh:name "Peringatan Ambang Waktu Penundaan dan Pembatasan" ;
+    sh:datatype xsd:integer ;
+    sh:maxInclusive 48 ;
+    sh:severity sh:Warning ;
+    sh:message "Peringatan dini Pasal 41 ayat (1) UU PDP: penundaan dan pembatasan pemrosesan melebihi 48 jam dan mendekati batas 72 jam."@id .
+
+# --- Pasal 46 ayat (1): Pemberitahuan Kegagalan Pelindungan Data (pemicu: kegagalan Pelindungan Data Pribadi) ---
+pdps:BreachNotificationShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:BreachIncident ;
+    rdfs:label "Shape Pemberitahuan Kegagalan Pelindungan Data Pribadi (Pasal 46 ayat (1))"@id ;
+    sh:property pdps:BreachNotificationHours_Recorded , pdps:BreachNotificationHours_WithinLimit , pdps:BreachNotificationHours_EarlyWarning .
+
+pdps:BreachNotificationHours_Recorded
+    sh:path pdp:breachNotificationHours ;
+    sh:name "Pencatatan Waktu Notifikasi Insiden" ;
+    sh:minCount 1 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 46 ayat (1) UU PDP: waktu pemberitahuan tertulis kegagalan Pelindungan Data Pribadi tidak tercatat, sehingga pemenuhan batas 3 x 24 jam tidak dapat diperiksa."@id .
+
+pdps:BreachNotificationHours_WithinLimit
+    sh:path pdp:breachNotificationHours ;
+    sh:name "Batas Waktu Notifikasi Insiden" ;
+    sh:datatype xsd:integer ;
+    sh:maxInclusive 72 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 46 ayat (1) UU PDP: pemberitahuan tertulis kegagalan Pelindungan Data Pribadi melebihi batas 3 x 24 jam (72 jam), atau tidak dicatat sebagai bilangan bulat jam."@id .
+
+pdps:BreachNotificationHours_EarlyWarning
+    sh:path pdp:breachNotificationHours ;
+    sh:name "Peringatan Ambang Waktu Notifikasi Insiden" ;
+    sh:datatype xsd:integer ;
+    sh:maxInclusive 48 ;
+    sh:severity sh:Warning ;
+    sh:message "Peringatan dini Pasal 46 ayat (1) UU PDP: pemberitahuan kegagalan Pelindungan Data Pribadi melebihi 48 jam dan mendekati batas 72 jam."@id .
+
+#################################################################
+#  GRUP 2: KEAMANAN TEKNIS DAN KERAHASIAAN (Pengendali; Prosesor melalui Pasal 52)
+#################################################################
+#
+# POLA CATATAN WAJIB (grup Pasal 52: Pasal 29 ayat (2), 31, 35, 36, 37, 38, 39; diubah 2026-10-28)
+# Setiap kewajiban terdiri atas dua property shape bernama:
+#   <X>_Recorded : sh:minCount 1                       -> Violation, pesan "catatan tidak tersedia"
+#   <X>_Applied  : sh:datatype xsd:boolean + sh:in (true) -> Violation, pesan "tercatat tidak diterapkan"
+# Pemecahan mengikuti konsensus validator FO-16/FO-30 (PERBAIKAN/CHANGELOG_PERBAIKAN.md, 2026-10-28 §13):
+# ketiadaan catatan dibedakan dari catatan bahwa kewajiban tidak diterapkan. Ketiadaan catatan tetap
+# Violation karena asumsi dunia tertutup (catatan kepatuhan wajib tersedia); asumsi ini dibahas di Bab 4.
+# sh:in dipakai (bukan sh:hasValue) agar data kosong hanya dilaporkan oleh <X>_Recorded.
+
+pdps:SecurityMeasuresShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DataController , pdp:DataProcessor ;
+    rdfs:label "Shape Langkah Teknis Keamanan (Pasal 35 huruf a dan Pasal 38; Pengendalian Hak Akses Pasal 39 ayat (1); bagi Prosesor jo. Pasal 52)"@id ;
+    rdfs:comment "Diubah 2026-10-28 berdasarkan konsensus validator FO-16/FO-30: enkripsi tidak lagi menjadi syarat wajib karena Pasal 35 tidak menyebutnya; pdp:hasEncryption tetap ada di ontologi sebagai data deskriptif dan tidak diperiksa. Pengendalian hak akses diatribusikan ke Pasal 39 ayat (1)."@id ;
+    sh:property pdps:SecurityMeasures_Recorded , pdps:SecurityMeasures_Applied ,
+                pdps:AccessControl_Recorded , pdps:AccessControl_Applied .
+
+pdps:SecurityMeasures_Recorded
+    sh:path pdp:hasSecurityMeasures ;
+    sh:name "Pencatatan Langkah Teknis Operasional Keamanan" ;
+    sh:minCount 1 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 35 huruf a dan Pasal 38 UU PDP (bagi Prosesor jo. Pasal 52): catatan langkah teknis operasional keamanan Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa."@id .
+
+pdps:SecurityMeasures_Applied
+    sh:path pdp:hasSecurityMeasures ;
+    sh:name "Penerapan Langkah Teknis Operasional Keamanan" ;
+    sh:datatype xsd:boolean ;
+    sh:in ( true ) ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 35 huruf a dan Pasal 38 UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat belum menerapkan langkah teknis operasional keamanan untuk melindungi data pribadi dari pemrosesan yang tidak sah."@id .
+
+pdps:AccessControl_Recorded
+    sh:path pdp:hasAccessControl ;
+    sh:name "Pencatatan Pengendalian Hak Akses" ;
+    sh:minCount 1 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 39 ayat (1) UU PDP (bagi Prosesor jo. Pasal 52): catatan pengendalian hak akses Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa."@id .
+
+pdps:AccessControl_Applied
+    sh:path pdp:hasAccessControl ;
+    sh:name "Penerapan Pengendalian Hak Akses" ;
+    sh:datatype xsd:boolean ;
+    sh:in ( true ) ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 39 ayat (1) UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak menerapkan pengendalian hak akses untuk mencegah akses tidak sah."@id .
+
+pdps:ConfidentialityShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DataController , pdp:DataProcessor ;
+    rdfs:label "Shape Kerahasiaan Data (Pasal 36; bagi Prosesor jo. Pasal 52)"@id ;
+    sh:property pdps:ConfidentialityMeasures_Recorded , pdps:ConfidentialityMeasures_Applied .
+
+pdps:ConfidentialityMeasures_Recorded
+    sh:path pdp:hasConfidentialityMeasures ;
+    sh:name "Pencatatan Langkah Perlindungan Kerahasiaan" ;
+    sh:minCount 1 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 36 UU PDP (bagi Prosesor jo. Pasal 52): catatan langkah menjaga kerahasiaan data pribadi pada Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa."@id .
+
+pdps:ConfidentialityMeasures_Applied
+    sh:path pdp:hasConfidentialityMeasures ;
+    sh:name "Penerapan Langkah Perlindungan Kerahasiaan" ;
+    sh:datatype xsd:boolean ;
+    sh:in ( true ) ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 36 UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak menjaga kerahasiaan data pribadi dalam pemrosesan."@id .
+
+pdps:SupervisionShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DataController , pdp:DataProcessor ;
+    rdfs:label "Shape Pengawasan Pemrosesan (Pasal 37; bagi Prosesor jo. Pasal 52)"@id ;
+    sh:property pdps:SupervisionMechanism_Recorded , pdps:SupervisionMechanism_Applied .
+
+pdps:SupervisionMechanism_Recorded
+    sh:path pdp:hasSupervisionMechanism ;
+    sh:name "Pencatatan Mekanisme Pengawasan Pihak Pemroses" ;
+    sh:minCount 1 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 37 UU PDP (bagi Prosesor jo. Pasal 52): catatan mekanisme pengawasan terhadap pihak yang terlibat dalam pemrosesan pada Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa."@id .
+
+pdps:SupervisionMechanism_Applied
+    sh:path pdp:hasSupervisionMechanism ;
+    sh:name "Penerapan Mekanisme Pengawasan Pihak Pemroses" ;
+    sh:datatype xsd:boolean ;
+    sh:in ( true ) ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 37 UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak memiliki mekanisme pengawasan terhadap pihak yang terlibat dalam pemrosesan data."@id .
+
+pdps:ElectronicSecuritySystemShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DataController , pdp:DataProcessor ;
+    rdfs:label "Shape Sistem Keamanan Elektronik (Pasal 39 ayat (1) dan (2); bagi Prosesor jo. Pasal 52)"@id ;
+    sh:property pdps:ElectronicSecuritySystem_Recorded , pdps:ElectronicSecuritySystem_Applied .
+
+pdps:ElectronicSecuritySystem_Recorded
+    sh:path pdp:hasElectronicSecuritySystem ;
+    sh:name "Pencatatan Sistem Keamanan Elektronik Andal" ;
+    sh:minCount 1 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 39 ayat (1) dan (2) UU PDP (bagi Prosesor jo. Pasal 52): catatan sistem keamanan elektronik Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa."@id .
+
+pdps:ElectronicSecuritySystem_Applied
+    sh:path pdp:hasElectronicSecuritySystem ;
+    sh:name "Penerapan Sistem Keamanan Elektronik Andal" ;
+    sh:datatype xsd:boolean ;
+    sh:in ( true ) ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 39 ayat (1) dan (2) UU PDP (bagi Prosesor jo. Pasal 52): sistem elektronik Pengendali atau Prosesor tercatat tidak memiliki sistem keamanan untuk mencegah akses tidak sah."@id .
+
+#################################################################
+#  GRUP 3: PEREKAMAN KEGIATAN DAN PENILAIAN DAMPAK
+#################################################################
+
+pdps:AuditLogShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DataController , pdp:DataProcessor ;
+    rdfs:label "Shape Perekaman Kegiatan Pemrosesan (Pasal 31; bagi Prosesor jo. Pasal 52)"@id ;
+    sh:property pdps:ProcessingAuditLog_Recorded , pdps:ProcessingAuditLog_Applied .
+
+pdps:ProcessingAuditLog_Recorded
+    sh:path pdp:hasProcessingAuditLog ;
+    sh:name "Pencatatan Status Perekaman Aktivitas Pemrosesan" ;
+    sh:minCount 1 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 31 UU PDP (bagi Prosesor jo. Pasal 52): catatan perekaman kegiatan pemrosesan Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa."@id .
+
+pdps:ProcessingAuditLog_Applied
+    sh:path pdp:hasProcessingAuditLog ;
+    sh:name "Perekaman Aktivitas Pemrosesan (Audit Log)" ;
+    sh:datatype xsd:boolean ;
+    sh:in ( true ) ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 31 UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak merekam seluruh kegiatan pemrosesan data pribadi."@id .
+
+# Pemicu: "dalam hal pemrosesan Data Pribadi memiliki potensi risiko tinggi terhadap Subjek Data Pribadi".
+pdps:DPIAShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:HighRiskProcessingController ;
+    rdfs:label "Shape Penilaian Dampak Pelindungan Data Pribadi (Pasal 34 ayat (1))"@id ;
+    sh:property [
+        sh:path pdp:hasDPIA ;
+        sh:name "Pelaksanaan DPIA" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 34 ayat (1) UU PDP: Pengendali dengan pemrosesan berpotensi risiko tinggi belum melakukan penilaian dampak Pelindungan Data Pribadi."@id ;
+    ] .
+
+#################################################################
+#  GRUP 4: DASAR PEMROSESAN, PERSETUJUAN, DAN HAK SUBJEK
+#################################################################
+
+pdps:LegalBasisShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DataController ;
+    rdfs:label "Shape Dasar Pemrosesan (Pasal 20 ayat (1) dan (2))"@id ;
+    sh:property [
+        sh:path pdp:hasLegalBasis ;
+        sh:name "Dasar Pemrosesan yang Sah" ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:in ( "consent" "contract" "legal_obligation" "vital_interest" "public_interest" "legitimate_interest" ) ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 20 ayat (1) dan (2) UU PDP: pemrosesan data pribadi tidak memiliki dasar pemrosesan atau dasarnya tidak termasuk enam dasar pada ayat (2)."@id ;
+    ] .
+
+# Pemicu: dasar pemrosesan persetujuan. Penerapan pada Pasal 24 adalah interpretasi peneliti.
+# Pasal 22 ayat (1) ("Persetujuan pemrosesan Data Pribadi dilakukan melalui persetujuan tertulis atau terekam")
+# dipetakan bersama shape ini: bukti persetujuan Pasal 24 adalah bukti persetujuan tertulis atau terekam.
+pdps:ConsentEvidenceShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:ConsentBasedController ;
+    rdfs:label "Shape Bukti Persetujuan (Pasal 24 jo. Pasal 22 ayat (1))"@id ;
+    rdfs:comment "Interpretasi peneliti (untuk dinilai validator): Pasal 24 tidak memuat frasa \"dalam hal\", tetapi \"bukti persetujuan yang telah diberikan\" mengandaikan persetujuan sebagai dasar pemrosesan (Pasal 20 ayat (2) huruf a; Pasal 22 ayat (1)). Karena itu shape hanya menargetkan Pengendali dengan dasar pemrosesan persetujuan. Bila tafsir ini ditolak, sh:targetClass dikembalikan ke pdp:DataController."@id ;
+    sh:property [
+        sh:path pdp:hasConsentEvidence ;
+        sh:name "Bukti Persetujuan Sah" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 24 jo. Pasal 22 ayat (1) UU PDP: Pengendali tidak dapat menunjukkan bukti persetujuan tertulis atau terekam yang telah diberikan oleh Subjek Data Pribadi."@id ;
+    ] .
+
+# Pemicu: "Dalam hal pemrosesan Data Pribadi berdasarkan persetujuan sebagaimana dimaksud dalam Pasal 20 ayat (2) huruf a".
+pdps:ProcessingNoticeShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:ConsentBasedController ;
+    rdfs:label "Shape Penyampaian Informasi Pemrosesan (Pasal 21 ayat (1))"@id ;
+    sh:property [
+        sh:path pdp:hasProcessingNotice ;
+        sh:name "Pemberitahuan Informasi Pemrosesan" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 21 ayat (1) UU PDP: Pengendali tidak menyampaikan informasi legalitas, tujuan, jenis data, retensi, jangka waktu pemrosesan, dan hak Subjek Data Pribadi."@id ;
+    ] .
+
+# Pemicu: pemrosesan Data Pribadi anak.
+pdps:ChildConsentShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:ChildDataController ;
+    rdfs:label "Shape Persetujuan Data Anak (Pasal 25 ayat (2))"@id ;
+    sh:property [
+        sh:path pdp:hasParentalConsentForChild ;
+        sh:name "Persetujuan Orang Tua/Wali" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 25 ayat (2) UU PDP: pemrosesan data pribadi anak tidak mendapat persetujuan orang tua dan/atau wali anak."@id ;
+    ] .
+
+# Pemicu: pemrosesan Data Pribadi penyandang disabilitas.
+pdps:DisabilityConsentShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DisabilityDataController ;
+    rdfs:label "Shape Persetujuan Penyandang Disabilitas (Pasal 26 ayat (3))"@id ;
+    sh:property [
+        sh:path pdp:hasSpecialConsentForDisability ;
+        sh:name "Persetujuan Khusus Disabilitas" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 26 ayat (3) UU PDP: pemrosesan data pribadi penyandang disabilitas tidak mendapat persetujuan penyandang disabilitas dan/atau walinya."@id ;
+    ] .
+
+pdps:DataMinimizationShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DataController ;
+    rdfs:label "Shape Pembatasan dan Kesesuaian Tujuan (Pasal 27 dan Pasal 28)"@id ;
+    sh:property [
+        sh:path pdp:hasDataMinimization ;
+        sh:name "Prinsip Pembatasan & Spesifikasi Tujuan" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 27 dan Pasal 28 UU PDP: pemrosesan tidak terbatas dan spesifik atau tidak sesuai dengan tujuan pemrosesan."@id ;
+    ] .
+
+pdps:DataAccuracyShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DataController , pdp:DataProcessor ;
+    rdfs:label "Shape Akurasi Data (Pasal 29 ayat (2); bagi Prosesor jo. Pasal 52)"@id ;
+    sh:property pdps:DataAccuracyVerification_Recorded , pdps:DataAccuracyVerification_Applied .
+
+pdps:DataAccuracyVerification_Recorded
+    sh:path pdp:hasDataAccuracyVerification ;
+    sh:name "Pencatatan Verifikasi Akurasi dan Konsistensi" ;
+    sh:minCount 1 ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 29 ayat (2) UU PDP (bagi Prosesor jo. Pasal 52): catatan verifikasi akurasi, kelengkapan, dan konsistensi data pribadi pada Pengendali atau Prosesor tidak tersedia, sehingga pemenuhan kewajiban tidak dapat diperiksa."@id .
+
+pdps:DataAccuracyVerification_Applied
+    sh:path pdp:hasDataAccuracyVerification ;
+    sh:name "Verifikasi Akurasi dan Konsistensi" ;
+    sh:datatype xsd:boolean ;
+    sh:in ( true ) ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 29 ayat (2) UU PDP (bagi Prosesor jo. Pasal 52): Pengendali atau Prosesor tercatat tidak melakukan verifikasi atas akurasi, kelengkapan, dan konsistensi data pribadi."@id .
+
+# Pemicu: "Dalam hal Pemrosesan Data Pribadi dilakukan oleh 2 (dua) atau lebih Pengendali Data Pribadi".
+pdps:JointControllerShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:JointController ;
+    rdfs:label "Shape Pengendali Bersama (Pasal 18 ayat (2))"@id ;
+    sh:property [
+        sh:path pdp:hasJointControllerAgreement ;
+        sh:name "Perjanjian Tertulis Antar-Pengendali" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 18 ayat (2) UU PDP: pemrosesan oleh dua atau lebih Pengendali tidak disertai perjanjian peran, tujuan bersama, dan narahubung."@id ;
+    ] .
+
+#################################################################
+#  GRUP 5: PENGAKHIRAN PEMROSESAN DAN ISI PEMBERITAHUAN
+#  (penghapusan, pemusnahan, dan pemberitahuannya dipindah ke Grup 9)
+#################################################################
+
+# Pemicu: "Pengendali Data Pribadi wajib mengakhiri pemrosesan Data Pribadi dalam hal: a. telah mencapai masa
+# retensi; b. tujuan pemrosesan Data Pribadi telah tercapai; atau c. terdapat permintaan dari Subjek Data Pribadi."
+# Menggantikan proksi lama "masa retensi > 0" pada semua Pengendali (posisi dipertahankan agar kelas K14 tetap).
+pdps:ProcessingTerminationShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:ProcessingTerminationGround ;
+    rdfs:label "Shape Pengakhiran Pemrosesan (Pasal 42 ayat (1))"@id ;
+    sh:property [
+        sh:path pdp:processingTerminated ;
+        sh:name "Pengakhiran Pemrosesan" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 42 ayat (1) UU PDP: kondisi pengakhiran pemrosesan terpenuhi, tetapi Pengendali tidak mengakhiri pemrosesan Data Pribadi."@id ;
+    ] .
+
+# Pemicu: kegagalan Pelindungan Data Pribadi (isi pemberitahuan tertulis Pasal 46 ayat (1)).
+pdps:BreachNotificationContentShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:BreachIncident ;
+    rdfs:label "Shape Isi Pemberitahuan Kegagalan Pelindungan Data Pribadi (Pasal 46 ayat (2))"@id ;
+    sh:property [
+        sh:path pdp:breachNotificationContainsRequiredElements ;
+        sh:name "Kelengkapan Elemen Konten Notifikasi" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 46 ayat (2) UU PDP: pemberitahuan kegagalan tidak memuat data pribadi yang terungkap, kapan dan bagaimana terungkap, serta upaya penanganan dan pemulihan."@id ;
+    ] .
+
+#################################################################
+#  GRUP 6: TRANSFER DATA DAN KEWAJIBAN PROSESOR
+#################################################################
+
+# Pemicu: transfer ke luar wilayah hukum Negara Republik Indonesia ("Dalam melakukan transfer Data Pribadi ...").
+# Struktur berjenjang ayat (2)-(4) dibaca sebagai disjungsi pada data statis: transfer patuh bila salah satu
+# syarat terpenuhi. Urutan jenjang (ayat (3) hanya bila ayat (2) tidak terpenuhi, dst.) tidak dapat diperiksa
+# dari data statis dan dicatat sebagai keterbatasan. Hasil dilaporkan di tingkat node (tanpa sh:resultPath).
+pdps:InternationalTransferShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:CrossBorderTransfer ;
+    rdfs:label "Shape Transfer Data ke Luar Wilayah Hukum RI (Pasal 56 ayat (2) sampai (4))"@id ;
+    sh:or (
+        [ sh:path pdp:transferRecipientEquivalentProtection ; sh:hasValue true ]
+        [ sh:path pdp:transferHasAdequateBindingProtection ; sh:hasValue true ]
+        [ sh:path pdp:transferHasSubjectConsent ; sh:hasValue true ]
+    ) ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 56 ayat (2) sampai (4) UU PDP: transfer ke luar wilayah hukum RI tidak memenuhi tingkat pelindungan setara atau lebih tinggi, pelindungan yang memadai dan mengikat, maupun persetujuan Subjek Data Pribadi."@id .
+
+# Kondisi "dalam hal Pengendali Data Pribadi menunjuk Prosesor" dipenuhi oleh keberadaan entitas pdp:DataProcessor.
+pdps:ProcessorInstructionShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DataProcessor ;
+    rdfs:label "Shape Pemrosesan atas Perintah Pengendali (Pasal 51 ayat (1))"@id ;
+    sh:property [
+        sh:path pdp:processesOnlyUnderInstruction ;
+        sh:name "Pemrosesan Hanya Sesuai Instruksi" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 51 ayat (1) UU PDP: Prosesor tidak melakukan pemrosesan berdasarkan perintah Pengendali Data Pribadi."@id ;
+    ] .
+
+#################################################################
+#  GRUP 7: LARANGAN
+#################################################################
+
+# Cakupan: Pasal 65 ayat (2) dan (3) saja. Ayat (1) dan Pasal 66 memuat unsur
+# "dengan maksud untuk menguntungkan diri sendiri atau orang lain" sehingga tidak dikodekan.
+pdps:UnauthorizedProcessingShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:PSE ;
+    rdfs:label "Shape Larangan Pengungkapan dan Penggunaan Data Tanpa Hak (Pasal 65 ayat (2) dan (3))"@id ;
+    sh:property [
+        sh:path pdp:hasUnauthorizedProcessing ;
+        sh:name "Indikator Pemrosesan Melawan Hukum" ;
+        sh:datatype xsd:boolean ;
+        sh:hasValue false ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 65 ayat (2) dan (3) UU PDP: terdapat indikator pengungkapan atau penggunaan data pribadi yang bukan miliknya secara melawan hukum."@id ;
+    ] .
+
+#################################################################
+#  GRUP 8: PENGALIHAN DATA PADA AKSI KORPORASI DAN PEJABAT/PETUGAS PDP
+#  (diletakkan di akhir berkas agar penomoran kelas batasan K01-K18 tidak bergeser)
+#################################################################
+
+# Pemicu: aksi korporasi badan hukum Pengendali yang sudah selesai (pdp:CorporateAction).
+pdps:CorporateActionNoticeShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:CorporateAction ;
+    rdfs:label "Shape Pemberitahuan Pengalihan Data Pribadi pada Aksi Korporasi (Pasal 48 ayat (1) dan (2))"@id ;
+    sh:property [
+        sh:path pdp:transferNoticeBeforeAction ;
+        sh:name "Pemberitahuan Pengalihan Sebelum Aksi Korporasi" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 48 ayat (1) dan (2) UU PDP: pemberitahuan pengalihan Data Pribadi kepada Subjek Data Pribadi tidak disampaikan sebelum penggabungan, pemisahan, pengambilalihan, peleburan, atau pembubaran badan hukum."@id ;
+    ] ;
+    sh:property [
+        sh:path pdp:transferNoticeAfterAction ;
+        sh:name "Pemberitahuan Pengalihan Sesudah Aksi Korporasi" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 48 ayat (1) dan (2) UU PDP: pemberitahuan pengalihan Data Pribadi kepada Subjek Data Pribadi tidak disampaikan sesudah penggabungan, pemisahan, pengambilalihan, peleburan, atau pembubaran badan hukum."@id ;
+    ] .
+
+# Pemicu: Pasal 53 ayat (1) huruf a, b, atau c (alternatif; amar butir 2 Putusan MK Nomor 151/PUU-XXII/2024,
+# referensi/putusan_mkri_12970_1753859809.pdf, hlm. 159 PDF).
+# Target superkelas pdp:DPORequiredActor; entitas bertipe salah satu subkelas huruf a/b/c menjadi focus node
+# melalui inferensi rdfs:subClassOf, sehingga satu huruf saja sudah memicu kewajiban.
+pdps:DataProtectionOfficerShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DPORequiredActor ;
+    rdfs:label "Shape Penunjukan Pejabat atau Petugas Pelindungan Data Pribadi (Pasal 53 ayat (1))"@id ;
+    sh:property [
+        sh:path pdp:hasDataProtectionOfficer ;
+        sh:name "Penunjukan Pejabat/Petugas PDP" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 53 ayat (1) UU PDP: Pengendali atau Prosesor yang memenuhi huruf a, b, atau c tidak menunjuk pejabat atau petugas yang melaksanakan fungsi Pelindungan Data Pribadi."@id ;
+    ] .
+
+#################################################################
+#  GRUP 9: KEWAJIBAN BERSYARAT PERISTIWA PASAL 13, 43, 44, DAN 45
+#  (diletakkan di akhir berkas agar penomoran kelas batasan K01-K20 tidak bergeser)
+#################################################################
+
+# Pemicu: permintaan Subjek Data Pribadi (pdp:DataPortabilityRequest).
+# Interpretasi peneliti (untuk dinilai validator): Pasal 13 ayat (1) tidak menyebut "permintaan"; kewajiban korelatif
+# Pengendali dibaca timbul ketika Subjek menjalankan haknya. Ayat (2) dan ayat (3) tidak dimodelkan.
+pdps:DataPortabilityShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DataPortabilityRequest ;
+    rdfs:label "Shape Portabilitas Data (Pasal 13 ayat (1))"@id ;
+    sh:property [
+        sh:path pdp:portableFormatProvided ;
+        sh:name "Penyediaan Data dalam Format Terstruktur" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 13 ayat (1) UU PDP: atas permintaan Subjek Data Pribadi, Pengendali tidak menyediakan data pribadi dalam struktur/format yang lazim digunakan atau dapat dibaca oleh sistem elektronik."@id ;
+    ] .
+
+# Pemicu: "Pengendali Data Pribadi wajib menghapus Data Pribadi dalam hal: a. ...; b. ...; c. ...; atau d. ..."
+pdps:DataDeletionShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DeletionGround ;
+    rdfs:label "Shape Penghapusan Data (Pasal 43 ayat (1))"@id ;
+    sh:property [
+        sh:path pdp:erasureCarriedOut ;
+        sh:name "Pelaksanaan Penghapusan Data" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 43 ayat (1) UU PDP: kondisi penghapusan terpenuhi, tetapi Pengendali tidak menghapus Data Pribadi."@id ;
+    ] .
+
+# Pemicu: "Pengendali Data Pribadi wajib memusnahkan Data Pribadi dalam hal: a. ...; b. ...; c. ...; dan/atau d. ..."
+pdps:DataDestructionShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:DestructionGround ;
+    rdfs:label "Shape Pemusnahan Data (Pasal 44 ayat (1))"@id ;
+    sh:property [
+        sh:path pdp:erasureCarriedOut ;
+        sh:name "Pelaksanaan Pemusnahan Data" ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:hasValue true ;
+        sh:severity sh:Violation ;
+        sh:message "Pelanggaran Pasal 44 ayat (1) UU PDP: kondisi pemusnahan terpenuhi, tetapi Pengendali tidak memusnahkan Data Pribadi."@id ;
+    ] .
+
+# Pemicu: penghapusan dan/atau pemusnahan yang telah dilakukan. Diperiksa sebagai implikasi pada entitas kondisi
+# (pdp:ErasureGround): bila pdp:erasureCarriedOut bernilai true, pdp:subjectNotifiedOfErasure wajib bernilai true.
+# Bila penghapusan/pemusnahan belum dilakukan, tidak ada yang perlu diberitahukan (yang dilanggar Pasal 43/44).
+# Hasil dilaporkan di tingkat node (tanpa sh:resultPath).
+pdps:DeletionNoticeShape
+    a sh:NodeShape ;
+    sh:targetClass pdp:ErasureGround ;
+    rdfs:label "Shape Pemberitahuan Penghapusan dan/atau Pemusnahan (Pasal 45)"@id ;
+    sh:or (
+        [ sh:not [ sh:path pdp:erasureCarriedOut ; sh:hasValue true ] ]
+        [ sh:path pdp:subjectNotifiedOfErasure ; sh:hasValue true ]
+    ) ;
+    sh:severity sh:Violation ;
+    sh:message "Pelanggaran Pasal 45 UU PDP: Data Pribadi telah dihapus dan/atau dimusnahkan, tetapi Pengendali tidak memberitahukannya kepada Subjek Data Pribadi."@id .

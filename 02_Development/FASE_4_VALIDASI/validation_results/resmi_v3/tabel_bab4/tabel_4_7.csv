@@ -1,0 +1,26 @@
+kelas,target,node_shape,pasal,komponen,unit_violation,unit_warning,hasil_v,pasangan_v,entitas_v,hasil_w,pasangan_w,entitas_w
+K01,DataUpdateRequest,DataUpdateShape,Pasal 30 ayat (1),datatype;maxInclusive;minCount,2,1,2,2,2,2,2,2
+K02,DataAccessRequest,DataAccessShape,Pasal 32 ayat (2),datatype;maxInclusive;minCount,2,1,2,2,2,2,2,2
+K03,ConsentWithdrawalRequest,ProcessingCessationShape,Pasal 40 ayat (2),datatype;maxInclusive;minCount,2,1,2,2,2,2,2,2
+K04,ProcessingRestrictionRequest,ProcessingRestrictionShape,Pasal 41 ayat (1),datatype;maxInclusive;minCount,2,1,2,2,2,2,2,2
+K05,BreachIncident,BreachNotificationShape,Pasal 46 ayat (1),datatype;maxInclusive;minCount,2,1,2,2,2,2,2,2
+K06,DataController;DataProcessor,SecurityMeasuresShape;ConfidentialityShape;SupervisionShape;ElectronicSecuritySystemShape;AuditLogShape;DataAccuracyShape,Pasal 35 huruf a dan Pasal 38; Pengendalian Hak Akses Pasal 39 ayat (1); bagi Prosesor jo. Pasal 52;Pasal 36; bagi Prosesor jo. Pasal 52;Pasal 37; bagi Prosesor jo. Pasal 52;Pasal 39 ayat (1) dan (2); bagi Prosesor jo. Pasal 52;Pasal 31; bagi Prosesor jo. Pasal 52;Pasal 29 ayat (2); bagi Prosesor jo. Pasal 52,datatype;in;minCount,14,0,21,21,3,0,0,0
+K07,HighRiskProcessingController,DPIAShape,Pasal 34 ayat (1),datatype;hasValue;minCount,1,0,1,1,1,0,0,0
+K08,DataController,LegalBasisShape,Pasal 20 ayat (1) dan (2),datatype;in;minCount,1,0,1,1,1,0,0,0
+K09,ConsentBasedController,ConsentEvidenceShape;ProcessingNoticeShape,Pasal 24 jo. Pasal 22 ayat (1);Pasal 21 ayat (1),datatype;hasValue;minCount,2,0,2,2,1,0,0,0
+K10,ChildDataController,ChildConsentShape,Pasal 25 ayat (2),datatype;hasValue;minCount,1,0,1,1,1,0,0,0
+K11,DisabilityDataController,DisabilityConsentShape,Pasal 26 ayat (3),datatype;hasValue;minCount,1,0,1,1,1,0,0,0
+K12,DataController,DataMinimizationShape,Pasal 27 dan Pasal 28,datatype;hasValue;minCount,1,0,1,1,1,0,0,0
+K13,JointController,JointControllerShape,Pasal 18 ayat (2),datatype;hasValue;minCount,1,0,1,1,1,0,0,0
+K14,ProcessingTerminationGround,ProcessingTerminationShape,Pasal 42 ayat (1),datatype;hasValue;minCount,1,0,1,1,1,0,0,0
+K15,BreachIncident,BreachNotificationContentShape,Pasal 46 ayat (2),datatype;hasValue;minCount,1,0,1,1,1,0,0,0
+K16,CrossBorderTransfer,InternationalTransferShape,Pasal 56 ayat (2) sampai (4),or,1,0,1,1,1,0,0,0
+K17,DataProcessor,ProcessorInstructionShape,Pasal 51 ayat (1),datatype;hasValue;minCount,1,0,1,1,1,0,0,0
+K18,PSE,UnauthorizedProcessingShape,Pasal 65 ayat (2) dan (3),datatype;hasValue,1,0,1,1,1,0,0,0
+K19,CorporateAction,CorporateActionNoticeShape,Pasal 48 ayat (1) dan (2),datatype;hasValue;minCount,2,0,2,2,1,0,0,0
+K20,DPORequiredActor,DataProtectionOfficerShape,Pasal 53 ayat (1),datatype;hasValue;minCount,1,0,2,2,2,0,0,0
+K21,DataPortabilityRequest,DataPortabilityShape,Pasal 13 ayat (1),datatype;hasValue;minCount,1,0,1,1,1,0,0,0
+K22,DeletionGround,DataDeletionShape,Pasal 43 ayat (1),datatype;hasValue;minCount,1,0,1,1,1,0,0,0
+K23,DestructionGround,DataDestructionShape,Pasal 44 ayat (1),datatype;hasValue;minCount,1,0,1,1,1,0,0,0
+K24,ErasureGround,DeletionNoticeShape,Pasal 45,or,1,0,1,1,1,0,0,0
+Total,,,,,44,5,52,52,32,10,10,10

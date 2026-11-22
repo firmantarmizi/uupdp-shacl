@@ -1,0 +1,65 @@
+ecp,kelas_batasan,peran,entitas,berkas,vonis_harapan,shape_violation_harapan,shape_warning_harapan,catatan
+ECP-01,valid,valid,PSE_Simulasi_FIN_Compliant,data_pse_compliant.ttl,Compliant,,,Pengendali dengan kelima kelas pemicu karakteristik; semua kewajiban terpenuhi
+ECP-01,valid,valid,Permintaan_Pembaruan_FIN,data_pse_compliant.ttl,Compliant,,,Ps. 30 ayat (1): 24 jam
+ECP-01,valid,valid,Permintaan_Akses_FIN,data_pse_compliant.ttl,Compliant,,,Ps. 32 ayat (2): 24 jam
+ECP-01,valid,valid,Penarikan_Persetujuan_FIN,data_pse_compliant.ttl,Compliant,,,Ps. 40 ayat (2): 24 jam
+ECP-01,valid,valid,Permintaan_Pembatasan_FIN,data_pse_compliant.ttl,Compliant,,,Ps. 41 ayat (1): 24 jam
+ECP-01,valid,valid,Insiden_FIN,data_pse_compliant.ttl,Compliant,,,Ps. 46 ayat (1)-(2): 24 jam; isi pemberitahuan lengkap
+ECP-01,valid,valid,Transfer_FIN,data_pse_compliant.ttl,Compliant,,,Ps. 56 ayat (2) terpenuhi (pelindungan setara)
+ECP-01,valid,valid,Prosesor_Simulasi_CLD_Compliant,data_pse_compliant.ttl,Compliant,,,Prosesor patuh: Ps. 51 ayat (1); grup Ps. 52 (Ps. 29/31/35/36/37/38/39); Ps. 65 ayat (2)-(3)
+ECP-01,valid,valid,AksiKorporasi_FIN,data_pse_compliant.ttl,Compliant,,,Ps. 48 ayat (1)-(2): penggabungan selesai; pemberitahuan sebelum dan sesudah disampaikan
+ECP-01,valid,valid,Permintaan_Portabilitas_FIN,data_pse_compliant.ttl,Compliant,,,Ps. 13 ayat (1): data disediakan dalam format terstruktur
+ECP-01,valid,valid,Pengakhiran_FIN,data_pse_compliant.ttl,Compliant,,,Ps. 42 ayat (1) huruf a: pemrosesan diakhiri
+ECP-01,valid,valid,Penghapusan_FIN,data_pse_compliant.ttl,Compliant,,,Ps. 43 ayat (1) huruf a: data dihapus; Ps. 45: Subjek diberi tahu
+ECP-01,valid,valid,Pemusnahan_FIN,data_pse_compliant.ttl,Compliant,,,Ps. 44 ayat (1) huruf a: data dimusnahkan; Ps. 45: Subjek diberi tahu
+ECP-02,valid,valid,PSE_Simulasi_ECM_Warning,data_pse_violation.ttl,Compliant,,,Pengendali sendiri tanpa hasil; peringatan dini ada pada peristiwanya
+ECP-02,valid,valid,Permintaan_Pembaruan_ECM,data_pse_violation.ttl,Compliant,,DataUpdateHours_EarlyWarning,55 jam: di atas ambang 48 jam dan tidak melewati 72 jam
+ECP-02,valid,valid,Permintaan_Akses_ECM,data_pse_violation.ttl,Compliant,,DataAccessHours_EarlyWarning,52 jam
+ECP-02,valid,valid,Penarikan_Persetujuan_ECM,data_pse_violation.ttl,Compliant,,ProcessingCessationHours_EarlyWarning,50 jam
+ECP-02,valid,valid,Permintaan_Pembatasan_ECM,data_pse_violation.ttl,Compliant,,ProcessingRestrictionHours_EarlyWarning,53 jam
+ECP-02,valid,valid,Insiden_ECM,data_pse_violation.ttl,Compliant,,BreachNotificationHours_EarlyWarning,58 jam; isi pemberitahuan lengkap
+ECP-03,K01,pendukung,Pengendali_ECP03,data_pse_violation.ttl,Compliant,,,Pengendali pendukung patuh
+ECP-03,K01,wakil,Pembaruan_ECP03_Lewat,data_pse_violation.ttl,Violation,DataUpdateHours_WithinLimit,DataUpdateHours_EarlyWarning,Ps. 30 ayat (1): 96 jam (melewati 72 jam sehingga juga melewati ambang 48 jam)
+ECP-03,K01,wakil,Pembaruan_ECP03_Kosong,data_pse_violation.ttl,Violation,DataUpdateHours_Recorded,,Ps. 30 ayat (1): waktu tidak tercatat
+ECP-04,K02,pendukung,Pengendali_ECP04,data_pse_violation.ttl,Compliant,,,Pengendali pendukung patuh
+ECP-04,K02,wakil,Akses_ECP04_Lewat,data_pse_violation.ttl,Violation,DataAccessHours_WithinLimit,DataAccessHours_EarlyWarning,Ps. 32 ayat (2): 120 jam
+ECP-04,K02,wakil,Akses_ECP04_Kosong,data_pse_violation.ttl,Violation,DataAccessHours_Recorded,,Ps. 32 ayat (2): waktu tidak tercatat
+ECP-05,K03,pendukung,Pengendali_ECP05,data_pse_violation.ttl,Compliant,,,Pengendali pendukung patuh; ConsentBasedController (aturan integritas (e))
+ECP-05,K03,wakil,Penarikan_ECP05_Lewat,data_pse_violation.ttl,Violation,ProcessingCessationHours_WithinLimit,ProcessingCessationHours_EarlyWarning,Ps. 40 ayat (2): 96 jam
+ECP-05,K03,wakil,Penarikan_ECP05_Kosong,data_pse_violation.ttl,Violation,ProcessingCessationHours_Recorded,,Ps. 40 ayat (2): waktu tidak tercatat
+ECP-06,K04,pendukung,Pengendali_ECP06,data_pse_violation.ttl,Compliant,,,Pengendali pendukung patuh
+ECP-06,K04,wakil,Pembatasan_ECP06_Lewat,data_pse_violation.ttl,Violation,ProcessingRestrictionHours_WithinLimit,ProcessingRestrictionHours_EarlyWarning,Ps. 41 ayat (1): 100 jam
+ECP-06,K04,wakil,Pembatasan_ECP06_Kosong,data_pse_violation.ttl,Violation,ProcessingRestrictionHours_Recorded,,Ps. 41 ayat (1): waktu tidak tercatat
+ECP-07,K05,pendukung,Pengendali_ECP07,data_pse_violation.ttl,Compliant,,,Pengendali pendukung patuh
+ECP-07,K05,wakil,Insiden_ECP07_Lewat,data_pse_violation.ttl,Violation,BreachNotificationHours_WithinLimit,BreachNotificationHours_EarlyWarning,Ps. 46 ayat (1): 144 jam; isi pemberitahuan lengkap
+ECP-07,K05,wakil,Insiden_ECP07_Kosong,data_pse_violation.ttl,Violation,BreachNotificationHours_Recorded,,Ps. 46 ayat (1): waktu tidak tercatat; isi pemberitahuan lengkap
+ECP-08,K06,wakil,PSE_Simulasi_SEC_Violation,data_pse_violation.ttl,Violation,AccessControl_Applied;ConfidentialityMeasures_Applied;DataAccuracyVerification_Applied;ElectronicSecuritySystem_Applied;ProcessingAuditLog_Applied;SecurityMeasures_Applied;SupervisionMechanism_Applied,,Pengendali: Ps. 29 ayat (2); 31; 35 huruf a; 36; 37; 38; 39 ayat (1)-(2); tujuh catatan tercatat false
+ECP-08,K06,wakil,Prosesor_Simulasi_SEC_Violation,data_pse_violation.ttl,Violation,AccessControl_Applied;ConfidentialityMeasures_Applied;DataAccuracyVerification_Applied;ElectronicSecuritySystem_Applied;ProcessingAuditLog_Applied;SecurityMeasures_Applied;SupervisionMechanism_Applied,,Prosesor: pasal yang sama jo. Ps. 52; Ps. 51 ayat (1) dipenuhi; tujuh catatan tercatat false
+ECP-08,K06,wakil,PSE_Simulasi_SEC_Kosong,data_pse_violation.ttl,Violation,AccessControl_Recorded;ConfidentialityMeasures_Recorded;DataAccuracyVerification_Recorded;ElectronicSecuritySystem_Recorded;ProcessingAuditLog_Recorded;SecurityMeasures_Recorded;SupervisionMechanism_Recorded,,"Pengendali tanpa tujuh catatan grup Ps. 52 (pola catatan wajib, 2026-10-28): Ps. 29 ayat (2); 31; 35 huruf a; 36; 37; 38; 39 ayat (1)-(2)"
+ECP-09,K07,wakil,PSE_Simulasi_HLT_Violation,data_pse_violation.ttl,Violation,DPIAShape:hasDPIA,,Ps. 34 ayat (1): memproses data kesehatan (Data Pribadi spesifik; Ps. 34 ayat (2) huruf b) tanpa penilaian dampak
+ECP-10,K08,wakil,PSE_Simulasi_LGL_Violation,data_pse_violation.ttl,Violation,LegalBasisShape:hasLegalBasis,,Ps. 20 ayat (1)-(2): dasar pemrosesan di luar enam dasar
+ECP-11,K09,wakil,PSE_Simulasi_CNS_Violation,data_pse_violation.ttl,Violation,ConsentEvidenceShape:hasConsentEvidence;ProcessingNoticeShape:hasProcessingNotice,,Ps. 21 ayat (1); Ps. 24 (interpretasi peneliti)
+ECP-12,K10,wakil,PSE_Simulasi_ANK_Violation,data_pse_violation.ttl,Violation,ChildConsentShape:hasParentalConsentForChild,,Ps. 25 ayat (2); Pengendali juga HighRisk dengan penilaian dampak terpenuhi
+ECP-13,K11,wakil,PSE_Simulasi_DIS_Violation,data_pse_violation.ttl,Violation,DisabilityConsentShape:hasSpecialConsentForDisability,,Ps. 26 ayat (3)
+ECP-14,K12,wakil,PSE_Simulasi_SIK_Violation,data_pse_violation.ttl,Violation,DataMinimizationShape:hasDataMinimization,,"Ps. 27; 28 (kewajiban Ps. 13, 43, 44, 45 kini bersyarat peristiwa: K21-K24)"
+ECP-15,K13,wakil,PSE_Simulasi_JNT_Violation,data_pse_violation.ttl,Violation,JointControllerShape:hasJointControllerAgreement,,Ps. 18 ayat (2)
+ECP-16,K14,pendukung,Pengendali_ECP16,data_pse_violation.ttl,Compliant,,,Pengendali pendukung patuh
+ECP-16,K14,wakil,Pengakhiran_ECP16,data_pse_violation.ttl,Violation,ProcessingTerminationShape:processingTerminated,,"Ps. 42 ayat (1) huruf b: tujuan tercapai, pemrosesan tidak diakhiri"
+ECP-17,K15,pendukung,Pengendali_ECP17,data_pse_violation.ttl,Compliant,,,Pengendali pendukung patuh
+ECP-17,K15,wakil,Insiden_ECP17,data_pse_violation.ttl,Violation,BreachNotificationContentShape:breachNotificationContainsRequiredElements,,Ps. 46 ayat (2): isi pemberitahuan tidak lengkap (24 jam: tenggat terpenuhi)
+ECP-18,K16,pendukung,Pengendali_ECP18,data_pse_violation.ttl,Compliant,,,Pengendali pendukung patuh
+ECP-18,K16,wakil,Transfer_ECP18,data_pse_violation.ttl,Violation,InternationalTransferShape,,Ps. 56 ayat (2)-(4): ketiga syarat berjenjang tidak terpenuhi (constraint tingkat node sh:or)
+ECP-19,K17,wakil,Prosesor_Simulasi_CLD_Violation,data_pse_violation.ttl,Violation,ProcessorInstructionShape:processesOnlyUnderInstruction,,Ps. 51 ayat (1); grup Ps. 52 dipenuhi
+ECP-20,K18,wakil,PSE_Simulasi_ILLEGAL_Violation,data_pse_violation.ttl,Violation,UnauthorizedProcessingShape:hasUnauthorizedProcessing,,Entitas bertipe pdp:PSE saja; hanya menjadi target shape larangan Ps. 65 ayat (2)-(3)
+ECP-21,K19,pendukung,Pengendali_ECP21,data_pse_violation.ttl,Compliant,,,Pengendali pendukung patuh (badan hukum)
+ECP-21,K19,wakil,AksiKorporasi_ECP21,data_pse_violation.ttl,Violation,CorporateActionNoticeShape:transferNoticeAfterAction;CorporateActionNoticeShape:transferNoticeBeforeAction,,Ps. 48 ayat (1)-(2): pengambilalihan selesai tanpa pemberitahuan sebelum dan sesudah
+ECP-22,K20,wakil,PSE_Simulasi_DPO_Violation,data_pse_violation.ttl,Violation,DataProtectionOfficerShape:hasDataProtectionOfficer,,Ps. 53 ayat (1) huruf b saja (alternatif; Putusan MK 151/PUU-XXII/2024); HighRisk dengan DPIA terpenuhi (aturan (f3))
+ECP-22,K20,wakil,Prosesor_Simulasi_DPO_Violation,data_pse_violation.ttl,Violation,DataProtectionOfficerShape:hasDataProtectionOfficer,,Ps. 53 ayat (1) huruf a saja; Prosesor; Ps. 51 dan grup Ps. 52 dipenuhi
+ECP-23,K21,pendukung,Pengendali_ECP23,data_pse_violation.ttl,Compliant,,,Pengendali pendukung patuh
+ECP-23,K21,wakil,Permintaan_Portabilitas_ECP23,data_pse_violation.ttl,Violation,DataPortabilityShape:portableFormatProvided,,Ps. 13 ayat (1) (pemicu permintaan = interpretasi peneliti): format terstruktur tidak disediakan
+ECP-24,K22,pendukung,Pengendali_ECP24,data_pse_violation.ttl,Compliant,,,Pengendali pendukung patuh
+ECP-24,K22,wakil,Penghapusan_ECP24,data_pse_violation.ttl,Violation,DataDeletionShape:erasureCarriedOut,,Ps. 43 ayat (1) huruf c: data tidak dihapus; Ps. 45 tidak terpicu (tidak ada penghapusan yang perlu diberitahukan)
+ECP-25,K23,pendukung,Pengendali_ECP25,data_pse_violation.ttl,Compliant,,,Pengendali pendukung patuh
+ECP-25,K23,wakil,Pemusnahan_ECP25,data_pse_violation.ttl,Violation,DataDestructionShape:erasureCarriedOut,,Ps. 44 ayat (1) huruf d: data tidak dimusnahkan; Ps. 45 tidak terpicu
+ECP-26,K24,pendukung,Pengendali_ECP26,data_pse_violation.ttl,Compliant,,,Pengendali pendukung patuh
+ECP-26,K24,wakil,Penghapusan_ECP26,data_pse_violation.ttl,Violation,DeletionNoticeShape,,Ps. 45: penghapusan dilakukan (Ps. 43 ayat (1) dipenuhi) tanpa pemberitahuan kepada Subjek (constraint tingkat node sh:or)

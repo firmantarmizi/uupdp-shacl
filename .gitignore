@@ -1,0 +1,9 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# New outputs written by the scripts; the official results in resmi_v3/ are tracked
+02_Development/FASE_4_VALIDASI/validation_results/*
+!02_Development/FASE_4_VALIDASI/validation_results/resmi_v3/

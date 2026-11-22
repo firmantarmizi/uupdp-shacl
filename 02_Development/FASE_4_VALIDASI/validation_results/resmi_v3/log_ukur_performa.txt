@@ -1,0 +1,16 @@
+﻿[PENGUKURAN RESMI resmi_v3 - Bab 4]
+Lingkungan: {'mulai': '2026-10-28T20:44:28', 'python': '3.13.0', 'pyshacl': '0.40.1', 'rdflib': '7.6.0', 'matplotlib': '3.10.0', 'numpy': '2.5.4', 'os': 'Windows-11-10.0.26100-SP0', 'cpu': 'Intel(R) Core(TM) i7-7600U CPU @ 2.80GHz', 'prosesor': 'Intel64 Family 6 Model 142 Stepping 9, GenuineIntel', 'cpu_logis': 4, 'cpu_mhz_nominal': 2904, 'penghitung_cpu': 'PDH \\Processor Information(_Total)\\% Processor Performance ; \\Processor Information(_Total)\\Processor Frequency', 'penghitung_cpu_galat': None, 'ram_total_gb': 15.84, 'ram_bebas_gb': 8.5, 'daya_ac': 'AC terhubung', 'baterai_persen': 100, 'skema_daya': 'Power Scheme GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c  (High performance)'}
+
+compliant         96 triple | validasi median 0.196 s (SD 0.354, CV 98.8%, pencilan 2) | parse 0.009 s | memori puncak 0.85 MB
+violation        531 triple | validasi median 0.365 s (SD 0.038, CV 10.2%, pencilan 1) | parse 0.027 s | memori puncak 2.13 MB
+uji_batas_bva    128 triple | validasi median 0.179 s (SD 0.005, CV 2.7%, pencilan 1) | parse 0.007 s | memori puncak 1.08 MB
+
+Skalabilitas (graf pelanggaran; x1 = 52 V / 10 W)
+x1        531 triple | median 0.375 s (SD 0.028, CV 7.2%, pencilan 2) | memori 2.13 MB | 52 V / 10 W | cek OK
+x10      5310 triple | median 2.483 s (SD 0.208, CV 8.2%, pencilan 1) | memori 10.87 MB | 520 V / 100 W | cek OK
+x50     26550 triple | median 16.310 s (SD 3.237, CV 18.2%, pencilan 1) | memori 49.08 MB | 2600 V / 500 W | cek OK
+x100    53100 triple | median 25.829 s (SD 0.895, CV 3.4%, pencilan 1) | memori 89.33 MB | 5200 V / 1000 W | cek OK
+x250   132750 triple | median 66.081 s (SD 0.500, CV 0.8%, pencilan 0) | memori 217.63 MB | 13000 V / 2500 W | cek OK
+Selesai 2026-10-28T21:22:26 (durasi 38.0 menit)
+
+Keluaran tersimpan di D:\Magister PJJ Informatika Amikom\Tesis\Transformasi UU No. 27 Tahun 2022 Menjadi Dataset Semantik untuk Validasi Kepatuhan Data Pribadi menggunakan SHACL\02_Development\FASE_4_VALIDASI\validation_results\resmi_v3

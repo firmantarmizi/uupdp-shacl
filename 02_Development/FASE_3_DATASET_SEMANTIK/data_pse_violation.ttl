@@ -1,0 +1,737 @@
+@prefix pdp:   <http://example.org/pdp#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+#################################################################
+#  DATA GRAF SINTETIS: PARTISI ECP-02 SAMPAI ECP-26
+#  Metode: Equivalence Class Partitioning (ECP). ECP-01 ada di data_pse_compliant.ttl.
+#  Kunci jawaban: FASE_4_VALIDASI/kunci_jawaban_ecp.csv
+#
+#  N_partisi = N_valid + N_constraint = 2 + 24 = 26
+#   - Partisi valid: ECP-01 (patuh penuh) dan ECP-02 (peringatan dini 48 < x <= 72 jam).
+#   - Partisi pelanggaran: ECP-03 sampai ECP-26 = kelas batasan K01 sampai K24
+#     (dihitung oleh FASE_4_VALIDASI/hitung_kelas_batasan.py dari shapes_pdp.ttl).
+#  Aturan desain:
+#   - Isolasi: entitas wakil hanya melanggar unit constraint kelasnya; seluruh kewajiban lain dipenuhi.
+#   - Cakupan: gabungan entitas wakil dalam satu partisi melanggar seluruh unit constraint kelasnya.
+#     Pada kelas tenggat, _Recorded (nilai kosong) dan _WithinLimit (> 72 jam) saling eksklusif,
+#     sehingga partisinya memuat dua entitas wakil (Lewat dan Kosong).
+#   - Partisi yang kelasnya menargetkan entitas peristiwa memakai Pengendali pendukung sendiri yang patuh.
+#  Kelas pemicu dan entitas peristiwa ditulis eksplisit (peran lapisan ingesti arsitektur ACC).
+#  Disclaimer: Data artifisial murni berbasis arketipe domain industri
+#################################################################
+
+# ===============================================================
+# PARTISI ECP-02 (VALID): PERINGATAN DINI
+# Domain: PSE E-Commerce Platform
+# Setiap permintaan dan insiden ditindaklanjuti dalam 50-58 jam
+# (> 48 jam tetapi <= 72 jam): sh:Warning tanpa sh:Violation.
+# ===============================================================
+pdp:PSE_Simulasi_ECM_Warning
+    a pdp:DataController , pdp:PSE , pdp:ConsentBasedController ;
+    rdfs:label "Arketipe PSE Sektor E-Commerce (Simulasi Peringatan Dini)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "consent" ;
+    pdp:hasConsentEvidence true ;
+    pdp:hasProcessingNotice true ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Permintaan_Pembaruan_ECM
+    a pdp:DataUpdateRequest ;
+    rdfs:label "Permintaan pembaruan data pada PSE ECM"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_ECM_Warning ;
+    pdp:dataUpdateResponseHours 55 .              # WARNING: > 48 jam tapi <= 72 jam (Pasal 30 ayat (1))
+
+pdp:Permintaan_Akses_ECM
+    a pdp:DataAccessRequest ;
+    rdfs:label "Permintaan akses data pada PSE ECM"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_ECM_Warning ;
+    pdp:dataAccessResponseHours 52 .              # WARNING: > 48 jam tapi <= 72 jam (Pasal 32 ayat (2))
+
+pdp:Penarikan_Persetujuan_ECM
+    a pdp:ConsentWithdrawalRequest ;
+    rdfs:label "Permintaan penarikan kembali persetujuan pada PSE ECM"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_ECM_Warning ;
+    pdp:processingCessationHours 50 .             # WARNING: > 48 jam tapi <= 72 jam (Pasal 40 ayat (2))
+
+pdp:Permintaan_Pembatasan_ECM
+    a pdp:ProcessingRestrictionRequest ;
+    rdfs:label "Permintaan penundaan dan pembatasan pemrosesan pada PSE ECM"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_ECM_Warning ;
+    pdp:processingRestrictionHours 53 .           # WARNING: > 48 jam tapi <= 72 jam (Pasal 41 ayat (1))
+
+pdp:Insiden_ECM
+    a pdp:BreachIncident ;
+    rdfs:label "Kegagalan Pelindungan Data Pribadi pada PSE ECM"@id ;
+    pdp:responsibleController pdp:PSE_Simulasi_ECM_Warning ;
+    pdp:breachNotificationHours 58 ;              # WARNING: > 48 jam tapi <= 72 jam (Pasal 46 ayat (1))
+    pdp:breachNotificationContainsRequiredElements true .
+
+# ===============================================================
+# PARTISI ECP-03 (K01): TENGGAT PEMBARUAN DATA (Pasal 30 ayat (1))
+# Pengendali pendukung patuh + dua permintaan pembaruan: > 72 jam dan tidak tercatat.
+# ===============================================================
+pdp:Pengendali_ECP03
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Pengendali pendukung ECP-03 (patuh)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Pembaruan_ECP03_Lewat
+    a pdp:DataUpdateRequest ;
+    rdfs:label "Permintaan pembaruan data ECP-03 (melewati 72 jam)"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP03 ;
+    pdp:dataUpdateResponseHours 96 .              # VIOLATION _WithinLimit + WARNING _EarlyWarning (Pasal 30 ayat (1))
+
+pdp:Pembaruan_ECP03_Kosong
+    a pdp:DataUpdateRequest ;
+    rdfs:label "Permintaan pembaruan data ECP-03 (waktu tidak tercatat)"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP03 .
+                                                  # VIOLATION _Recorded: dataUpdateResponseHours tidak ada
+
+# ===============================================================
+# PARTISI ECP-04 (K02): TENGGAT AKSES DATA (Pasal 32 ayat (2))
+# ===============================================================
+pdp:Pengendali_ECP04
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Pengendali pendukung ECP-04 (patuh)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Akses_ECP04_Lewat
+    a pdp:DataAccessRequest ;
+    rdfs:label "Permintaan akses data ECP-04 (melewati 72 jam)"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP04 ;
+    pdp:dataAccessResponseHours 120 .             # VIOLATION _WithinLimit + WARNING _EarlyWarning (Pasal 32 ayat (2))
+
+pdp:Akses_ECP04_Kosong
+    a pdp:DataAccessRequest ;
+    rdfs:label "Permintaan akses data ECP-04 (waktu tidak tercatat)"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP04 .
+                                                  # VIOLATION _Recorded: dataAccessResponseHours tidak ada
+
+# ===============================================================
+# PARTISI ECP-05 (K03): TENGGAT PENGHENTIAN PEMROSESAN (Pasal 40 ayat (2))
+# Pengendali pendukung berdasar persetujuan (aturan integritas (e)).
+# ===============================================================
+pdp:Pengendali_ECP05
+    a pdp:DataController , pdp:PSE , pdp:ConsentBasedController ;
+    rdfs:label "Pengendali pendukung ECP-05 (patuh, dasar persetujuan)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "consent" ;
+    pdp:hasConsentEvidence true ;
+    pdp:hasProcessingNotice true ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Penarikan_ECP05_Lewat
+    a pdp:ConsentWithdrawalRequest ;
+    rdfs:label "Permintaan penarikan kembali persetujuan ECP-05 (melewati 72 jam)"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP05 ;
+    pdp:processingCessationHours 96 .             # VIOLATION _WithinLimit + WARNING _EarlyWarning (Pasal 40 ayat (2))
+
+pdp:Penarikan_ECP05_Kosong
+    a pdp:ConsentWithdrawalRequest ;
+    rdfs:label "Permintaan penarikan kembali persetujuan ECP-05 (waktu tidak tercatat)"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP05 .
+                                                  # VIOLATION _Recorded: processingCessationHours tidak ada
+
+# ===============================================================
+# PARTISI ECP-06 (K04): TENGGAT PENUNDAAN DAN PEMBATASAN PEMROSESAN (Pasal 41 ayat (1))
+# ===============================================================
+pdp:Pengendali_ECP06
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Pengendali pendukung ECP-06 (patuh)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Pembatasan_ECP06_Lewat
+    a pdp:ProcessingRestrictionRequest ;
+    rdfs:label "Permintaan penundaan dan pembatasan ECP-06 (melewati 72 jam)"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP06 ;
+    pdp:processingRestrictionHours 100 .          # VIOLATION _WithinLimit + WARNING _EarlyWarning (Pasal 41 ayat (1))
+
+pdp:Pembatasan_ECP06_Kosong
+    a pdp:ProcessingRestrictionRequest ;
+    rdfs:label "Permintaan penundaan dan pembatasan ECP-06 (waktu tidak tercatat)"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP06 .
+                                                  # VIOLATION _Recorded: processingRestrictionHours tidak ada
+
+# ===============================================================
+# PARTISI ECP-07 (K05): TENGGAT PEMBERITAHUAN KEGAGALAN PDP (Pasal 46 ayat (1))
+# Isi pemberitahuan (Pasal 46 ayat (2), kelas K15) dibuat lengkap agar partisi terisolasi.
+# ===============================================================
+pdp:Pengendali_ECP07
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Pengendali pendukung ECP-07 (patuh)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Insiden_ECP07_Lewat
+    a pdp:BreachIncident ;
+    rdfs:label "Kegagalan Pelindungan Data Pribadi ECP-07 (pemberitahuan melewati 72 jam)"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP07 ;
+    pdp:breachNotificationHours 144 ;             # VIOLATION _WithinLimit + WARNING _EarlyWarning (Pasal 46 ayat (1))
+    pdp:breachNotificationContainsRequiredElements true .
+
+pdp:Insiden_ECP07_Kosong
+    a pdp:BreachIncident ;
+    rdfs:label "Kegagalan Pelindungan Data Pribadi ECP-07 (waktu pemberitahuan tidak tercatat)"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP07 ;
+    pdp:breachNotificationContainsRequiredElements true .
+                                                  # VIOLATION _Recorded: breachNotificationHours tidak ada
+
+# ===============================================================
+# PARTISI ECP-08 (K06): KEAMANAN, KERAHASIAAN, PENGAWASAN, PEREKAMAN, DAN AKURASI
+# (Pasal 29 ayat (2), 31, 35, 36, 37, 38, 39; bagi Prosesor jo. Pasal 52)
+# Domain: PSE Infrastruktur & Basis Data Ritel beserta Prosesornya.
+# Dua entitas wakil "tercatat false" karena kelas ini menargetkan pdp:DataController dan pdp:DataProcessor,
+# ditambah satu wakil "tidak tercatat" (PSE_Simulasi_SEC_Kosong) untuk unit <X>_Recorded (pola catatan wajib, 2026-10-28).
+# pdp:hasEncryption tidak lagi diperiksa (konsensus validator FO-16/FO-30); nilainya dibiarkan sebagai data deskriptif.
+# ===============================================================
+pdp:PSE_Simulasi_SEC_Violation
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Arketipe Pengendali dengan Pelanggaran Keamanan dan Akuntabilitas"@id ;
+    pdp:hasEncryption false ;                     # deskriptif; tidak diperiksa sejak 2026-10-28
+    pdp:hasAccessControl false ;                  # VIOLATION: Pasal 39 ayat (1)
+    pdp:hasSecurityMeasures false ;               # VIOLATION: Pasal 35 huruf a dan Pasal 38
+    pdp:hasConfidentialityMeasures false ;        # VIOLATION: Pasal 36
+    pdp:hasSupervisionMechanism false ;           # VIOLATION: Pasal 37
+    pdp:hasElectronicSecuritySystem false ;       # VIOLATION: Pasal 39 ayat (1) dan (2)
+    pdp:hasProcessingAuditLog false ;             # VIOLATION: Pasal 31
+    pdp:hasDataAccuracyVerification false ;       # VIOLATION: Pasal 29 ayat (2)
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Prosesor_Simulasi_SEC_Violation
+    a pdp:DataProcessor , pdp:PSE ;
+    rdfs:label "Arketipe Prosesor dengan Pelanggaran Keamanan dan Akuntabilitas (jo. Pasal 52)"@id ;
+    pdp:processesOnlyUnderInstruction true ;      # Pasal 51 ayat (1) dipenuhi (kelas K17)
+    pdp:hasEncryption false ;                     # deskriptif; tidak diperiksa sejak 2026-10-28
+    pdp:hasAccessControl false ;                  # VIOLATION: Pasal 39 ayat (1) jo. Pasal 52
+    pdp:hasSecurityMeasures false ;               # VIOLATION: Pasal 35 huruf a dan 38 jo. Pasal 52
+    pdp:hasConfidentialityMeasures false ;        # VIOLATION: Pasal 36 jo. Pasal 52
+    pdp:hasSupervisionMechanism false ;           # VIOLATION: Pasal 37 jo. Pasal 52
+    pdp:hasElectronicSecuritySystem false ;       # VIOLATION: Pasal 39 ayat (1) dan (2) jo. Pasal 52
+    pdp:hasProcessingAuditLog false ;             # VIOLATION: Pasal 31 jo. Pasal 52
+    pdp:hasDataAccuracyVerification false ;       # VIOLATION: Pasal 29 ayat (2) jo. Pasal 52
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:PSE_Simulasi_SEC_Kosong
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Arketipe Pengendali tanpa Catatan Keamanan dan Akuntabilitas"@id ;
+    # Tujuh catatan grup Pasal 52 tidak ada -> VIOLATION <X>_Recorded (catatan tidak tersedia):
+    # hasSecurityMeasures (Ps. 35 huruf a, 38), hasAccessControl (Ps. 39 ayat (1)), hasConfidentialityMeasures (Ps. 36),
+    # hasSupervisionMechanism (Ps. 37), hasElectronicSecuritySystem (Ps. 39), hasProcessingAuditLog (Ps. 31),
+    # hasDataAccuracyVerification (Ps. 29 ayat (2)).
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+# ===============================================================
+# PARTISI ECP-09 (K07): PENILAIAN DAMPAK — PEMROSESAN DATA KESEHATAN (Pasal 34 ayat (1))
+# Domain: PSE Layanan Kesehatan (Healthtech)
+# Data kesehatan adalah Data Pribadi spesifik (Pasal 4 ayat (2) huruf a), sehingga pemrosesannya
+# berpotensi risiko tinggi (Pasal 34 ayat (2) huruf b) dan Pengendali bertipe HighRiskProcessingController
+# (aturan integritas (f1)). Satu-satunya pelanggaran: penilaian dampak tidak dilakukan.
+# ===============================================================
+pdp:Data_Kesehatan_HLT
+    a pdp:SpecificPersonalData ;
+    rdfs:label "Data rekam medis pasien pada PSE HLT"@id ;
+    pdp:personalDataCategory "data dan informasi kesehatan" .   # Pasal 4 ayat (2) huruf a
+
+pdp:PSE_Simulasi_HLT_Violation
+    a pdp:DataController , pdp:PSE , pdp:ConsentBasedController , pdp:HighRiskProcessingController ;
+    rdfs:label "Arketipe PSE Sektor Kesehatan (Simulasi Pemrosesan Data Kesehatan tanpa Penilaian Dampak)"@id ;
+    pdp:processesPersonalData pdp:Data_Kesehatan_HLT ;
+    pdp:hasDPIA false ;                           # VIOLATION: penilaian dampak tidak dilakukan (Pasal 34 ayat (1))
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "consent" ;
+    pdp:hasConsentEvidence true ;
+    pdp:hasProcessingNotice true ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+# ===============================================================
+# PARTISI ECP-10 (K08): DASAR PEMROSESAN (Pasal 20 ayat (1) dan (2))
+# Dasar pemrosesan di luar enam dasar ayat (2). Bukan dasar persetujuan, sehingga bukan
+# ConsentBasedController (aturan integritas (b)).
+# ===============================================================
+pdp:PSE_Simulasi_LGL_Violation
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Arketipe Pemrosesan tanpa Dasar Pemrosesan yang Sah"@id ;
+    pdp:hasLegalBasis "unauthorized_commercial" ; # VIOLATION: di luar enam dasar Pasal 20 ayat (2)
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+# ===============================================================
+# PARTISI ECP-11 (K09): KEWAJIBAN PEMROSESAN BERDASARKAN PERSETUJUAN (Pasal 21 ayat (1); Pasal 24)
+# ===============================================================
+pdp:PSE_Simulasi_CNS_Violation
+    a pdp:DataController , pdp:PSE , pdp:ConsentBasedController ;
+    rdfs:label "Arketipe Pemrosesan Berbasis Persetujuan tanpa Informasi dan Bukti Persetujuan"@id ;
+    pdp:hasLegalBasis "consent" ;
+    pdp:hasConsentEvidence false ;                # VIOLATION: bukti persetujuan tidak ada (Pasal 24)
+    pdp:hasProcessingNotice false ;               # VIOLATION: informasi pemrosesan tidak disampaikan (Pasal 21 ayat (1))
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+# ===============================================================
+# PARTISI ECP-12 (K10): PERSETUJUAN ORANG TUA/WALI ATAS DATA ANAK (Pasal 25 ayat (2))
+# Data anak adalah Data Pribadi spesifik (Pasal 4 ayat (2) huruf e), sehingga Pengendali juga
+# HighRiskProcessingController (aturan integritas (f1) dan (f2)) dan penilaian dampak dipenuhi.
+# ===============================================================
+pdp:Data_Anak_ANK
+    a pdp:SpecificPersonalData ;
+    rdfs:label "Data pribadi siswa pada PSE ANK"@id ;
+    pdp:personalDataCategory "data anak" .       # Pasal 4 ayat (2) huruf e
+
+pdp:PSE_Simulasi_ANK_Violation
+    a pdp:DataController , pdp:PSE , pdp:ChildDataController , pdp:HighRiskProcessingController ;
+    rdfs:label "Arketipe PSE Layanan Pendidikan Anak (Simulasi tanpa Persetujuan Orang Tua/Wali)"@id ;
+    pdp:processesPersonalData pdp:Data_Anak_ANK ;
+    pdp:hasParentalConsentForChild false ;        # VIOLATION: tanpa persetujuan orang tua/wali (Pasal 25 ayat (2))
+    pdp:hasDPIA true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+# ===============================================================
+# PARTISI ECP-13 (K11): PERSETUJUAN PENYANDANG DISABILITAS/WALI (Pasal 26 ayat (3))
+# ===============================================================
+pdp:PSE_Simulasi_DIS_Violation
+    a pdp:DataController , pdp:PSE , pdp:DisabilityDataController ;
+    rdfs:label "Arketipe Pemrosesan Data Penyandang Disabilitas tanpa Persetujuan"@id ;
+    pdp:hasSpecialConsentForDisability false ;    # VIOLATION: tanpa persetujuan penyandang disabilitas/wali (Pasal 26 ayat (3))
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+# ===============================================================
+# PARTISI ECP-14 (K12): PEMROSESAN TERBATAS, SPESIFIK, DAN SESUAI TUJUAN (Pasal 27 dan Pasal 28)
+# ===============================================================
+pdp:PSE_Simulasi_SIK_Violation
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Arketipe Pemrosesan di Luar Tujuan"@id ;
+    pdp:hasDataMinimization false ;               # VIOLATION: Pasal 27 dan Pasal 28
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+# ===============================================================
+# PARTISI ECP-15 (K13): PENGENDALI BERSAMA (Pasal 18 ayat (2))
+# ===============================================================
+pdp:PSE_Simulasi_JNT_Violation
+    a pdp:DataController , pdp:PSE , pdp:JointController ;
+    rdfs:label "Arketipe Pengendali Bersama tanpa Perjanjian"@id ;
+    pdp:hasJointControllerAgreement false ;       # VIOLATION: tanpa perjanjian peran, tujuan bersama, dan narahubung (Pasal 18 ayat (2))
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+# ===============================================================
+# PARTISI ECP-16 (K14): PENGAKHIRAN PEMROSESAN (Pasal 42 ayat (1))
+# Pengendali pendukung patuh + kondisi pengakhiran (huruf b: tujuan tercapai) tanpa pengakhiran pemrosesan.
+# ===============================================================
+pdp:Pengendali_ECP16
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Pengendali pendukung ECP-16 (patuh)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Pengakhiran_ECP16
+    a pdp:ProcessingTerminationGround ;
+    rdfs:label "Tujuan pemrosesan tercapai pada Pengendali ECP-16"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP16 ;
+    pdp:triggerGround "b" ;                       # Pasal 42 ayat (1) huruf b (informatif)
+    pdp:processingTerminated false .              # VIOLATION: pemrosesan tidak diakhiri (Pasal 42 ayat (1))
+
+# ===============================================================
+# PARTISI ECP-17 (K15): ISI PEMBERITAHUAN KEGAGALAN PDP (Pasal 46 ayat (2))
+# Tenggat Pasal 46 ayat (1) dipenuhi (24 jam) agar partisi terisolasi.
+# ===============================================================
+pdp:Pengendali_ECP17
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Pengendali pendukung ECP-17 (patuh)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Insiden_ECP17
+    a pdp:BreachIncident ;
+    rdfs:label "Kegagalan Pelindungan Data Pribadi ECP-17 (isi pemberitahuan tidak lengkap)"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP17 ;
+    pdp:breachNotificationHours 24 ;
+    pdp:breachNotificationContainsRequiredElements false . # VIOLATION: isi pemberitahuan tidak lengkap (Pasal 46 ayat (2))
+
+# ===============================================================
+# PARTISI ECP-18 (K16): TRANSFER KE LUAR WILAYAH HUKUM RI (Pasal 56 ayat (2) sampai (4))
+# Domain: PSE Layanan Cloud Lintas Negara
+# ===============================================================
+pdp:Pengendali_ECP18
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Pengendali pendukung ECP-18 (patuh)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Transfer_ECP18
+    a pdp:CrossBorderTransfer ;
+    rdfs:label "Transfer data ECP-18 ke luar wilayah hukum RI"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP18 ;
+    pdp:dataTransferDestination "Yurisdiksi_Non_Adekuat" ;
+    pdp:transferRecipientEquivalentProtection false ;   # Pasal 56 ayat (2) tidak terpenuhi
+    pdp:transferHasAdequateBindingProtection false ;    # Pasal 56 ayat (3) tidak terpenuhi
+    pdp:transferHasSubjectConsent false .               # VIOLATION: Pasal 56 ayat (4) juga tidak terpenuhi
+
+# ===============================================================
+# PARTISI ECP-19 (K17): PROSESOR DI LUAR PERINTAH PENGENDALI (Pasal 51 ayat (1))
+# Domain: Vendor Pihak Ketiga / Pengolah Data Subkontraktor
+# Kewajiban yang berlaku melalui Pasal 52 (kelas K06) dipenuhi agar partisi terisolasi.
+# ===============================================================
+pdp:Prosesor_Simulasi_CLD_Violation
+    a pdp:DataProcessor , pdp:PSE ;
+    rdfs:label "Arketipe Pelanggaran Prosesor Cloud (Simulasi Pemrosesan di Luar Perintah)"@id ;
+    pdp:processesOnlyUnderInstruction false ;     # VIOLATION: memproses di luar perintah Pengendali (Pasal 51 ayat (1))
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasUnauthorizedProcessing false .
+
+# ===============================================================
+# PARTISI ECP-20 (K18): PENGUNGKAPAN/PENGGUNAAN DATA TANPA HAK (Pasal 65 ayat (2) dan (3))
+# Entitas bertipe pdp:PSE saja, sehingga hanya menjadi target shape larangan.
+# ===============================================================
+pdp:PSE_Simulasi_ILLEGAL_Violation
+    a pdp:PSE ;
+    rdfs:label "Arketipe Pelanggaran Larangan (Simulasi Pengungkapan/Penggunaan Data Tanpa Hak)"@id ;
+    pdp:hasUnauthorizedProcessing true .         # VIOLATION: indikator pengungkapan/penggunaan data tanpa hak (Pasal 65 ayat (2)-(3))
+
+# ===============================================================
+# PARTISI ECP-21 (K19): PEMBERITAHUAN PENGALIHAN DATA PADA AKSI KORPORASI (Pasal 48 ayat (1) dan (2))
+# Pengendali pendukung patuh (badan hukum) + aksi korporasi selesai tanpa pemberitahuan sebelum dan sesudah.
+# ===============================================================
+pdp:Pengendali_ECP21
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Pengendali pendukung ECP-21 (patuh, badan hukum)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:AksiKorporasi_ECP21
+    a pdp:CorporateAction ;
+    rdfs:label "Pengambilalihan badan hukum Pengendali ECP-21 (aksi selesai)"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP21 ;
+    pdp:corporateActionType "pengambilalihan" ;
+    pdp:transferNoticeBeforeAction false ;        # VIOLATION: tanpa pemberitahuan sebelum (Pasal 48 ayat (1)-(2))
+    pdp:transferNoticeAfterAction false .         # VIOLATION: tanpa pemberitahuan sesudah (Pasal 48 ayat (1)-(2))
+
+# ===============================================================
+# PARTISI ECP-22 (K20): PENUNJUKAN PEJABAT/PETUGAS PDP (Pasal 53 ayat (1))
+# Dua entitas wakil karena kewajiban berlaku bagi Pengendali dan Prosesor. Masing-masing hanya memenuhi
+# SATU huruf pemicu, sehingga partisi ini juga menunjukkan bahwa huruf a, b, c bersifat alternatif
+# (Putusan MK Nomor 151/PUU-XXII/2024).
+# ===============================================================
+pdp:PSE_Simulasi_DPO_Violation
+    a pdp:DataController , pdp:PSE , pdp:LargeScaleMonitoringActor , pdp:HighRiskProcessingController ;
+    rdfs:label "Arketipe Platform Analitik Perilaku Pengguna tanpa Pejabat/Petugas PDP (huruf b)"@id ;
+    pdp:hasDataProtectionOfficer false ;          # VIOLATION: pejabat/petugas PDP tidak ditunjuk (Pasal 53 ayat (1) huruf b)
+    pdp:hasDPIA true ;                            # huruf b juga berarti risiko tinggi (Pasal 34 ayat (2) huruf c-d; aturan (f3))
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Prosesor_Simulasi_DPO_Violation
+    a pdp:DataProcessor , pdp:PSE , pdp:PublicServiceProcessingActor ;
+    rdfs:label "Arketipe Prosesor Layanan Publik tanpa Pejabat/Petugas PDP (huruf a)"@id ;
+    pdp:hasDataProtectionOfficer false ;          # VIOLATION: pejabat/petugas PDP tidak ditunjuk (Pasal 53 ayat (1) huruf a)
+    pdp:processesOnlyUnderInstruction true ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasUnauthorizedProcessing false .
+
+# ===============================================================
+# PARTISI ECP-23 (K21): PORTABILITAS ATAS PERMINTAAN SUBJEK (Pasal 13 ayat (1))
+# Pemicu permintaan adalah interpretasi peneliti (teks tidak menyebut "permintaan").
+# ===============================================================
+pdp:Pengendali_ECP23
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Pengendali pendukung ECP-23 (patuh)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Permintaan_Portabilitas_ECP23
+    a pdp:DataPortabilityRequest ;
+    rdfs:label "Permintaan Subjek atas Data Pribadi dalam format terstruktur pada Pengendali ECP-23"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP23 ;
+    pdp:portableFormatProvided false .            # VIOLATION: tidak disediakan dalam format terstruktur (Pasal 13 ayat (1))
+
+# ===============================================================
+# PARTISI ECP-24 (K22): PENGHAPUSAN (Pasal 43 ayat (1))
+# Penghapusan tidak dilakukan sehingga tidak ada yang perlu diberitahukan (Pasal 45 tidak terpicu).
+# ===============================================================
+pdp:Pengendali_ECP24
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Pengendali pendukung ECP-24 (patuh)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Penghapusan_ECP24
+    a pdp:DeletionGround ;
+    rdfs:label "Permintaan penghapusan Subjek pada Pengendali ECP-24"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP24 ;
+    pdp:triggerGround "c" ;                       # Pasal 43 ayat (1) huruf c (informatif)
+    pdp:erasureCarriedOut false .                 # VIOLATION: data tidak dihapus (Pasal 43 ayat (1))
+
+# ===============================================================
+# PARTISI ECP-25 (K23): PEMUSNAHAN (Pasal 44 ayat (1))
+# ===============================================================
+pdp:Pengendali_ECP25
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Pengendali pendukung ECP-25 (patuh)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Pemusnahan_ECP25
+    a pdp:DestructionGround ;
+    rdfs:label "Data diperoleh secara melawan hukum pada Pengendali ECP-25"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP25 ;
+    pdp:triggerGround "d" ;                       # Pasal 44 ayat (1) huruf d (informatif)
+    pdp:erasureCarriedOut false .                 # VIOLATION: data tidak dimusnahkan (Pasal 44 ayat (1))
+
+# ===============================================================
+# PARTISI ECP-26 (K24): PEMBERITAHUAN PENGHAPUSAN DAN/ATAU PEMUSNAHAN (Pasal 45)
+# Penghapusan dilakukan (Pasal 43 ayat (1) dipenuhi), tetapi Subjek tidak diberi tahu.
+# ===============================================================
+pdp:Pengendali_ECP26
+    a pdp:DataController , pdp:PSE ;
+    rdfs:label "Pengendali pendukung ECP-26 (patuh)"@id ;
+    pdp:hasEncryption true ;
+    pdp:hasAccessControl true ;
+    pdp:hasSecurityMeasures true ;
+    pdp:hasConfidentialityMeasures true ;
+    pdp:hasSupervisionMechanism true ;
+    pdp:hasElectronicSecuritySystem true ;
+    pdp:hasProcessingAuditLog true ;
+    pdp:hasLegalBasis "contract" ;
+    pdp:hasDataMinimization true ;
+    pdp:hasDataAccuracyVerification true ;
+    pdp:hasRetentionPeriod 365 ;
+    pdp:hasUnauthorizedProcessing false .
+
+pdp:Penghapusan_ECP26
+    a pdp:DeletionGround ;
+    rdfs:label "Penarikan kembali persetujuan pada Pengendali ECP-26 diikuti penghapusan"@id ;
+    pdp:responsibleController pdp:Pengendali_ECP26 ;
+    pdp:triggerGround "b" ;                       # Pasal 43 ayat (1) huruf b (informatif)
+    pdp:erasureCarriedOut true ;                  # Pasal 43 ayat (1) dipenuhi
+    pdp:subjectNotifiedOfErasure false .          # VIOLATION: Subjek tidak diberi tahu (Pasal 45)

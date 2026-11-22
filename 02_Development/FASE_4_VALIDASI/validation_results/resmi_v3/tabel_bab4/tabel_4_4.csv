@@ -1,0 +1,5 @@
+modalitas,jumlah_klausul,pasal,severity
+Obligation,32,Ps. 13 ayat (1); Ps. 18 ayat (2); Ps. 20 ayat (1)–(2); Ps. 21 ayat (1); Ps. 22 ayat (1); Ps. 24; Ps. 25 ayat (2); Ps. 26 ayat (3); Ps. 27; Ps. 28; Ps. 29 ayat (1)–(2); Ps. 30 ayat (1); Ps. 31; Ps. 32 ayat (2); Ps. 34 ayat (1); Ps. 35 huruf a–b; Ps. 36; Ps. 37; Ps. 38; Ps. 39 ayat (1)–(2); Ps. 40 ayat (2); Ps. 41 ayat (1); Ps. 42 ayat (1); Ps. 43 ayat (1); Ps. 44 ayat (1); Ps. 45; Ps. 46 ayat (1)–(2); Ps. 48 ayat (1)–(2); Ps. 51 ayat (1); Ps. 52; Ps. 53 ayat (1); Ps. 56 ayat (2)–(4),sh:Violation
+Prohibition,1,Ps. 65 ayat (2)–(3),sh:Violation
+Permission,0,,-
+Peringatan dini 48-72 jam (bukan klausul tersendiri),-,"Pola Tenggat (Ps. 30, 32, 40, 41, 46)",sh:Warning
