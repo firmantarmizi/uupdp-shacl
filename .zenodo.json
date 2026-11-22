@@ -1,0 +1,31 @@
+{
+  "title": "SHACL shapes, RDFS ontology, and synthetic test data for selected clauses of Indonesia's Personal Data Protection Law (Law No. 27 of 2022)",
+  "upload_type": "dataset",
+  "version": "1.0.0",
+  "language": "eng",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "creators": [
+    {
+      "name": "Tarmizi, Firman",
+      "affiliation": "Postgraduate Program, Universitas Amikom Yogyakarta",
+      "orcid": "0009-0005-8574-9815"
+    },
+    {
+      "name": "Muhammad, Alva Hendi",
+      "affiliation": "Postgraduate Program, Universitas Amikom Yogyakarta",
+      "orcid": "0000-0003-1970-3139"
+    }
+  ],
+  "description": "<p>RDFS ontology and SHACL shapes encoding selected clauses of Indonesia's Law No. 27 of 2022 on Personal Data Protection, synthetic test graphs with answer keys, verification scripts (equivalence class partitioning, boundary value analysis, trigger and mutation tests), the official verification and performance results, the operability screening of all 76 articles, and anonymized legal alignment ratings. The shapes are validated with pySHACL using RDFS entailment.</p><p>The test data are synthetic. The results show that the rules behave as designed; they do not establish compliance by any real organization, and the output is not legal advice.</p><p>This dataset accompanies the article \"Encoding selected clauses of Indonesia's Personal Data Protection Law as SHACL shapes for deterministic compliance checking\" (submitted to JUTI: Jurnal Ilmiah Teknologi Informasi).</p>",
+  "notes": "Data, ontology, shapes, results, and documentation are licensed under CC BY 4.0 (LICENSE-DATA). Code (*.py, *.ps1) is licensed under the MIT License (LICENSE).",
+  "keywords": [
+    "SHACL",
+    "RDF Schema",
+    "compliance checking",
+    "personal data protection",
+    "Indonesia",
+    "deontic logic",
+    "Semantic Web"
+  ]
+}
