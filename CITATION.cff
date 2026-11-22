@@ -3,7 +3,9 @@ message: "If you use this dataset, please cite it as below."
 type: dataset
 title: "SHACL shapes, RDFS ontology, and synthetic test data for selected clauses of Indonesia's Personal Data Protection Law (Law No. 27 of 2022)"
 version: 1.0.0
+doi: 10.5281/zenodo.24448702
 date-released: 2026-11-23
+repository-code: "https://github.com/firmantarmizi/uupdp-shacl"
 authors:
   - family-names: Tarmizi
     given-names: Firman

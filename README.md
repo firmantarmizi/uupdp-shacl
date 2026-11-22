@@ -1,5 +1,7 @@
 # PDP Law → SHACL: semantic dataset for compliance checking of Indonesia's Personal Data Protection Law
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24448702.svg)](https://doi.org/10.5281/zenodo.24448702)
+
 This repository accompanies the article *"Encoding selected clauses of Indonesia's Personal Data Protection Law as SHACL shapes for deterministic compliance checking"* by Firman Tarmizi and Alva Hendi Muhammad (Postgraduate Program, Universitas Amikom Yogyakarta), submitted to *JUTI: Jurnal Ilmiah Teknologi Informasi*.
 
 It contains an RDFS ontology and SHACL shapes for selected clauses of Law of the Republic of Indonesia No. 27 of 2022 on Personal Data Protection (UU PDP), synthetic test graphs with answer keys, the scripts used for validation, verification, agreement computation, and performance measurement, and the official results reported in the article.
@@ -125,7 +127,7 @@ The two files in `traceability/` are in English, except for the official text of
 
 ## Citation
 
-Please cite the article and this dataset. Dataset: F. Tarmizi and A. H. Muhammad, *SHACL shapes, RDFS ontology, and synthetic test data for selected clauses of Indonesia's Personal Data Protection Law*, version 1.0.0, Zenodo, 2026, doi: [DOI after the Zenodo release]. Machine-readable metadata are in `CITATION.cff`.
+Please cite the article and this dataset. Dataset: F. Tarmizi and A. H. Muhammad, *SHACL shapes, RDFS ontology, and synthetic test data for selected clauses of Indonesia's Personal Data Protection Law*, version 1.0.0, Zenodo, 2026, doi: [10.5281/zenodo.24448702](https://doi.org/10.5281/zenodo.24448702). Machine-readable metadata are in `CITATION.cff`.
 
 ## License
 
